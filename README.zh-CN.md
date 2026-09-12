@@ -1,5 +1,9 @@
 # 🧭 From Evidence to Action
 
+<p align="center">
+  <img src="docs/brand-mark.svg" width="520" alt="PersonaGuard brand mark">
+</p>
+
 **面向 HCI 系统的个性化决策证据审查协议**
 
 [English](README.md) · **简体中文**

@@ -1,5 +1,9 @@
 # PersonaGuard
 
+<p align="center">
+  <img src="docs/brand-mark.svg" width="520" alt="PersonaGuard brand mark">
+</p>
+
 **A Companion for Deciding When AI Should Personalize**
 
 **Auditing Personalization Decisions in HCI Systems**
