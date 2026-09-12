@@ -1,0 +1,88 @@
+# Machine-local credentials and notes (never commit)
+/.local/
+*_token.json
+token.json
+*.pem
+*.key
+*.token
+.env
+.env.*
+!.env.example
+/HANDOFF.md
+
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+/build/
+/dist/
+
+# Data is opt-in: only reviewed documentation belongs in Git.
+/data/*
+!/data/DATASET.md
+!/data/stimuli/
+/data/stimuli/*
+!/data/stimuli/PROVENANCE.md
+
+# Restricted arrays, recordings, media and checkpoints, wherever generated
+*.npy
+*.npz
+*.mat
+*.edf
+*.set
+*.snirf
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.wav
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Local results, downloaded literature, packages and recoverable backups
+/artifacts/
+/checkpoints/
+/references/
+/archive/
+/paper/submission/
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.orig
+*.rej
+*~
+
+# LaTeX intermediates (generated/*.tex and figure PDFs are real inputs)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.xdv
+*-luamml-mathml.html
+
+# Optional raster exports; version the editable vectors and cited PDFs
+/paper/figures/*.png
+/paper/figures/*.tif
+/paper/figures/*.tiff
+/paper_support/figures/*.png
+/paper_support/figures/*.tif
+/paper_support/figures/*.tiff
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
