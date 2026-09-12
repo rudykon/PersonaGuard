@@ -1,4 +1,6 @@
-# 🧭 From Evidence to Action
+# PersonaGuard
+
+**A Companion for Deciding When AI Should Personalize**
 
 **Auditing Personalization Decisions in HCI Systems**
 
