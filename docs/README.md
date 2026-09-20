@@ -21,6 +21,7 @@
 线上页面：https://rudykon.github.io/PersonaGuard/
 
 页面源文件为 [index.html](index.html)，样式和交互位于 `assets/`。
+阅读顺序为项目定义、审查示例、五个问题、方法检查与局限、项目资源；默认展示画像复用案例。
 使用原生 HTML/CSS/JavaScript，无需前端依赖或构建。GitHub Pages 从 `main` 分支的 `/docs` 发布。
 
 ```bash
@@ -28,5 +29,12 @@ python3 -m http.server 8000 --directory docs
 python3 -B scripts/build_project_page_data.py --check
 ```
 
-浏览 `http://localhost:8000`。修改公开协议或案例后，运行 `python3 -B scripts/build_project_page_data.py` 更新交互数据；
+浏览 `http://localhost:8000`。页面内容分为两层：
+
+- [case-copy.js](assets/case-copy.js)：按案例 ID 编写的双语通俗说明。`expected_action` 用于核对其对应的正式判定；修改时同时核对页面中的无 JavaScript 默认示例。
+- [cases.js](assets/cases.js)：生成文件，保存解析器输出、正式规则条件与优先级，不手动编辑。
+
+修改公开协议或案例后，运行 `python3 -B scripts/build_project_page_data.py` 更新数据；
+`--check` 同时检查生成文件、案例 ID、双语说明是否完整，以及说明对应的正式判定是否改变。
+技术详情、实验数值和命令默认折叠。页面展示已记录案例，支持键盘选择；不在浏览器中审查任意新输入。
 页面不包含论文附件、`references/` 或私有数据。

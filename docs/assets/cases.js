@@ -115,31 +115,185 @@ window.PERSONAGUARD_CASES = {
       "id": "R4_RETENTION_TRANSFER",
       "title_en": "Persistence, transfer, and reference coverage must match durable reuse",
       "title_zh": "持久性、迁移与参考覆盖必须匹配长期复用",
-      "action": "WITHHOLD_RETENTION_AND_TRANSFER"
+      "action": "WITHHOLD_RETENTION_AND_TRANSFER",
+      "priority": 10,
+      "kind": "constraint",
+      "predicate": {
+        "all": [
+          {
+            "field": "deployment_stage",
+            "eq": "RETENTION_TRANSFER"
+          },
+          {
+            "any": [
+              {
+                "field": "evidence.persistence",
+                "in": [
+                  "PARTIAL",
+                  "NOT_TESTED"
+                ]
+              },
+              {
+                "field": "evidence.transfer",
+                "in": [
+                  "PARTIAL",
+                  "NOT_TESTED"
+                ]
+              },
+              {
+                "field": "evidence.reference_equity",
+                "in": [
+                  "PARTIAL",
+                  "NOT_ASSESSABLE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "R2_COMPARATOR_INCREMENT",
       "title_en": "Added acquisition or adaptation must beat its route-matched comparator",
       "title_zh": "新增获取或自适应必须优于路径匹配比较方案",
-      "action": "RETAIN_EVALUATED_COMPARATOR"
+      "action": "RETAIN_EVALUATED_COMPARATOR",
+      "priority": 20,
+      "kind": "constraint",
+      "predicate": {
+        "field": "evidence.comparator_increment",
+        "eq": "NO_DEMONSTRATED_INCREMENT"
+      }
     },
     {
       "id": "R3_CONSEQUENCE_MATCH",
       "title_en": "Evidence must match the consequence and be observed in use",
       "title_zh": "证据必须匹配后果并在真实使用中观察",
-      "action": "RUN_PREREGISTERED_USER_STUDY"
+      "action": "RUN_PREREGISTERED_USER_STUDY",
+      "priority": 30,
+      "kind": "constraint",
+      "predicate": {
+        "all": [
+          {
+            "field": "deployment_stage",
+            "in": [
+              "REVERSIBLE_PERSONALIZATION",
+              "CONSEQUENTIAL_PERSONALIZATION"
+            ]
+          },
+          {
+            "any": [
+              {
+                "field": "evidence.evaluation_mode",
+                "in": [
+                  "PROXY_ONLY",
+                  "VIGNETTE_ONLY",
+                  "NOT_TESTED"
+                ]
+              },
+              {
+                "field": "evidence.user_outcome",
+                "in": [
+                  "PROXIMAL_ONLY",
+                  "PREFERENCE_ONLY",
+                  "NOT_TESTED"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "R1_SCOPE_MATCH",
       "title_en": "Interpretation and use cannot exceed the evaluated evidence scope",
       "title_zh": "解释与用途不得超出已评估证据范围",
-      "action": "BOUND_TO_EVIDENCE_SCOPE"
+      "action": "BOUND_TO_EVIDENCE_SCOPE",
+      "priority": 40,
+      "kind": "constraint",
+      "predicate": {
+        "all": [
+          {
+            "field": "route_capability",
+            "eq": "AVAILABLE"
+          },
+          {
+            "field": "evidence.interpretation_scope",
+            "in": [
+              "PARTIAL",
+              "NOT_TESTED"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "R5_BOUNDED_PASS",
       "title_en": "Matched direct evidence and reversible use can license bounded personalization",
       "title_zh": "匹配的直接证据与可逆使用可许可受限个性化",
-      "action": "PROCEED_WITHIN_EVALUATED_BOUNDARY"
+      "action": "PROCEED_WITHIN_EVALUATED_BOUNDARY",
+      "priority": 90,
+      "kind": "permission",
+      "predicate": {
+        "all": [
+          {
+            "field": "deployment_stage",
+            "eq": "REVERSIBLE_PERSONALIZATION"
+          },
+          {
+            "field": "route_capability",
+            "eq": "AVAILABLE"
+          },
+          {
+            "field": "evidence.interpretation_scope",
+            "eq": "MATCHED"
+          },
+          {
+            "field": "evidence.comparator_increment",
+            "in": [
+              "SUPPORTED",
+              "PARTIAL",
+              "NOT_APPLICABLE"
+            ]
+          },
+          {
+            "field": "evidence.evaluation_mode",
+            "in": [
+              "IN_CONTEXT_USER_STUDY",
+              "TECHNICAL_AND_EMPIRICAL_EVALUATION",
+              "CASE_STUDY_IN_USE",
+              "LONGITUDINAL_FIELD_USE"
+            ]
+          },
+          {
+            "field": "evidence.user_outcome",
+            "in": [
+              "DIRECT_TASK_AND_EXPERIENCE",
+              "DIRECT_USER_EXPERIENCE"
+            ]
+          },
+          {
+            "any": [
+              {
+                "field": "evidence.user_control",
+                "eq": "SUPPORTED"
+              },
+              {
+                "field": "evidence.safety_reversibility",
+                "in": [
+                  "USER_CONTROLLED",
+                  "REVERSIBLE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "resolver": {
+    "policy": "Evaluate rules by ascending priority. The first matching constraint wins; a bounded-pass permission is returned only when no higher-priority constraint matches. No match returns a named evidence request, never silent approval.",
+    "precedence_rationale": "Lifecycle obligations precede local performance; a failed route-matched comparator precedes consequence and scope; consequence mismatch precedes scope; positive permission is evaluated last. This harm-first order returns the highest-consequence unresolved obligation rather than treating priorities as empirical weights.",
+    "fallback_action": "REQUIRE_ROUTE_SPECIFIC_EVIDENCE",
+    "ablation_semantics": "Removing a rule removes its constraint or permission. An affected route becomes unresolved unless another declared rule independently matches; ablation does not assume automatic deployment."
+  }
 };

@@ -2,31 +2,62 @@
   'use strict';
   const repo = 'https://github.com/rudykon/PersonaGuard';
   const research = window.PERSONAGUARD_CASES;
+  const copy = window.PERSONAGUARD_CASE_COPY;
   const caseButtons = [...document.querySelectorAll('[data-case]')];
-  let selectedCase = 'optional_sensing';
+  let selectedCase = 'retention_transfer';
   let language = 'en';
   let copyTimer;
 
   function renderCase() {
-    if (!research) return;
+    if (!research || !copy) return;
     const record = research.cases.find(item => item.id === selectedCase);
+    const explanation = copy[selectedCase];
     const rule = research.rules.find(item => item.id === record.matched_rule_id);
-    document.getElementById('case-title').textContent = record[`label_${language}`];
-    document.getElementById('case-use').textContent = record[`proposed_use_${language}`];
-    document.getElementById('case-evidence').textContent = record[`evidence_basis_${language}`];
-    document.getElementById('case-action').textContent = record[`audited_decision_${language}`];
+    if (!explanation || explanation.expected_action !== record.audited_action) {
+      throw new Error(`Presentation copy must be reviewed for ${selectedCase}`);
+    }
+    for (const [field, id] of Object.entries({
+      question: 'case-question', use: 'case-use', evidence: 'case-evidence',
+      next: 'case-action', why: 'case-why', context: 'case-context',
+    })) document.getElementById(id).textContent = explanation[field][language];
+    for (const [field, id] of Object.entries({
+      proposed_use: 'case-official-use', evidence_basis: 'case-official-evidence',
+      audited_decision: 'case-official-action',
+    })) document.getElementById(id).textContent = record[`${field}_${language}`];
+    document.getElementById('case-rule').textContent = rule.id.split('_')[0];
     document.getElementById('case-rule-title').textContent = rule[`title_${language}`];
-    const ruleId = rule.id.split('_')[0];
-    document.getElementById('case-rule').textContent = ruleId;
-    document.getElementById('case-source').href = `${repo}/blob/main/${record.source_locator}`;
-    document.getElementById('case-source').setAttribute('aria-label', language === 'zh' ? '查看案例证据' : 'View case evidence');
+    document.getElementById('case-priority').textContent = rule.priority;
+    document.getElementById('case-source').href = `${repo}/blob/main/${record.source_locator.split('#')[0]}`;
+    const conditions = document.getElementById('case-conditions');
+    conditions.replaceChildren();
+    for (const [field, value] of Object.entries(record.decisive_values)) {
+      const row = document.createElement('tr');
+      for (const text of [field, value]) {
+        const cell = document.createElement('td');
+        cell.textContent = String(text);
+        row.append(cell);
+      }
+      conditions.append(row);
+    }
     document.getElementById('case-panel').setAttribute('aria-labelledby', `tab-${selectedCase}`);
     caseButtons.forEach(button => {
       const active = button.dataset.case === selectedCase;
       button.setAttribute('aria-selected', String(active));
       button.tabIndex = active ? 0 : -1;
     });
-    document.querySelectorAll('[data-rule]').forEach(item => item.classList.toggle('active', item.dataset.rule === ruleId));
+  }
+
+  function renderRules() {
+    if (!research) return;
+    research.rules.forEach(rule => {
+      const id = rule.id.split('_')[0];
+      document.querySelector(`[data-formal-rule="${id}"]`).textContent = `${rule.id} — ${rule[`title_${language}`]}`;
+      document.querySelector(`[data-priority="${id}"]`).textContent = rule.priority;
+      document.querySelector(`[data-predicate="${id}"]`).textContent = JSON.stringify(rule.predicate, null, 2);
+    });
+    document.getElementById('rule-order').textContent = [...research.rules]
+      .sort((a, b) => a.priority - b.priority)
+      .map(rule => rule.id.split('_')[0]).join(' → ');
   }
 
   function setLanguage(next) {
@@ -34,13 +65,14 @@
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-en][data-zh]').forEach(node => { node.textContent = node.dataset[language]; });
     document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === language)));
-    document.title = language === 'zh' ? 'PersonaGuard — 从证据到行动' : 'PersonaGuard — From Evidence to Action';
+    document.title = language === 'zh' ? 'PersonaGuard — AI 应该何时进行个性化？' : 'PersonaGuard — When should AI personalize?';
     document.querySelector('nav').setAttribute('aria-label', language === 'zh' ? '主导航' : 'Main navigation');
-    document.querySelector('[role=tablist]').setAttribute('aria-label', language === 'zh' ? '已记录的研究案例' : 'Recorded research cases');
+    document.querySelector('[role=tablist]').setAttribute('aria-label', language === 'zh' ? '已有审查示例' : 'Recorded review examples');
     clearTimeout(copyTimer);
     document.getElementById('copy-status').textContent = '';
     renderCase();
-    try { localStorage.setItem('personaguard-language', language); } catch (_) { /* Language remains usable without storage. */ }
+    renderRules();
+    try { localStorage.setItem('personaguard-language', language); } catch (_) { /* The page remains usable without storage. */ }
   }
 
   document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
@@ -79,21 +111,22 @@
       status.textContent = language === 'zh' ? '已选中命令，请手动复制。' : 'Commands selected. Copy with Ctrl+C or Command+C.';
     }
     clearTimeout(copyTimer);
-    copyTimer = setTimeout(() => { label.textContent = language === 'zh' ? '复制' : 'Copy'; }, 3500);
+    copyTimer = setTimeout(() => { label.textContent = language === 'zh' ? '复制命令' : 'Copy commands'; }, 3500);
   });
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        document.querySelectorAll('.desktop-nav a').forEach(link => {
+        document.querySelectorAll('.main-nav a').forEach(link => {
           if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
           else link.removeAttribute('aria-current');
         });
       });
-    }, { rootMargin: '-15% 0px -65% 0px' });
-    ['overview', 'protocol', 'evidence', 'resources'].forEach(id => observer.observe(document.getElementById(id)));
+    }, { rootMargin: '-18% 0px -60% 0px' });
+    ['overview', 'examples', 'protocol', 'evidence', 'resources'].forEach(id => observer.observe(document.getElementById(id)));
   }
   try { language = localStorage.getItem('personaguard-language') === 'zh' ? 'zh' : 'en'; } catch (_) { /* Use English by default. */ }
   setLanguage(language);
+  if (research && copy) document.documentElement.classList.add('js-ready');
 })();
