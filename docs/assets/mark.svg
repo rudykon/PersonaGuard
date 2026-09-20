@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 28 350 330" role="img" aria-label="PersonaGuard"><g id="_x30_1_x5F_Icon__x2F__PG_body_and_rear_arc">
+	<g id="_x30_1_x5F_Icon_x5F_Body">
+
+			<linearGradient id="PG__x2F__upper_rear_arc_00000017492901413116323230000004319278525622229150_" gradientUnits="userSpaceOnUse" x1="282.3273" y1="336.6683" x2="254.3273" y2="233.6683" gradientTransform="matrix(1 0 0 -1 0 401)">
+			<stop offset="0" style="stop-color:#079457" />
+			<stop offset="0.47" style="stop-color:#035538" />
+			<stop offset="1" style="stop-color:#023728" />
+		</linearGradient>
+
+			<path id="PG__x2F__upper_rear_arc" style="fill:url(#PG__x2F__upper_rear_arc_00000017492901413116323230000004319278525622229150_);" d="    M189,60c24-9,48-9,69-5c51,9,89,47,95,97c-11-8-23-12-35-10c-13,1-25,11-35,5c-12-20-30-34-50-38C222,88,207,72,189,60z" />
+
+			<linearGradient id="PG__x2F__lower_rear_arc_00000078024740551746762250000008246225338459267775_" gradientUnits="userSpaceOnUse" x1="35.8899" y1="316.7341" x2="285.8899" y2="47.7341" gradientTransform="matrix(1 0 0 -1 0 401)">
+			<stop offset="0" style="stop-color:#13D982" />
+			<stop offset="0.42" style="stop-color:#09B86C" />
+			<stop offset="0.76" style="stop-color:#047246" />
+			<stop offset="1" style="stop-color:#023F2D" />
+		</linearGradient>
+
+			<path id="PG__x2F__lower_rear_arc" style="fill:url(#PG__x2F__lower_rear_arc_00000078024740551746762250000008246225338459267775_);" d="    M228,215c-7,27-16,49-32,67c11,6,27,6,39,2c28-8,46-29,51-56c0-6,12-5,17-3c18,8,37,4,51-8c-2,64-49,115-113,124    c-57,8-105-22-126-68c-2-3-2-6,2-6h33c24,0,32-16,28-35l-8-34c10-13,14-27,9-44c-5-21-23-32-41-31c-25,0-42,20-42,46v164    c0,5-1,7-6,5c-33-11-48-35-48-73V63c0-5,2-7,8-7h82c51-1,94,39,100,95c1,4,0,7-3,7h-10c-15,0-18,12-18,24C201,199,213,211,228,215    z" />
+	</g>
+</g>
+<g id="_x30_2_x5F_Icon__x2F__Keyhole_and_latch">
+	<g id="_x30_2_x5F_Icon_x5F_Key_x5F_and_x5F_Latch">
+
+			<linearGradient id="PG__x2F__horizontal_latch_00000165916541238745720740000005664964738094344884_" gradientUnits="userSpaceOnUse" x1="244.2522" y1="236.8456" x2="257.2522" y2="186.8456" gradientTransform="matrix(1 0 0 -1 0 401)">
+			<stop offset="0" style="stop-color:#079457" />
+			<stop offset="0.47" style="stop-color:#035538" />
+			<stop offset="1" style="stop-color:#023728" />
+		</linearGradient>
+
+			<path id="PG__x2F__horizontal_latch" style="fill:url(#PG__x2F__horizontal_latch_00000165916541238745720740000005664964738094344884_);" d="    M211,166h76c-6,15-6,31,2,43h-50c-20,0-32-10-31-28v-10C208,168,209,166,211,166z" />
+
+			<linearGradient id="Keyhole__x2F__mint_silhouette_00000054236722504713597560000014519444955012165519_" gradientUnits="userSpaceOnUse" x1="113.5091" y1="249.6647" x2="165.5091" y2="149.6647" gradientTransform="matrix(1 0 0 -1 0 401)">
+			<stop offset="0" style="stop-color:#35E98F" />
+			<stop offset="1" style="stop-color:#08AB61" />
+		</linearGradient>
+
+			<path id="Keyhole__x2F__mint_silhouette" style="fill:url(#Keyhole__x2F__mint_silhouette_00000054236722504713597560000014519444955012165519_);" d="    M128,193c-9-5-14-13-14-25c0-14,11-25,25-25s25,11,25,25c0,11-5,20-15,25l11,47c1,4-1,7-5,7h-34c-4,0-5-3-4-7L128,193z" />
+
+			<linearGradient id="Latch__x2F__circular_endpoint_00000013194690731072858560000000916421850072888992_" gradientUnits="userSpaceOnUse" x1="308.5075" y1="245.1815" x2="342.5075" y2="183.1815" gradientTransform="matrix(1 0 0 -1 0 401)">
+			<stop offset="0" style="stop-color:#35E98F" />
+			<stop offset="1" style="stop-color:#08AB61" />
+		</linearGradient>
+
+			<path id="Latch__x2F__circular_endpoint" style="fill:url(#Latch__x2F__circular_endpoint_00000013194690731072858560000000916421850072888992_);" d="    M356,185c0,17.4-14,31.5-31.5,31.5c-17.4,0-31.5-14.1-31.5-31.5s14.1-31.5,31.5-31.5C342,153.5,356,167.6,356,185z" />
+	</g>
+</g>
+</svg>

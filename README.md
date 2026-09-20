@@ -15,6 +15,8 @@ evidence supports. Continuous valence–arousal estimation provides the worked
 example, covering content priors, physiological sensing, sparse feedback, and
 profile retention or transfer.
 
+[Project page](https://rudykon.github.io/PersonaGuard/)
+
 ## Quick start
 
 Python 3.10+ and Git are required. From the repository root:

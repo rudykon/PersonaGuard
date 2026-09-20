@@ -15,3 +15,18 @@
 各入口的输入条件见脚本索引，命令参数使用对应脚本的 `--help` 查看。
 
 协议配置见 [configs/protocol](../configs/protocol/README.md)，汇总数值和证据记录见 [results](../results/README.md)。
+
+## 论文海报项目页
+
+线上页面：https://rudykon.github.io/PersonaGuard/
+
+页面源文件为 [index.html](index.html)，样式和交互位于 `assets/`。
+使用原生 HTML/CSS/JavaScript，无需前端依赖或构建。GitHub Pages 从 `main` 分支的 `/docs` 发布。
+
+```bash
+python3 -m http.server 8000 --directory docs
+python3 -B scripts/build_project_page_data.py --check
+```
+
+浏览 `http://localhost:8000`。修改公开协议或案例后，运行 `python3 -B scripts/build_project_page_data.py` 更新交互数据；
+页面不包含论文附件、`references/` 或私有数据。
