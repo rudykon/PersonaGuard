@@ -24,7 +24,7 @@ import requests
 ROOT = Path(__file__).resolve().parents[1]
 BIB_PATH = ROOT / "paper" / "references.bib"
 REPORT_DATE = "2026-09-11"
-JSON_OUTPUT = ROOT / "paper_support" / f"reference_verification_{REPORT_DATE}.json"
+JSON_OUTPUT = ROOT / "artifacts" / "paper_reports" / f"reference_verification_{REPORT_DATE}.json"
 MARKDOWN_OUTPUT = ROOT / "artifacts" / "paper_reports" / f"reference_verification_{REPORT_DATE}.md"
 CACHE_DIR = ROOT / "artifacts" / "reference_verification_cache"
 USER_AGENT = (
@@ -1214,6 +1214,7 @@ def main() -> int:
         "summary": summary,
         "entries": ordered,
     }
+    JSON_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     JSON_OUTPUT.write_text(
         json.dumps(report, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
         encoding="utf-8",

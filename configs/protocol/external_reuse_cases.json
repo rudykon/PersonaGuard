@@ -1,0 +1,170 @@
+{
+  "schema_version": "route-audit-cases-v2",
+  "protocol_version": "2.0",
+  "case_set": "external_published_hci_transfer",
+  "selection": {
+    "strategy": "Purposive maximum-variation benchmark, not a systematic review or prevalence estimate.",
+    "eligibility": "Peer-reviewed HCI work with an implemented or concretely specified personalization route, an identifiable comparator or consequence, and sufficient primary-source reporting to fill the frozen route schema.",
+    "variation_axes": ["system- versus user-controlled change", "positive versus negative comparator result", "lab versus field or case-study use", "behavioral versus sensing-based personalization", "direct use versus vignette evidence"],
+    "coding_boundary": "Authors of the present manuscript coded public reports. The source authors did not validate these encodings, and no independent second coder was available.",
+    "source_count": 6,
+    "case_count": 7
+  },
+  "sources": [
+    {
+      "id": "findlater2004menus",
+      "citation_key": "findlater2004menus",
+      "doi": "10.1145/985692.985704",
+      "title": "A Comparison of Static, Adaptive, and Adaptable Menus",
+      "primary_source_url": "https://www.cs.ubc.ca/labs/edapt/papers/findlater2004.pdf",
+      "reported_evidence": "Controlled lab study with 27 participants; static was faster than adaptive, adaptable was faster than adaptive in some orders, and most participants preferred adaptable."
+    },
+    {
+      "id": "gajos2010supple",
+      "citation_key": "gajos2010supple",
+      "doi": "10.1016/j.artint.2010.05.005",
+      "title": "Automatically Generating Personalized User Interfaces with Supple",
+      "primary_source_url": "https://www.eecs.harvard.edu/~kgajos/papers/2010/gajos10automatically.shtml",
+      "reported_evidence": "Automatically generated interfaces were compared with manufacturer defaults and improved speed, accuracy, and satisfaction for people with motor impairments."
+    },
+    {
+      "id": "reinecke2011cultural",
+      "citation_key": "reinecke2011cultural",
+      "doi": "10.1145/1970378.1970382",
+      "title": "Improving Performance, Perceived Usability, and Aesthetics with Culturally Adaptive User Interfaces",
+      "primary_source_url": "https://wildlab.cs.washington.edu/Publications_files/ReineckeBernstein_ToCHI.pdf",
+      "reported_evidence": "Evaluation with 41 users found faster task performance, fewer clicks and errors, and preference for the culturally adapted website over a non-adapted version."
+    },
+    {
+      "id": "johnson2013calibration",
+      "citation_key": "johnson2013calibration",
+      "doi": "10.1145/2493432.2493457",
+      "title": "Embracing Calibration in Body Sensing: Using Self-Tweaking to Enhance Ownership and Performance",
+      "primary_source_url": "https://oro.open.ac.uk/37923/",
+      "reported_evidence": "Two in-use body-sensing case studies showed teachers and pupils using exposed calibration to set goals and shape the technology to their bodies."
+    },
+    {
+      "id": "todi2021modelbased",
+      "citation_key": "todi2021modelbased",
+      "doi": "10.1145/3411764.3445497",
+      "title": "Adapting User Interfaces with Model-based Reinforcement Learning",
+      "primary_source_url": "https://arxiv.org/abs/2103.06807",
+      "reported_evidence": "A conservative adaptive-menu policy was evaluated empirically and in simulation against non-adaptive and frequency-based policies."
+    },
+    {
+      "id": "alves2026interaction",
+      "citation_key": "alves2026interaction",
+      "doi": "10.1145/3772318.3791022",
+      "title": "Exploring the Role of Interaction Data to Empower End-User Decision-Making in UI Personalization",
+      "primary_source_url": "https://arxiv.org/abs/2603.19196",
+      "reported_evidence": "Twelve interview participants considered synthetic-data vignettes; preferences and design considerations were elicited, but no functional personalized system or real task benefit was tested."
+    }
+  ],
+  "cases": [
+    {
+      "id": "findlater_adaptive_menu",
+      "source_id": "findlater2004menus",
+      "label_en": "System-adaptive split menu",
+      "label_zh": "系统自适应 split menu",
+      "proposed_use_en": "Use frequency-and-recency adaptation instead of the evaluated static split menu.",
+      "proposed_use_zh": "以频率和近期使用驱动的自适应替代已评估静态 split menu。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "NO_DEMONSTRATED_INCREMENT", "evaluation_mode": "IN_CONTEXT_USER_STUDY", "user_outcome": "DIRECT_TASK_AND_EXPERIENCE", "user_control": "NOT_REPORTED", "safety_reversibility": "REVERSIBLE", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "NOT_REQUIRED"},
+      "evidence_basis_en": "The adaptive menu was slower than the static comparator; the study therefore supplies route-specific negative evidence rather than missing data.",
+      "evidence_basis_zh": "自适应 menu 慢于静态比较方案，因此这是路径特定的负证据，而非缺失数据。",
+      "source_locator": "doi:10.1145/985692.985704#abstract-and-conclusion",
+      "naive_action": "DEPLOY_SYSTEM_ADAPTATION"
+    },
+    {
+      "id": "findlater_adaptable_menu",
+      "source_id": "findlater2004menus",
+      "label_en": "User-adaptable split menu",
+      "label_zh": "用户可调 split menu",
+      "proposed_use_en": "Offer user-controlled split-menu customization in the evaluated menu task.",
+      "proposed_use_zh": "在已评估 menu 任务中提供用户控制的 split-menu 定制。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "PARTIAL", "evaluation_mode": "IN_CONTEXT_USER_STUDY", "user_outcome": "DIRECT_TASK_AND_EXPERIENCE", "user_control": "SUPPORTED", "safety_reversibility": "USER_CONTROLLED", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "NOT_REQUIRED"},
+      "evidence_basis_en": "Participants could customize effectively in the tested task, adaptable menus beat adaptive menus in some orders, and most participants preferred the adaptable condition.",
+      "evidence_basis_zh": "参与者可在测试任务中有效定制；可调 menu 在部分顺序中优于自适应 menu，且多数参与者偏好可调条件。",
+      "source_locator": "doi:10.1145/985692.985704#abstract-and-conclusion",
+      "naive_action": "REJECT_PERSONALIZATION_WHEN_ANY_COMPARISON_IS_MIXED"
+    },
+    {
+      "id": "supple_motor_access",
+      "source_id": "gajos2010supple",
+      "label_en": "Ability-based generated interfaces",
+      "label_zh": "基于能力的生成界面",
+      "proposed_use_en": "Generate reversible interfaces for users whose motor abilities are poorly served by manufacturer defaults.",
+      "proposed_use_zh": "为不适合厂商默认界面的运动障碍用户生成可逆界面。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "SUPPORTED", "evaluation_mode": "IN_CONTEXT_USER_STUDY", "user_outcome": "DIRECT_TASK_AND_EXPERIENCE", "user_control": "PARTIAL", "safety_reversibility": "REVERSIBLE", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "PARTIAL"},
+      "evidence_basis_en": "Compared with manufacturer defaults, the evaluated interfaces improved speed, accuracy, and satisfaction for the target population.",
+      "evidence_basis_zh": "相对厂商默认界面，已评估界面改善了目标人群的速度、准确性与满意度。",
+      "source_locator": "doi:10.1016/j.artint.2010.05.005#abstract",
+      "naive_action": "REJECT_PERSONALIZATION_UNTIL_ALL_TRANSFER_EVIDENCE_EXISTS"
+    },
+    {
+      "id": "culturally_adaptive_website",
+      "source_id": "reinecke2011cultural",
+      "label_en": "Culturally adaptive website",
+      "label_zh": "文化自适应网站",
+      "proposed_use_en": "Use the evaluated cultural adaptation for the tested website tasks and populations.",
+      "proposed_use_zh": "在测试网站任务与人群中使用已评估文化自适应。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "SUPPORTED", "evaluation_mode": "IN_CONTEXT_USER_STUDY", "user_outcome": "DIRECT_TASK_AND_EXPERIENCE", "user_control": "NOT_REPORTED", "safety_reversibility": "REVERSIBLE", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "PARTIAL"},
+      "evidence_basis_en": "The adapted condition improved observed task performance and subjective experience against the non-adapted website in the evaluated sample.",
+      "evidence_basis_zh": "在已评估样本中，自适应条件相对非自适应网站改善了任务表现与主观体验。",
+      "source_locator": "doi:10.1145/1970378.1970382#abstract",
+      "naive_action": "REJECT_PERSONALIZATION_BECAUSE_PROFILES_ARE_NEVER_PERMITTED"
+    },
+    {
+      "id": "body_sensing_self_calibration",
+      "source_id": "johnson2013calibration",
+      "label_en": "User-shaped body-sensing calibration",
+      "label_zh": "用户塑造的身体传感校准",
+      "proposed_use_en": "Expose calibration so teachers and learners can shape goals and system behavior in the evaluated physical-skill setting.",
+      "proposed_use_zh": "开放校准，使教师和学习者在已评估身体技能场景中塑造目标与系统行为。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "NOT_APPLICABLE", "evaluation_mode": "CASE_STUDY_IN_USE", "user_outcome": "DIRECT_USER_EXPERIENCE", "user_control": "SUPPORTED", "safety_reversibility": "USER_CONTROLLED", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "NOT_REQUIRED"},
+      "evidence_basis_en": "Two in-use cases directly examined how exposed calibration supported ownership and goal setting rather than treating calibration as hidden setup.",
+      "evidence_basis_zh": "两个真实使用案例直接考察了开放校准如何支持掌控感与目标设定，而非把校准当作隐藏设置。",
+      "source_locator": "doi:10.1145/2493432.2493457#abstract",
+      "naive_action": "HIDE_CALIBRATION_AS_TECHNICAL_SETUP"
+    },
+    {
+      "id": "model_based_adaptive_menu",
+      "source_id": "todi2021modelbased",
+      "label_en": "Conservative model-based menu adaptation",
+      "label_zh": "保守型模型驱动 menu 自适应",
+      "proposed_use_en": "Use the conservative policy in the evaluated adaptive-menu setting.",
+      "proposed_use_zh": "在已评估自适应 menu 场景中使用保守策略。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "SUPPORTED", "evaluation_mode": "TECHNICAL_AND_EMPIRICAL_EVALUATION", "user_outcome": "DIRECT_TASK_AND_EXPERIENCE", "user_control": "NOT_REPORTED", "safety_reversibility": "REVERSIBLE", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "NOT_REQUIRED"},
+      "evidence_basis_en": "The conservative policy was designed to avoid changes when none were beneficial and outperformed non-adaptive and frequency-based policies in the reported evaluations.",
+      "evidence_basis_zh": "保守策略被设计为在无益时不改变，并在报告评估中优于非自适应与频率策略。",
+      "source_locator": "doi:10.1145/3411764.3445497#abstract",
+      "naive_action": "REJECT_AUTOMATIC_ADAPTATION_CATEGORICALLY"
+    },
+    {
+      "id": "interaction_data_visual_suggestions",
+      "source_id": "alves2026interaction",
+      "label_en": "Interaction-data visual suggestions",
+      "label_zh": "交互数据可视建议",
+      "proposed_use_en": "Deploy interaction-data-driven visual personalization suggestions with user acceptance and refinement.",
+      "proposed_use_zh": "部署由交互数据驱动、可由用户接受和调整的可视个性化建议。",
+      "deployment_stage": "REVERSIBLE_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {"interpretation_scope": "MATCHED", "comparator_increment": "NOT_TESTED", "evaluation_mode": "VIGNETTE_ONLY", "user_outcome": "PREFERENCE_ONLY", "user_control": "SUPPORTED", "safety_reversibility": "USER_CONTROLLED", "persistence": "NOT_REQUIRED", "transfer": "NOT_REQUIRED", "reference_equity": "NOT_REQUIRED"},
+      "evidence_basis_en": "Participants preferred supported, transparent suggestions in interviews, but the vignettes used synthetic data and did not test a functional system or task benefit.",
+      "evidence_basis_zh": "访谈参与者偏好有支持且透明的建议，但 vignette 使用合成数据，未检验功能系统或任务收益。",
+      "source_locator": "doi:10.1145/3772318.3791022#methods-and-conclusion",
+      "naive_action": "DEPLOY_FROM_STATED_PREFERENCE"
+    }
+  ]
+}

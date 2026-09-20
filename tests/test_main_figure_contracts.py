@@ -9,14 +9,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def rows(stem):
-    with (ROOT / "paper_support/figures" / f"source_data_{stem}.csv").open() as handle:
+    with (ROOT / "scripts/figures" / f"source_data_{stem}.csv").open() as handle:
         return list(csv.DictReader(handle))
 
 
 class MainFigureContractsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source = json.loads((ROOT / "paper_support/revision6_source.json").read_text())
+        cls.source = json.loads((ROOT / "results/revision6_source.json").read_text())
         cls.protocol = cls.source["summaries"]["protocol_replay"]
 
     def test_action_counts_preserve_both_record_sets(self):
@@ -58,7 +58,7 @@ class MainFigureContractsTest(unittest.TestCase):
         self.assertIn("known video", dense[0]["probe"])
 
     def test_measurement_figure_uses_separate_unjittered_axes(self):
-        script = (ROOT / "paper_support/figures/make_revision5_figures.py").read_text()
+        script = (ROOT / "scripts/figures/make_revision5_figures.py").read_text()
         function = script.split("def figure_estimator_reference_actionability(", 1)[1]
         function = function.split("\ndef main()", 1)[0]
         self.assertNotIn("twinx", function)

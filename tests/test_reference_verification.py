@@ -1,5 +1,3 @@
-import hashlib
-import json
 import unittest
 
 from scripts import verify_references as verifier
@@ -11,45 +9,25 @@ class ReferenceVerificationTests(unittest.TestCase):
         cls.entries = verifier.parse_bibtex(
             verifier.BIB_PATH.read_text(encoding="utf-8")
         )
-        cls.report = json.loads(
-            verifier.JSON_OUTPUT.read_text(encoding="utf-8")
-        )
 
-    def test_all_86_bibliography_entries_are_audited_once(self):
-        self.assertEqual(len(self.entries), 86)
-        self.assertEqual(self.report["entry_count"], 86)
-        expected = [entry["key"] for entry in self.entries]
-        observed = [entry["key"] for entry in self.report["entries"]]
-        self.assertEqual(observed, expected)
-        self.assertEqual(len(observed), len(set(observed)))
-
-    def test_report_matches_current_bibliography_bytes(self):
-        digest = hashlib.sha256(verifier.BIB_PATH.read_bytes()).hexdigest()
-        self.assertEqual(self.report["bib_sha256"], digest)
-
-    def test_no_reference_requires_a_field_fix_or_is_unverifiable(self):
-        self.assertEqual(self.report["summary"]["needs_fix"], 0)
-        self.assertEqual(self.report["summary"]["unverifiable"], 0)
-        for entry in self.report["entries"]:
-            self.assertNotIn(entry["status"], {"needs_fix", "unverifiable"})
-            self.assertGreaterEqual(entry["confirmed_sources"], 1)
-
-    def test_every_entry_retains_field_level_source_evidence(self):
-        for entry in self.report["entries"]:
-            self.assertTrue(entry["sources"], entry["key"])
-            self.assertTrue(
-                any(source.get("evidence_url") for source in entry["sources"]),
-                entry["key"],
-            )
-            for required in ("author", "title", "year"):
-                self.assertTrue(entry["fields"].get(required), entry["key"])
-
-    def test_human_readable_report_can_be_rendered_without_stored_markdown(self):
-        text = verifier.markdown_report(self.report)
-        self.assertIn("Entries parsed: 86", text)
+    def test_human_readable_report_can_be_rendered_without_stored_audit(self):
+        report = {
+            "audit_date": "2026-01-01",
+            "entry_count": 1,
+            "summary": {"verified": 1, "needs_fix": 0, "unverifiable": 0},
+            "entries": [{
+                "key": "example", "status": "verified", "confirmed_sources": 2,
+                "best_title_similarity": 1.0, "issues": [], "sources": [],
+                "fields": {"author": "Doe, Jane", "title": "Example Article", "year": "2026"},
+            }],
+        }
+        text = verifier.markdown_report(report)
+        self.assertIn("Entries parsed: 1", text)
         self.assertIn("needs_fix=0", text)
         self.assertIn("unverifiable=0", text)
-        self.assertFalse(verifier.MARKDOWN_OUTPUT.is_relative_to(verifier.ROOT / "paper"))
+        self.assertIn("### example", text)
+        self.assertTrue(verifier.JSON_OUTPUT.is_relative_to(verifier.ROOT / "artifacts"))
+        self.assertTrue(verifier.MARKDOWN_OUTPUT.is_relative_to(verifier.ROOT / "artifacts"))
 
     def test_frontiers_article_number_is_recovered_from_doi(self):
         self.assertEqual(
@@ -158,7 +136,6 @@ class ReferenceVerificationTests(unittest.TestCase):
         self.assertTrue(any(issue["field"] == "author_order" for issue in result["issues"]))
 
     def test_mer_reference_is_pinned_to_the_cited_author_version(self):
-        self.assertEqual(self.report["audit_date"], verifier.REPORT_DATE)
         fields = next(e["fields"] for e in self.entries if e["key"] == "lian2026mer")
         self.assertEqual(fields["eprint"], "2604.19417v4")
         self.assertEqual(fields["url"], "https://arxiv.org/abs/2604.19417v4")

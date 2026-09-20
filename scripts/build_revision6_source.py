@@ -2,7 +2,7 @@
 """Build the Revision-6 source from formal artifacts and authorized figure examples.
 
 All manuscript tables, generated README blocks, and manuscript figures must read
-paper_support/revision6_source.json rather than earlier revision directories. Upstream
+results/revision6_source.json rather than earlier revision directories. Upstream
 artifacts remain the reproducible analysis record; this file is the sole
 publication-facing numerical interface.
 """
@@ -19,10 +19,10 @@ from typing import Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = ROOT / "paper_support" / "revision6_source.json"
+DEFAULT_OUTPUT = ROOT / "results" / "revision6_source.json"
 
 JSON_INPUTS = {
-    "dense_trajectory_examples": ROOT / "paper_support" / "dense_trajectory_examples.json",
+    "dense_trajectory_examples": ROOT / "scripts" / "figures" / "dense_trajectory_examples.json",
     "revision2": ROOT / "artifacts" / "revision2" / "summary.json",
     "revision3": ROOT / "artifacts" / "revision3" / "summary.json",
     "revision4": ROOT / "artifacts" / "revision4" / "summary.json",
@@ -36,12 +36,12 @@ JSON_INPUTS = {
     / "artifacts"
     / "normative_dynamics"
     / "summary.json",
-    "evidence_traceability": ROOT / "paper_support" / "evidence_traceability.json",
-    "protocol_replay_cases": ROOT / "paper_support" / "protocol_replay_cases.json",
+    "evidence_traceability": ROOT / "results" / "evidence_traceability.json",
+    "protocol_replay_cases": ROOT / "configs" / "protocol" / "protocol_replay_cases.json",
     "protocol_replay": ROOT / "artifacts" / "revision6" / "protocol_replay.json",
-    "protocol_rules": ROOT / "paper_support" / "protocol_rules.json",
-    "external_reuse_cases": ROOT / "paper_support" / "external_reuse_cases.json",
-    "adjacent_frameworks": ROOT / "paper_support" / "adjacent_frameworks.json",
+    "protocol_rules": ROOT / "configs" / "protocol" / "protocol_rules.json",
+    "external_reuse_cases": ROOT / "configs" / "protocol" / "external_reuse_cases.json",
+    "adjacent_frameworks": ROOT / "configs" / "protocol" / "adjacent_frameworks.json",
     "algorithm_experiments": ROOT
     / "artifacts"
     / "algorithm_experiment_summary"
@@ -494,7 +494,7 @@ def build_source() -> dict[str, object]:
         "schema_version": "revision6-publication-source-v1",
         "revision": 6,
         "policy": {
-            "single_numeric_source": "paper_support/revision6_source.json",
+            "single_numeric_source": "results/revision6_source.json",
             "anonymous_curve_exception": (
                 "Three author-authorized Figure 5 examples and their plotted "
                 "coordinates only; no original identities or complete OOF archives."

@@ -1,0 +1,9 @@
+panel,evaluation_lane,unit,probe,supports,does_not_establish
+A,4 frozen worked routes,Four proposed profile uses,unchanged schema and resolver,RQ1 representation and declared contract,coding validity or human decision improvement
+A,7 author-coded external routes,From 6 published HCI papers,unchanged schema and resolver,RQ1 representation and declared contract,coding validity or human decision improvement
+A,Structural challenges + ablations,Distinct expected responses,unchanged schema and resolver,RQ1 representation and declared contract,coding validity or human decision improvement
+C,Profile interpretation · RQ2,Trace interpretation,Cross-axis / own–donor / cross-video; Estimator + reference sensitivity,formal evidence link,independent reuse or user benefit
+C,Scalar sensing · RQ3,Optional profile sensing,q prediction vs video mean,formal evidence link,independent reuse or user benefit
+C,Signed calibration · RQ3,Signed calibration,Cross-video reference-proximal correction,formal evidence link,independent reuse or user benefit
+C,Lifecycle evidence gap,Retention / transfer,No repeated-session / transfer evidence,formal evidence link,independent reuse or user benefit
+B,additional dense-trajectory analyses,RQ3; metadata/content/causal residual/SAM,"participant + released-video holdout for content/residual; participant holdout, known video for SAM",information-specific offline increments,additional resolved audit routes

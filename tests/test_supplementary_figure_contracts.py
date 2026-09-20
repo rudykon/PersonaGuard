@@ -10,20 +10,21 @@ import unittest
 from unittest.mock import Mock, patch
 
 ROOT=Path(__file__).resolve().parents[1]
-FIG=ROOT/"paper_support/figures"
-sys.path.insert(0,str(FIG))
-spec=importlib.util.spec_from_file_location("si_figures",FIG/"make_supplementary_figures.py")
+FIG=ROOT/"paper/figures"
+SCRIPTS=ROOT/"scripts/figures"
+sys.path.insert(0,str(SCRIPTS))
+spec=importlib.util.spec_from_file_location("si_figures",SCRIPTS/"make_supplementary_figures.py")
 module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 def rows(stem):
-    with (FIG/f"source_data_{stem}.csv").open() as f:
+    with (SCRIPTS/f"source_data_{stem}.csv").open() as f:
         return list(csv.DictReader(f))
 
 class SupplementaryFigureContractsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source=json.loads((ROOT/"paper_support/revision6_source.json").read_text())
+        cls.source=json.loads((ROOT/"results/revision6_source.json").read_text())
         cls.s=cls.source["summaries"]
 
     def test_all_graph_nodes_states_and_directions_preserved(self):
@@ -121,11 +122,11 @@ class SupplementaryFigureContractsTest(unittest.TestCase):
         for stem in ["Evidence_Graph","Validation_Boundaries_portraits",
                      "dense_algorithm_sensitivity","decision_boundary_sensitivity"]:
             self.assertIn('"'+stem+'"',build)
-            # Raster and grayscale previews are optional review products.
-            suffixes=[".svg","_embed.pdf"] if stem in author_stems else [".svg",".pdf","_embed.pdf"]
+            # Formal assets keep author originals and cited PDFs only.
+            suffixes=[".svg","_embed.pdf"] if stem in author_stems else ["_embed.pdf"]
             for suffix in suffixes:
                 self.assertTrue((FIG/(stem+suffix)).is_file())
-        script=(FIG/"make_supplementary_figures.py").read_text()
+        script=(SCRIPTS/"make_supplementary_figures.py").read_text()
         self.assertIn('f"{stem}.png"',script)
         self.assertIn('f"{stem}.tiff"',script)
         self.assertIn('f"{stem}_grayscale.png"',script)
@@ -178,7 +179,7 @@ class FigureExportRequirementsTest(unittest.TestCase):
         temporary=tempfile.TemporaryDirectory(prefix="chi2027-export-test-")
         self.addCleanup(temporary.cleanup)
         self.directory=Path(temporary.name)
-        figures=self.directory/"paper_support/figures"
+        figures=self.directory/"artifacts/figures"
         figures.mkdir(parents=True)
         for suffix in self.builder.FIGURE_SUFFIXES:
             (figures/("example"+suffix)).write_bytes(b"test fixture")
@@ -188,21 +189,23 @@ class FigureExportRequirementsTest(unittest.TestCase):
         (self.directory/"paper/body.tex").write_text(
             r"\includegraphics{example_embed.pdf}", encoding="utf-8"
         )
-        for name,value in [("ROOT",self.directory),("FIGURE_STEMS",("example",))]:
+        for name,value in [("ROOT",self.directory),("FIGURE_STEMS",("example",)),("CUSTOM_SVG_STEMS",frozenset())]:
             change=patch.object(self.builder,name,value)
             change.start()
             self.addCleanup(change.stop)
 
-    def test_vector_assets_suffice_after_raster_archival(self):
+    def test_formal_assets_suffice_without_work_exports(self):
+        for path in (self.directory/"artifacts/figures").iterdir():
+            path.unlink()
         self.builder.verify_figure_exports()
 
     def test_missing_manuscript_pdf_still_fails(self):
-        (self.directory/"paper_support/figures/example_embed.pdf").unlink()
+        (self.directory/"paper/figures/example_embed.pdf").unlink()
         with self.assertRaisesRegex(RuntimeError,"example_embed.pdf"):
             self.builder.verify_figure_exports()
 
     def test_empty_manuscript_pdf_still_fails(self):
-        (self.directory/"paper_support/figures/example_embed.pdf").write_bytes(b"")
+        (self.directory/"paper/figures/example_embed.pdf").write_bytes(b"")
         with self.assertRaisesRegex(RuntimeError,"example_embed.pdf"):
             self.builder.verify_figure_exports()
 
@@ -210,7 +213,7 @@ class FigureExportRequirementsTest(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError,"example.png"):
             self.builder.verify_figure_exports(require_raster=True)
         for suffix in self.builder.RASTER_FIGURE_SUFFIXES:
-            (self.directory/"paper_support/figures"/("example"+suffix)).write_bytes(b"test fixture")
+            (self.directory/"artifacts/figures"/("example"+suffix)).write_bytes(b"test fixture")
         self.builder.verify_figure_exports(require_raster=True)
         self.assertTrue(self.builder.parse_args(["--check","--require-raster"]).require_raster)
 
@@ -219,8 +222,27 @@ class FigureExportRequirementsTest(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError,"Unreferenced"):
             self.builder.verify_figure_exports()
 
+    def test_author_sources_remain_in_paper_and_are_not_overwritten(self):
+        self.builder.FIGURE_STEMS=("example","author")
+        self.builder.CUSTOM_SVG_STEMS=frozenset({"author"})
+        (self.directory/"paper/body.tex").write_text(
+            r"\includegraphics{example_embed.pdf}\includegraphics{author_embed.pdf}",
+            encoding="utf-8",
+        )
+        formal=self.directory/"paper/figures"
+        (formal/"author.svg").write_bytes(b"original SVG")
+        (formal/"author_embed.pdf").write_bytes(b"author export")
+        (self.directory/"artifacts/figures/author_embed.pdf").write_bytes(b"unwanted replacement")
+        self.builder.publish_figure_exports()
+        self.assertEqual((formal/"author.svg").read_bytes(),b"original SVG")
+        self.assertEqual((formal/"author_embed.pdf").read_bytes(),b"author export")
+        self.builder.verify_figure_exports()
+        (formal/"author.svg").unlink()
+        with self.assertRaisesRegex(RuntimeError,"author.svg"):
+            self.builder.verify_figure_exports()
+
     def test_publisher_only_copies_registered_cited_images(self):
-        figures=self.directory/"paper_support/figures"
+        figures=self.directory/"artifacts/figures"
         (figures/"unused_embed.pdf").write_bytes(b"unused source")
         (figures/"example_embed.pdf").write_bytes(b"updated fixture")
         self.builder.publish_figure_exports()

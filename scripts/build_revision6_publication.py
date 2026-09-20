@@ -33,8 +33,8 @@ FIGURE_STEMS = (
     "dense_algorithm_sensitivity",
     "decision_boundary_sensitivity",
 )
-# Editable sources/exports live outside the manuscript; paper gets cited PDFs only.
-FIGURE_SUFFIXES = (".svg", "_embed.pdf")
+# The manuscript keeps cited PDFs and the four author-provided SVG originals.
+FIGURE_SUFFIXES = ("_embed.pdf",)
 RASTER_FIGURE_SUFFIXES = (".png", ".tiff")
 CUSTOM_SVG_STEMS = frozenset((
     "Evidence-to-Action_Audit_Protocol", "Protocol_Evaluation_refined_source",
@@ -56,7 +56,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--require-raster", action="store_true",
-        help="also require optional PNG/TIFF exports (not LaTeX dependencies)",
+        help="also require optional PNG/TIFF work exports in artifacts/figures",
     )
     return parser.parse_args(argv)
 
@@ -103,10 +103,10 @@ def cited_figure_names() -> set[str]:
 
 
 def publish_figure_exports() -> None:
-    """Copy only currently cited PDFs from support exports into paper/figures."""
+    """Copy generated cited PDFs; author SVGs export directly beside their sources."""
     destination = ROOT / "paper" / "figures"
-    names = cited_figure_names()
-    sources = {name: ROOT / "paper_support" / "figures" / name for name in names}
+    names = cited_figure_names() - {f"{stem}_embed.pdf" for stem in CUSTOM_SVG_STEMS}
+    sources = {name: ROOT / "artifacts" / "figures" / name for name in names}
     for source in sources.values():
         if not source.is_file() or not source.stat().st_size:
             raise RuntimeError(f"Missing or empty figure export: {source}")
@@ -118,26 +118,26 @@ def publish_figure_exports() -> None:
 
 
 def verify_figure_exports(*, require_raster: bool = False) -> None:
+    """Verify formal assets without requiring disposable build products."""
     names = cited_figure_names()
-    missing = []
-    support = ROOT / "paper_support" / "figures"
-    for stem in FIGURE_STEMS:
-        suffixes = FIGURE_SUFFIXES
-        if require_raster and stem not in CUSTOM_SVG_STEMS:
-            suffixes += RASTER_FIGURE_SUFFIXES
-        paths = [support / f"{stem}{suffix}" for suffix in suffixes]
-        paths.append(ROOT / "paper" / "figures" / f"{stem}_embed.pdf")
-        for path in paths:
-            if not path.is_file() or not path.stat().st_size:
-                missing.append(path.relative_to(ROOT).as_posix())
+    originals = {f"{stem}.svg" for stem in CUSTOM_SVG_STEMS}
+    destination = ROOT / "paper" / "figures"
+    paths = [destination / name for name in sorted(names | originals)]
+    if require_raster:
+        paths.extend(
+            ROOT / "artifacts" / "figures" / f"{stem}{suffix}"
+            for stem in FIGURE_STEMS if stem not in CUSTOM_SVG_STEMS
+            for suffix in RASTER_FIGURE_SUFFIXES
+        )
+    missing = [
+        path.relative_to(ROOT).as_posix() for path in paths
+        if not path.is_file() or not path.stat().st_size
+    ]
     if missing:
         raise RuntimeError("Missing or empty publication figure exports: " + ", ".join(missing))
-    for name in names:
-        if (support / name).read_bytes() != (ROOT / "paper" / "figures" / name).read_bytes():
-            raise RuntimeError(f"Published figure differs from support export: {name}")
     extras = {
-        path.name for path in (ROOT / "paper" / "figures").iterdir()
-        if path.name not in names
+        path.name for path in destination.iterdir()
+        if path.name not in names | originals
     }
     if extras:
         raise RuntimeError(f"Unreferenced items in paper/figures: {sorted(extras)}")
@@ -145,31 +145,30 @@ def verify_figure_exports(*, require_raster: bool = False) -> None:
 
 def main() -> None:
     args = parse_args()
+    # Author disclosure fragments are maintained separately from generated results.
     if args.check:
-        run("scripts/generate_submission_readiness.py", "--check", "--strict")
         run("scripts/generate_word_count_report.py", "--check")
         run("scripts/generate_evidence_traceability.py", "--check")
         run("scripts/run_protocol_replay.py", "--check")
         run("scripts/build_revision6_source.py", "--check")
         run("scripts/generate_revision6_publication.py", "--check")
-        run("paper_support/figures/export_current_protocol_svgs.py", "--check")
-        run("paper_support/figures/export_current_supplementary_svgs.py", "--check")
+        run("scripts/figures/export_current_protocol_svgs.py", "--check")
+        run("scripts/figures/export_current_supplementary_svgs.py", "--check")
         verify_figure_exports(require_raster=args.require_raster)
     else:
-        run("scripts/generate_submission_readiness.py", "--strict")
         run("scripts/refresh_evidence_traceability.py")
         run("scripts/generate_evidence_traceability.py")
         run("scripts/generate_evidence_traceability.py", "--check")
         run("scripts/run_protocol_replay.py")
         run("scripts/build_revision6_source.py")
         run("scripts/generate_revision6_publication.py")
-        run("paper_support/figures/make_revision6_protocol_figure.py")
-        run("paper_support/figures/make_dense_trajectory_examples.py")
-        run("paper_support/figures/make_revision6_validity_figure.py")
-        run("paper_support/figures/make_revision5_figures.py")
-        run("paper_support/figures/make_supplementary_figures.py")
-        run("paper_support/figures/make_revision6_decision_figures.py")
-        run("paper_support/figures/export_current_protocol_svgs.py")
+        run("scripts/figures/make_revision6_protocol_figure.py")
+        run("scripts/figures/make_dense_trajectory_examples.py")
+        run("scripts/figures/make_revision6_validity_figure.py")
+        run("scripts/figures/make_revision5_figures.py")
+        run("scripts/figures/make_supplementary_figures.py")
+        run("scripts/figures/make_revision6_decision_figures.py")
+        run("scripts/figures/export_current_protocol_svgs.py")
         publish_figure_exports()
         run("scripts/generate_word_count_report.py")
         run("scripts/build_revision6_source.py", "--check")

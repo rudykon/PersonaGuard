@@ -80,7 +80,7 @@ class ProtocolReplayTest(unittest.TestCase):
     def test_route_inputs_do_not_encode_expected_actions_or_rule_ids(self):
         for filename in ("protocol_replay_cases.json", "external_reuse_cases.json"):
             specification = json.loads(
-                (ROOT / "paper_support" / filename).read_text(encoding="utf-8")
+                (ROOT / "configs" / "protocol" / filename).read_text(encoding="utf-8")
             )
             self.assertEqual(specification["schema_version"], "route-audit-cases-v2")
             for case in specification["cases"]:
@@ -99,10 +99,10 @@ class ProtocolReplayTest(unittest.TestCase):
 
     def test_positive_permission_requires_capability_and_control_or_reversibility(self):
         protocol = json.loads(
-            (ROOT / "paper_support" / "protocol_rules.json").read_text(encoding="utf-8")
+            (ROOT / "configs" / "protocol" / "protocol_rules.json").read_text(encoding="utf-8")
         )
         external = json.loads(
-            (ROOT / "paper_support" / "external_reuse_cases.json").read_text(
+            (ROOT / "configs" / "protocol" / "external_reuse_cases.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -128,7 +128,7 @@ class ProtocolReplayTest(unittest.TestCase):
 
     def test_every_declared_evidence_field_is_used_by_a_rule(self):
         protocol = json.loads(
-            (ROOT / "paper_support" / "protocol_rules.json").read_text(encoding="utf-8")
+            (ROOT / "configs" / "protocol" / "protocol_rules.json").read_text(encoding="utf-8")
         )
         used = set()
         for rule in protocol["rules"]:
@@ -148,8 +148,8 @@ class ProtocolReplayTest(unittest.TestCase):
 
     def test_supplied_case_set_entrypoint_reuses_frozen_resolver(self):
         resolved = MODULE.resolve_case_set(
-            ROOT / "paper_support" / "protocol_replay_cases.json",
-            ROOT / "paper_support" / "protocol_rules.json",
+            ROOT / "configs" / "protocol" / "protocol_replay_cases.json",
+            ROOT / "configs" / "protocol" / "protocol_rules.json",
             external=False,
         )
         self.assertEqual(

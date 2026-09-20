@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the evidence traceability graph and generate bilingual table rows."""
+"""Validate the evidence graph and generate English rows, with optional Chinese output."""
 
 from __future__ import annotations
 
@@ -13,9 +13,8 @@ from typing import Sequence
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SCHEMA = PROJECT_ROOT / "paper_support" / "evidence_traceability.json"
+DEFAULT_SCHEMA = PROJECT_ROOT / "results" / "evidence_traceability.json"
 DEFAULT_EN = PROJECT_ROOT / "paper" / "generated" / "evidence_traceability_rows.tex"
-DEFAULT_ZH = PROJECT_ROOT / "paper" / "generated" / "evidence_traceability_rows_zh.tex"
 
 ALLOWED_STATUSES = {
     "AVAILABLE",
@@ -54,7 +53,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
     parser.add_argument("--output-en", type=Path, default=DEFAULT_EN)
-    parser.add_argument("--output-zh", type=Path, default=DEFAULT_ZH)
+    parser.add_argument(
+        "--output-zh", type=Path,
+        help="optionally export Chinese rows to an explicitly supplied path",
+    )
     parser.add_argument("--check", action="store_true")
     return parser.parse_args(argv)
 
@@ -223,9 +225,9 @@ def chinese_table_text(value: object) -> str:
 def table_rows(graph: dict[str, object], language: str) -> str:
     output = [
         (
-            "% 由 paper_support/evidence_traceability.json 自动生成；请勿手工编辑。"
+            "% 由 results/evidence_traceability.json 自动生成；请勿手工编辑。"
             if language == "zh"
-            else "% Generated from paper_support/evidence_traceability.json; do not edit by hand."
+            else "% Generated from results/evidence_traceability.json; do not edit by hand."
         )
     ]
     status_zh = {
@@ -259,18 +261,16 @@ def main() -> None:
     args = parse_args()
     graph = json.loads(args.schema.read_text(encoding="utf-8"))
     validate_graph(graph)
-    expected_en = table_rows(graph, "en")
-    expected_zh = table_rows(graph, "zh")
-    if args.check:
-        actual_en = args.output_en.read_text(encoding="utf-8")
-        actual_zh = args.output_zh.read_text(encoding="utf-8")
-        if actual_en != expected_en or actual_zh != expected_zh:
-            raise RuntimeError("Generated evidence-table rows are stale")
-    else:
-        args.output_en.parent.mkdir(parents=True, exist_ok=True)
-        args.output_zh.parent.mkdir(parents=True, exist_ok=True)
-        args.output_en.write_text(expected_en, encoding="utf-8")
-        args.output_zh.write_text(expected_zh, encoding="utf-8")
+    outputs = {args.output_en: table_rows(graph, "en")}
+    if args.output_zh is not None:
+        outputs[args.output_zh] = table_rows(graph, "zh")
+    for output, expected in outputs.items():
+        if args.check:
+            if not output.is_file() or output.read_text(encoding="utf-8") != expected:
+                raise RuntimeError(f"Generated evidence-table rows are stale: {output}")
+        else:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(expected, encoding="utf-8")
     print(
         f"Validated {len(graph['nodes'])} nodes and {len(graph['edges'])} typed edges."
     )

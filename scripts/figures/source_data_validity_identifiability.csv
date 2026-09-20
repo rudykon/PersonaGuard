@@ -1,0 +1,16 @@
+analysis,ci_high,ci_low,condition,estimate,mean,metric,noise_sd_label_units,panel,profile_rank_spearman,retained_ci_high,retained_ci_low,retained_fraction,unit
+Arousal → valence,1.6613635860110862,0.29699987739008843,,,0.9237854729847467,,,A,,,,,released joystick label units
+Valence → arousal,1.2377169285444218,0.17594627428811307,,,0.6886702518338048,,,A,,,,,released joystick label units
+Combined,1.4061438082816535,0.30513066775135117,,,0.8062278624092758,,,A,,,,,released joystick label units
+True shift: 4 s,0.7157499999999997,0.0,,,0.3886,lag recovery MAE,0.0,B,,,,,seconds
+True shift: 4 s,1.23,0.46425,,,0.8952,lag recovery MAE,2.0,B,,,,,seconds
+True shift: 4 s,1.96,0.859,,,1.469,lag recovery MAE,5.0,B,,,,,seconds
+Magnitude pulse: lag 0 s,1.1462499999999995,0.07,,,0.5219,apparent absolute lag,0.0,B,,,,,seconds
+Magnitude pulse: lag 0 s,1.4019999999999992,0.3195,,,0.7561999999999999,apparent absolute lag,2.0,B,,,,,seconds
+Magnitude pulse: lag 0 s,1.7119999999999993,0.47,,,0.9914999999999999,apparent absolute lag,5.0,B,,,,,seconds
+High gradient (descriptive),2.1882981563428014,1.240184465427605,,,1.7139691550248692,,,C,,,,,seconds
+Local peak (slope-adjusted),0.0119844913959497,-0.13330580665476502,,,-0.05776441922275257,,,C,,,,,seconds
+Participant variance,,,raw,0.18392311376304843,,,,D,,,,,seconds squared
+Participant variance,,,participant-cross-fitted geometry adjusted,0.0568762456194825,,,,D,,1.7785497954723297,0.08179179858916373,0.30923924924823326,seconds squared
+Descriptive shared-reference RG15,0.8993141996431395,0.6486266889119248,raw,0.7603756447833127,,,,D,,,,,
+Descriptive shared-reference RG15,0.8541024674553737,0.20582144860621815,participant-cross-fitted geometry adjusted,0.4651893763414902,,,,D,0.7260869565217389,,,,

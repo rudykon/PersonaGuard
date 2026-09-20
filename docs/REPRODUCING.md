@@ -5,10 +5,10 @@
 
 ## 1. 仓库检查
 
-需要 Python 3.10+，无需 GPU、研究数据或网络访问：
+需要 Python 3.10+ 和 Git，无需 GPU、研究数据或网络访问：
 
 ```bash
-python3 -B -m unittest -v tests.test_repository_layout
+python3 -B -m unittest -v tests.test_repository_layout tests.test_export_github
 python3 -B scripts/check_repository.py
 ```
 
@@ -55,7 +55,7 @@ make smoke PYTHON=.venv/bin/python
 所有运行均需核对各脚本的信息时点、参与者/视频留出条件、输入缓存和输出目录。
 实验重跑不会由 `make check` 或 `make smoke` 自动触发。
 
-`paper_support/revision6_source.json` 是已保存正式分析记录的统一数值接口。
+`results/revision6_source.json` 是已保存正式分析记录的统一数值接口。
 该文件的完整重建与本地材料核查需要 `artifacts/`、特征来源清单及其他本地输入。
 这些输入不会随 GitHub 克隆自动获得。
 

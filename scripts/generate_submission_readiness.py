@@ -10,10 +10,8 @@ from typing import Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "paper_support" / "submission_readiness.json"
 OUTPUTS = {
     "en": ROOT / "paper" / "generated" / "secondary_analysis_ethics_statement.tex",
-    "zh": ROOT / "paper" / "generated" / "secondary_analysis_ethics_statement_zh.tex",
 }
 
 DISCLOSURE_COMPLETE = "DISCLOSURE_COMPLETE"
@@ -26,6 +24,10 @@ REQUIRED_DISCLOSURE_FIELDS = {
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--source", type=Path, required=True,
+        help="path to an author-supplied submission-readiness JSON record",
+    )
     parser.add_argument("--check", action="store_true")
     parser.add_argument(
         "--strict",
@@ -69,15 +71,15 @@ def render(record: dict[str, object], *, language: str = "en") -> str:
     sentence = str(record[field]).strip()
     if language == "zh":
         sentence = sentence.replace("gated research release", "受限研究发布集")
-        comment = "% 由 paper_support/submission_readiness.json 自动生成；请勿手工编辑。\n"
+        comment = "% 由作者提供的披露记录生成；请通过独立生成工具更新。\n"
     else:
-        comment = "% Generated from paper_support/submission_readiness.json; do not edit by hand.\n"
+        comment = "% Generated from an author-supplied disclosure record; update with the standalone generator.\n"
     return comment + sentence + "\n"
 
 
 def main() -> None:
     args = parse_args()
-    document = json.loads(SOURCE.read_text(encoding="utf-8"))
+    document = json.loads(args.source.read_text(encoding="utf-8"))
     record = validate(document, strict=args.strict)
     for language, output in OUTPUTS.items():
         expected = render(record, language=language)

@@ -24,7 +24,8 @@ WARNING_BYTES = 10 * MIB
 MAXIMUM_BYTES = 100 * MIB
 TEXT_SCAN_BYTES = 2 * MIB
 PRIVATE_ROOTS = frozenset({
-    ".local", ".venv", "archive", "artifacts", "checkpoints", "references",
+    ".git", ".local", ".venv", "archive", "artifacts", "checkpoints", "references",
+    "paper", "paper_zh", "build", "dist",
 })
 PRIVATE_PARTS = frozenset({
     "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "node_modules",
@@ -123,8 +124,10 @@ def secret_issues(relative: str, text: str) -> list[Issue]:
     return issues
 
 
-def readme_link_issues(root: Path, relative: str, text: str) -> list[Issue]:
-    """Check inline local links in the root READMEs, ignoring code fences."""
+def readme_link_issues(
+    root: Path, relative: str, text: str, published_paths: set[str] | None = None,
+) -> list[Issue]:
+    """Check inline local Markdown links, ignoring code fences."""
     issues = []
     fenced = False
     for number, line in enumerate(text.splitlines(), start=1):
@@ -150,11 +153,22 @@ def readme_link_issues(root: Path, relative: str, text: str) -> list[Issue]:
                 continue
             if not resolved.exists():
                 issues.append(Issue("error", relative, "local Markdown link target is missing", number))
+            elif published_paths is not None:
+                target_path = resolved.relative_to(root.resolve()).as_posix()
+                included = target_path == "." or target_path in published_paths or any(
+                    item.startswith(target_path + "/") for item in published_paths
+                )
+                if not included:
+                    issues.append(Issue("error", relative, "local Markdown link target is excluded from publication", number))
     return issues
 
 
 def audit_repository(root: Path, candidates: list[str] | None = None) -> tuple[list[str], list[Issue]]:
     candidates = git_candidates(root) if candidates is None else sorted(set(candidates))
+    published_paths = {
+        relative for relative in candidates
+        if private_path_reason(relative) is None and (root / relative).is_file()
+    }
     issues: list[Issue] = []
     for relative in candidates:
         path = root / relative
@@ -191,8 +205,8 @@ def audit_repository(root: Path, candidates: list[str] | None = None) -> tuple[l
         except UnicodeDecodeError:
             continue
         issues.extend(secret_issues(relative, text))
-        if relative in {"README.md", "README.zh-CN.md"}:
-            issues.extend(readme_link_issues(root, relative, text))
+        if path.suffix.lower() == ".md":
+            issues.extend(readme_link_issues(root, relative, text, published_paths))
     return candidates, issues
 
 

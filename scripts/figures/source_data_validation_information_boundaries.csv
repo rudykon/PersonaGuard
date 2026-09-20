@@ -1,0 +1,7 @@
+panel,condition,outer_participant_folds,inner_participant_folds,prediction_input,evaluation_target,source_locator,calibration_budgets,outer_video_folds,inner_video_folds
+A,scalar_profile_sensing,5,4,complete-trial physiology; no target-video joystick,q constructed against training reference,summaries.revision6.primary_antialias_reservation_sensing,,,
+A,signed_calibration,,,other calibration-video reports,separate evaluation-video reference-proximal error,summaries.revision5.signed_calibration_practical_value,1;2;4;8,,
+B,dense_content,5,2,complete target-video asset; no target-video fitting labels,,summaries.av_content_run_manifest.configuration,,5,3
+B,dense_causal_residual,,2,frozen content and current/past physiology,,summaries.av_physio_run_manifest.configuration,,,2
+C,known_video_sam,,4,same-video training trajectories and held-out post-trial SAM,held-out dense report; evaluation only,summaries.sparse_anchor_run_manifest.configuration,,,
+D,applicable_training_boundary,,,outer errors do not choose inner candidates or gates,,statistical_analysis_registry,,,

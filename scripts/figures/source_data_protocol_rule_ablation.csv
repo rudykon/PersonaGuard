@@ -1,0 +1,6 @@
+rule_id,kind,cases_changed
+R1_SCOPE_MATCH,constraint,1
+R2_COMPARATOR_INCREMENT,constraint,2
+R3_CONSEQUENCE_MATCH,constraint,2
+R4_RETENTION_TRANSFER,constraint,1
+R5_BOUNDED_PASS,permission,5

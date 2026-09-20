@@ -1,0 +1,32 @@
+panel,kind,case_set,id,label,rule,action,value,denominator
+A,route,external,body_sensing_self_calibration,Bounded permission,R5_BOUNDED_PASS,PROCEED_WITHIN_EVALUATED_BOUNDARY,1,7
+A,route,external,culturally_adaptive_website,Bounded permission,R5_BOUNDED_PASS,PROCEED_WITHIN_EVALUATED_BOUNDARY,1,7
+A,route,external,findlater_adaptable_menu,Bounded permission,R5_BOUNDED_PASS,PROCEED_WITHIN_EVALUATED_BOUNDARY,1,7
+A,route,external,findlater_adaptive_menu,Retain comparator,R2_COMPARATOR_INCREMENT,RETAIN_EVALUATED_COMPARATOR,1,7
+A,route,external,interaction_data_visual_suggestions,In-context study,R3_CONSEQUENCE_MATCH,RUN_PREREGISTERED_USER_STUDY,1,7
+A,route,external,model_based_adaptive_menu,Bounded permission,R5_BOUNDED_PASS,PROCEED_WITHIN_EVALUATED_BOUNDARY,1,7
+A,route,external,supple_motor_access,Bounded permission,R5_BOUNDED_PASS,PROCEED_WITHIN_EVALUATED_BOUNDARY,1,7
+A,action_count,external,PROCEED_WITHIN_EVALUATED_BOUNDARY,Bounded permission,,PROCEED_WITHIN_EVALUATED_BOUNDARY,5,7
+A,action_count,external,BOUND_TO_EVIDENCE_SCOPE,Scope restriction,,BOUND_TO_EVIDENCE_SCOPE,0,7
+A,action_count,external,RETAIN_EVALUATED_COMPARATOR,Retain comparator,,RETAIN_EVALUATED_COMPARATOR,1,7
+A,action_count,external,RUN_PREREGISTERED_USER_STUDY,In-context study,,RUN_PREREGISTERED_USER_STUDY,1,7
+A,action_count,external,WITHHOLD_RETENTION_AND_TRANSFER,Withhold retention / transfer,,WITHHOLD_RETENTION_AND_TRANSFER,0,7
+A,route,worked,optional_sensing,Retain comparator,R2_COMPARATOR_INCREMENT,RETAIN_EVALUATED_COMPARATOR,1,4
+A,route,worked,retention_transfer,Withhold retention / transfer,R4_RETENTION_TRANSFER,WITHHOLD_RETENTION_AND_TRANSFER,1,4
+A,route,worked,signed_calibration,In-context study,R3_CONSEQUENCE_MATCH,RUN_PREREGISTERED_USER_STUDY,1,4
+A,route,worked,trace_interpretation,Scope restriction,R1_SCOPE_MATCH,BOUND_TO_EVIDENCE_SCOPE,1,4
+A,action_count,worked,PROCEED_WITHIN_EVALUATED_BOUNDARY,Bounded permission,,PROCEED_WITHIN_EVALUATED_BOUNDARY,0,4
+A,action_count,worked,BOUND_TO_EVIDENCE_SCOPE,Scope restriction,,BOUND_TO_EVIDENCE_SCOPE,1,4
+A,action_count,worked,RETAIN_EVALUATED_COMPARATOR,Retain comparator,,RETAIN_EVALUATED_COMPARATOR,1,4
+A,action_count,worked,RUN_PREREGISTERED_USER_STUDY,In-context study,,RUN_PREREGISTERED_USER_STUDY,1,4
+A,action_count,worked,WITHHOLD_RETENTION_AND_TRANSFER,Withhold retention / transfer,,WITHHOLD_RETENTION_AND_TRANSFER,1,4
+B,rule_ablation,combined,R1,actions changed,R1,,1,11
+B,rule_ablation,combined,R2,actions changed,R2,,2,11
+B,rule_ablation,combined,R3,actions changed,R3,,2,11
+B,rule_ablation,combined,R4,actions changed,R4,,1,11
+B,rule_ablation,combined,R5,actions changed,R5,,5,11
+C,structural_challenge,challenge,Order permutations,Preserve outputs,,Preserve outputs,100,100
+C,structural_challenge,challenge,Malformed records,Reject input,,Reject input,12,12
+C,structural_challenge,challenge,Unrelated-field changes,Preserve focal action,,Preserve focal action,5,5
+C,structural_challenge,challenge,Permission-boundary failures,Remove permission,,Remove permission,30,30
+C,structural_challenge,challenge,Precedence probes,Return priority action,,Return priority action,4,4

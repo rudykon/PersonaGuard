@@ -1,0 +1,21 @@
+panel,condition,estimate,low,high,interval,comparator,comparator_mae,retained,threshold,mae,primary
+A,clip,30.72015908923414,30.67299134681622,30.754494232270453,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,False,,,
+A,siglip,30.641191325916186,30.561118934220737,30.762520449360213,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,False,,,
+A,dinov2,30.7183424797323,30.7183424797323,31.095592059691747,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,False,,,
+A,clip_siglip,30.49315748612086,30.49315748612086,30.73583097126749,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,True,,,
+A,clip_siglip_weighted,30.684167939424515,30.606646105812654,30.684167939424515,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,False,,,
+A,clip_siglip_delta1,30.50298806561364,30.50298806561364,30.734725368685194,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,False,,,
+A,clip_siglip_delta13,30.584946121109855,30.57804140481684,30.7171575764815,fixed-offset minimum--maximum; not CI,metadata prior,31.333409395482803,False,,,
+B,full_modalities,0.018305428822834813,,,none,frozen content prior,,,0.0,30.474852057298026,False
+B,full_modalities,0.023688317669762426,,,none,frozen content prior,,,0.05,30.4694691684511,False
+B,full_modalities,-0.0055579079522019015,,,none,frozen content prior,,,0.1,30.498715394073063,True
+B,full_modalities,0.0,,,none,frozen content prior,,,0.2,30.49315748612086,False
+B,full_modalities,0.0,,,none,frozen content prior,,,0.5,30.49315748612086,False
+B,temporal_token_modalities,0.020729347732334702,,,none,frozen content prior,,,0.0,30.472428138388526,False
+B,temporal_token_modalities,0.027085596323015437,,,none,frozen content prior,,,0.05,30.466071889797846,False
+B,temporal_token_modalities,0.0,,,none,frozen content prior,,,0.1,30.49315748612086,True
+B,temporal_token_modalities,0.0,,,none,frozen content prior,,,0.2,30.49315748612086,False
+B,temporal_token_modalities,0.0,,,none,frozen content prior,,,0.5,30.49315748612086,False
+C,canonical_prior,0.0,,,none,known-video population prior,28.416500355132317,,,28.416500355132317,
+C,previous_functional_ensemble,2.0015897597091232,,,none,known-video population prior,28.416500355132317,,,26.414910595423194,
+C,gaussian_functional_ensemble,2.127135291364458,0.5573186891774337,3.8783202484415624,participant x video crossed-bootstrap 95% percentile CI,known-video population prior,28.416500355132317,,,26.289365107791976,

@@ -23,10 +23,10 @@ from typing import Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GRAPH_PATH = ROOT / "paper_support" / "evidence_traceability.json"
-RULES_PATH = ROOT / "paper_support" / "protocol_rules.json"
-CASES_PATH = ROOT / "paper_support" / "protocol_replay_cases.json"
-EXTERNAL_CASES_PATH = ROOT / "paper_support" / "external_reuse_cases.json"
+GRAPH_PATH = ROOT / "results" / "evidence_traceability.json"
+RULES_PATH = ROOT / "configs" / "protocol" / "protocol_rules.json"
+CASES_PATH = ROOT / "configs" / "protocol" / "protocol_replay_cases.json"
+EXTERNAL_CASES_PATH = ROOT / "configs" / "protocol" / "external_reuse_cases.json"
 OUTPUT_PATH = ROOT / "artifacts" / "revision6" / "protocol_replay.json"
 VALIDATOR_PATH = ROOT / "scripts" / "generate_evidence_traceability.py"
 ORDER_REPLAYS = 100
@@ -64,7 +64,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--rules",
         type=Path,
         default=RULES_PATH,
-        help="Rule file for --resolve-case-set (default: paper_support/protocol_rules.json).",
+        help="Rule file for --resolve-case-set (default: configs/protocol/protocol_rules.json).",
     )
     return parser.parse_args(argv)
 
@@ -697,10 +697,10 @@ def build_result() -> dict[str, object]:
         "schema_version": "protocol-replay-result-v2",
         "protocol_version": protocol["protocol_version"],
         "source_records": {
-            "evidence_graph": {"uri": "paper_support/evidence_traceability.json", "sha256": sha256(GRAPH_PATH)},
-            "protocol_rules": {"uri": "paper_support/protocol_rules.json", "sha256": sha256(RULES_PATH)},
-            "worked_cases": {"uri": "paper_support/protocol_replay_cases.json", "sha256": sha256(CASES_PATH)},
-            "external_cases": {"uri": "paper_support/external_reuse_cases.json", "sha256": sha256(EXTERNAL_CASES_PATH)},
+            "evidence_graph": {"uri": "results/evidence_traceability.json", "sha256": sha256(GRAPH_PATH)},
+            "protocol_rules": {"uri": "configs/protocol/protocol_rules.json", "sha256": sha256(RULES_PATH)},
+            "worked_cases": {"uri": "configs/protocol/protocol_replay_cases.json", "sha256": sha256(CASES_PATH)},
+            "external_cases": {"uri": "configs/protocol/external_reuse_cases.json", "sha256": sha256(EXTERNAL_CASES_PATH)},
         },
         "machine_checked_scope": protocol["machine_check_scope"]["checked"],
         "not_machine_checked": protocol["machine_check_scope"]["not_checked"],

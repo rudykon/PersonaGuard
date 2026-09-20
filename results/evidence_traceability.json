@@ -1,0 +1,532 @@
+{
+  "schema_version": "1.2",
+  "graph_type": "evidence_traceability_graph",
+  "graph_instance_version": "revision6-2026-08-09",
+  "decision_snapshot_date": "2026-08-09",
+  "machine_check_scope": {
+    "checked": [
+      "schema versions and required fields",
+      "unique identifiers and typed edge endpoints",
+      "project-relative artifact existence and SHA-256 hashes",
+      "declared status-permission and propagation constraints",
+      "deterministic rule replay and generated-file consistency"
+    ],
+    "not_checked": [
+      "truth or adequacy of the underlying evidence",
+      "substantive correctness of node statuses or rationales",
+      "construct validity, causal validity, or consequential validity",
+      "human analyst agreement or protocol usability",
+      "fairness, user benefit, or transfer beyond the replayed cases"
+    ]
+  },
+  "artifact_registry": [
+    {
+      "id": "phase_trait_summary",
+      "uri": "artifacts/phase_trait/summary.json",
+      "sha256": "af1ff90b5f3d508c21bc1402ebe7f536f5a2a523bab93466156af713d3537b20"
+    },
+    {
+      "id": "revision4_summary",
+      "uri": "artifacts/revision4/summary.json",
+      "sha256": "fe24ae5bade197e49a3272827bf987bf985b4f483d4ded46dfa7d97f8ae60941"
+    },
+    {
+      "id": "revision4_estimand_robustness",
+      "uri": "artifacts/revision4/estimand_robustness.csv",
+      "sha256": "9fe7084f414838a2c9eaaeee8962413ea281786fa3e0eb1b01696cd9aa88563d"
+    },
+    {
+      "id": "revision4_estimand_calibration",
+      "uri": "artifacts/revision4/estimand_calibration.csv",
+      "sha256": "73834823c03d13afc4c55d2321149a608ad90b55c54e90ef61f2e3d0a7776095"
+    },
+    {
+      "id": "revision5_summary",
+      "uri": "artifacts/revision5/summary.json",
+      "sha256": "86a43b07f304b96a6b2b4b829837113b2e04f5a2080e348bfb69e99656f13d35"
+    },
+    {
+      "id": "revision5_full_pipeline_bootstrap",
+      "uri": "artifacts/revision5/full_pipeline_bootstrap.csv",
+      "sha256": "2c9ca82ddf6e8240caff9ab2d9a9384d7f0e6a20795fe3e02429c1e6d1aab124"
+    },
+    {
+      "id": "revision5_calibration_practical_value",
+      "uri": "artifacts/revision5/calibration_practical_value.csv",
+      "sha256": "690d3314c575db1dfe3e8679f2fe3035f300baa2c9c29b1cc9f6beb97e9d615f"
+    },
+    {
+      "id": "revision6_summary",
+      "uri": "artifacts/revision6/summary.json",
+      "sha256": "37f1545ef2c68a2b78ef007d01334723b7f5a074f9ac422cf321a0daceecf864"
+    },
+    {
+      "id": "revision6_matched_identity_transfer",
+      "uri": "artifacts/revision6/matched_identity_transfer.csv",
+      "sha256": "53045173309f9e66228149cbe086b826e98d7ba21b0810ae4f17a03e996919b8"
+    },
+    {
+      "id": "revision6_category_heterogeneity",
+      "uri": "artifacts/revision6/category_heterogeneity.csv",
+      "sha256": "ec9e44ec369387d7b054cfd737ac099370ef09a38f577a690baa86d1f94bcb7e"
+    },
+    {
+      "id": "revision6_primary_sensing_results",
+      "uri": "artifacts/revision6/primary_antialias_sensing_results.csv",
+      "sha256": "4448e8194898378ee8453fda5800777df2bdf98d1c550c010b622308686c877e"
+    },
+    {
+      "id": "revision6_sensing_model_table",
+      "uri": "artifacts/revision6/sensing_model_table.csv",
+      "sha256": "62e359bbb564c425b52da4353b0c23790ea25aeeedae332a4330068ce102647a"
+    },
+    {
+      "id": "revision6_decision_threshold_curves",
+      "uri": "artifacts/revision6/decision_threshold_curves.csv",
+      "sha256": "20c1e8bda552cd7e016d6a699d0ee1358335a596be39a9df9c0bc7cd6c50f122"
+    },
+    {
+      "id": "revision6_repeated_grouped_cv",
+      "uri": "artifacts/revision6/repeated_grouped_cv.csv",
+      "sha256": "0ec2d33b6d5ed8269ab5d1ff6e26bf9e745070325c016c97c0bb15c5c6594e8d"
+    }
+  ],
+  "edge_semantics": {
+    "requires": "The target analysis is not interpretable unless the source requirement is explicitly satisfied.",
+    "supports": "The source provides relevant evidence for the target but does not determine its status.",
+    "does_not_license": "Positive evidence at the source must not be converted into the target claim.",
+    "blocks_deployment": "Unless the source has affirmative evidence, consequential use at the target remains not justified."
+  },
+  "status_propagation_rules": {
+    "no_automatic_status_propagation": "Node states never propagate automatically across an edge.",
+    "partial_does_not_license_retention_or_utility": "A PARTIAL measurement or empirical-library stability node cannot license retention, transfer, or user-benefit claims.",
+    "route_failure_is_local": "Failure to demonstrate increment for one acquisition route does not invalidate another route.",
+    "untested_utility_blocks_consequential_deployment": "NOT_TESTED downstream utility blocks consequential personalization and durable retention.",
+    "unassessed_reference_equity_blocks_retention": "When reference-group coverage, subgroup error, and transportability are not assessable, durable retention and transfer remain blocked."
+  },
+  "nodes": [
+    {
+      "id": "measurement_meaning",
+      "status": "PARTIAL",
+      "status_rationale": "Same-trial coupling is supported, but magnitude perturbations, interface coupling, and only small matched-set cross-video residual transfer prevent a stable person-warp interpretation.",
+      "evidence_artifact_ids": [
+        "revision4_summary",
+        "revision6_matched_identity_transfer",
+        "revision6_category_heterogeneity"
+      ],
+      "decision_owner_role": "measurement-analysis lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review before any durable-profile claim or after a new session, interface, estimator, or cross-video transfer study.",
+      "estimand": "w(t), b, q",
+      "permits": [
+        "bounded_measurement_research"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Measurement meaning",
+        "evidence": "Same-trial cross-axis and donor controls; cross-video signed-residual transfer",
+        "boundary": "Shared joystick/trial coupling, magnitude perturbations, and geometry remain plausible",
+        "permitted_claim": "Interface-contingent temporal structure; limited cross-video constant-residual evidence",
+        "decision": "Preserve raw traces and alternative explanations"
+      },
+      "table_zh": {
+        "node": "测量含义",
+        "evidence": "同试次跨轴与 donor 对照；跨视频有符号残差迁移",
+        "boundary": "共享 joystick/试次耦合、幅值扰动与几何解释仍然存在",
+        "permitted_claim": "受界面约束的时间结构；有限的跨视频常量残差证据",
+        "decision": "保留原始轨迹与替代解释"
+      }
+    },
+    {
+      "id": "estimator_robustness",
+      "status": "PARTIAL",
+      "status_rationale": "Admissible estimands and DTW objectives materially change ranks, coefficients, calibration gains, and path geometry.",
+      "evidence_artifact_ids": [
+        "revision4_summary",
+        "revision4_estimand_robustness"
+      ],
+      "decision_owner_role": "measurement-analysis lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review whenever the estimand, alignment objective, smoothing, band, or reference estimator changes.",
+      "estimand": "five q definitions and four DTW objectives",
+      "permits": [
+        "estimator_specific_reporting"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Estimator robustness",
+        "evidence": "Five estimands; four objectives; nine one-factor parameter settings",
+        "boundary": "Ranks, empirical-library stability, calibration, and path geometry change",
+        "permitted_claim": "Estimator-dependent temporal-deviation profile",
+        "decision": "Report definition and objective; do not universalize"
+      },
+      "table_zh": {
+        "node": "估计器稳健性",
+        "evidence": "五种估计目标；四种目标函数；九个单因素参数设置",
+        "boundary": "排序、经验视频库稳定性、校准和路径几何发生变化",
+        "permitted_claim": "依赖估计器的时间偏差画像",
+        "decision": "报告定义与目标函数；不得普遍化"
+      }
+    },
+    {
+      "id": "empirical_library_resampling_stability",
+      "status": "PARTIAL",
+      "status_rationale": "The ANOVA ratios are descriptive shared-reference sensitivities: participant scores reuse overlapping leave-one-out references, the induced cross-participant dependence is not modeled, and no unseen-video universe or external reference cohort is observed.",
+      "evidence_artifact_ids": [
+        "revision4_summary",
+        "revision5_summary",
+        "revision5_full_pipeline_bootstrap"
+      ],
+      "decision_owner_role": "statistical-analysis lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review after adding videos, changing category support, changing the reference cohort, or obtaining an external item sample.",
+      "estimand": "relative and absolute shared-reference variance fractions under empirical-library resampling",
+      "permits": [
+        "empirical_library_resampling_sensitivity"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Shared-reference sensitivity",
+        "evidence": "Descriptive variance ratios; category, reference-size, and 1,000-draw original-identity-exclusion analyses",
+        "boundary": "Overlapping references induce unmodeled dependence; no calibrated reliability interpretation or external cohort",
+        "permitted_claim": "Reference-aware empirical-library sensitivity for the released support",
+        "decision": "Do not apply a reliability cutoff or infer exact-replay, future-video, or trait stability"
+      },
+      "table_zh": {
+        "node": "共享参考敏感性",
+        "evidence": "描述性方差比、类别、参考人数与 1,000 次原始身份排除分析",
+        "boundary": "重叠参考诱发的依赖未建模；没有校准过的可靠性解释或外部参考队列",
+        "permitted_claim": "发布 support 上参考感知的经验视频库敏感性",
+        "decision": "不使用可靠性阈值，也不推断完全重放、未来视频或 trait 稳定性"
+      }
+    },
+    {
+      "id": "session_persistence",
+      "status": "NOT_TESTED",
+      "status_rationale": "The release contains no repeat acquisition for any participant.",
+      "evidence_artifact_ids": [
+        "phase_trait_summary",
+        "revision4_summary"
+      ],
+      "decision_owner_role": "study-design lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review only after a preregistered repeat-session or cross-interface replication becomes available.",
+      "estimand": "test-retest persistence",
+      "permits": [],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Session persistence",
+        "evidence": "No repeat session in the release",
+        "boundary": "State, fatigue, grip, and setup remain plausible",
+        "permitted_claim": "None beyond one acquisition session",
+        "decision": "Do not retain the score as a persistent trait"
+      },
+      "table_zh": {
+        "node": "Session 持久性",
+        "evidence": "发布数据没有重复 session",
+        "boundary": "状态、疲劳、握持和设置差异仍可能存在",
+        "permitted_claim": "不超出单次采集 session",
+        "decision": "不得作为持久 trait 保留"
+      }
+    },
+    {
+      "id": "trace_derived_estimation",
+      "status": "AVAILABLE",
+      "status_rationale": "The declared reference and estimator can compute w(t), b, and q after a completed joystick report, within the stated offline boundary.",
+      "evidence_artifact_ids": [
+        "revision4_summary"
+      ],
+      "decision_owner_role": "analysis-method lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review whenever deployment information, reference construction, or the trace estimator changes.",
+      "estimand": "post-trial computation of w(t), b, q",
+      "permits": [
+        "post_trial_trace_derived_estimation"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Trace-derived estimation",
+        "evidence": "$b$, $q$, and $w(t)$ are computable from a completed report and a declared reference",
+        "boundary": "Not directly observed; depends on reference, smoothing, and DTW",
+        "permitted_claim": "Post-trial trace-derived estimate",
+        "decision": "Use only when reporting burden and purpose are justified"
+      },
+      "table_zh": {
+        "node": "轨迹派生估计",
+        "evidence": "完成报告并声明参考后可计算 $b$、$q$ 与 $w(t)$",
+        "boundary": "并非直接观测；依赖参考、平滑和 DTW",
+        "permitted_claim": "试次后的轨迹派生估计",
+        "decision": "仅在报告负担和用途合理时使用"
+      }
+    },
+    {
+      "id": "eeg_fnirs_increment",
+      "status": "NO_DEMONSTRATED_INCREMENT",
+      "status_rationale": "Under nested participant-held-out evaluation, every sensor-containing point estimate was worse than video mean and the blockwise interval crossed zero.",
+      "evidence_artifact_ids": [
+        "revision6_summary",
+        "revision6_primary_sensing_results",
+        "revision6_sensing_model_table",
+        "revision6_decision_threshold_curves",
+        "revision6_repeated_grouped_cv"
+      ],
+      "decision_owner_role": "sensor-analysis lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review after a materially different sensor representation, acquisition protocol, target, or prospective deployment setting is evaluated.",
+      "table_status": "NO DEMONSTRATED INCREMENT",
+      "estimand": "incremental prediction of q",
+      "permits": [
+        "retain_no_sensor_baseline"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "EEG/fNIRS increment",
+        "evidence": "Nested participant-held-out comparison and anti-alias sensitivity",
+        "boundary": "Evaluated arrays, array order, features, models, and offline protocol only",
+        "permitted_claim": "No demonstrated increment for the evaluated pipeline",
+        "decision": "Retain the no-sensor baseline for this target"
+      },
+      "table_zh": {
+        "node": "EEG/fNIRS 增量",
+        "evidence": "嵌套 participant-held-out 比较与抗混叠敏感性",
+        "boundary": "仅覆盖所评估数组、顺序、特征、模型与离线协议",
+        "permitted_claim": "所评估流程未证明增量",
+        "decision": "该目标保留无传感器基线"
+      }
+    },
+    {
+      "id": "absolute_q_calibration",
+      "status": "PARTIAL",
+      "status_rationale": "Held-out q prediction improves modestly on average, but q is direction-free and some participants degrade.",
+      "evidence_artifact_ids": [
+        "revision4_summary",
+        "revision4_estimand_calibration"
+      ],
+      "decision_owner_role": "personalization-analysis lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review after defining a meaningful-gain threshold, collecting repeat sessions, or changing calibration burden.",
+      "estimand": "held-out q prediction",
+      "permits": [
+        "further_calibration_research"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Absolute $q$ calibration",
+        "evidence": "Small positive mean gains at all budgets (.019--.053 s)",
+        "boundary": "Modest effects, participant degradation, and no correction direction",
+        "permitted_claim": "Incremental held-out $q$ prediction",
+        "decision": "Report burden and individual degradation"
+      },
+      "table_zh": {
+        "node": "绝对 $q$ 校准",
+        "evidence": "各预算平均增益均为小幅正值（.019--.053 s）",
+        "boundary": "效应较小、部分参与者退化且没有校正方向",
+        "permitted_claim": "held-out $q$ 的增量预测",
+        "decision": "报告负担与个体退化"
+      }
+    },
+    {
+      "id": "signed_proximal_correction",
+      "status": "PARTIAL",
+      "status_rationale": "Signed calibration improves a proximal reference-trace endpoint, but the effect is tiny relative to baseline error and no practical-value threshold or user outcome exists.",
+      "evidence_artifact_ids": [
+        "revision5_summary",
+        "revision5_calibration_practical_value",
+        "revision6_decision_threshold_curves"
+      ],
+      "decision_owner_role": "personalization-analysis lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review before deployment and after preregistering a smallest worthwhile improvement, degradation limit, and consequential endpoint.",
+      "estimand": "held-out reference-trace MAE after constant signed shift",
+      "minimum_meaningful_gain": null,
+      "permits": [
+        "prospective_utility_study"
+      ],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Signed proximal correction",
+        "evidence": "Small held-out gain versus video-only correction",
+        "boundary": "0.069--0.208\\% relative gain; 1.7--13.7 min annotation; no meaningful-gain threshold",
+        "permitted_claim": "Statistical support for a proximal reference-trace endpoint",
+        "decision": "Practical value undetermined; preregister a utility threshold"
+      },
+      "table_zh": {
+        "node": "有符号近端校正",
+        "evidence": "相对 video-only correction 的 held-out 增益很小",
+        "boundary": "相对增益 0.069--0.208\\%；标注 1.7--13.7 min；无意义阈值",
+        "permitted_claim": "近端参考轨迹终点得到统计支持",
+        "decision": "实际价值未定；后续应预注册效用阈值"
+      }
+    },
+    {
+      "id": "downstream_user_utility",
+      "status": "NOT_TESTED",
+      "status_rationale": "No interactive benefit, harm, workload, comfort, trust, or decision-quality endpoint was collected.",
+      "evidence_artifact_ids": [
+        "revision5_summary",
+        "revision6_decision_threshold_curves"
+      ],
+      "decision_owner_role": "HCI study-design lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review only after a prospective interaction study with declared consequential endpoints.",
+      "estimand": "interactive benefit, harm, workload, or decision quality",
+      "permits": [],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Downstream user utility",
+        "evidence": "No interactive consequence endpoint",
+        "boundary": "No workload, benefit, harm, or smallest worthwhile improvement",
+        "permitted_claim": "None",
+        "decision": "Do not claim useful personalization"
+      },
+      "table_zh": {
+        "node": "下游用户效用",
+        "evidence": "没有交互后果终点",
+        "boundary": "没有工作负担、获益、伤害或最小有意义改善",
+        "permitted_claim": "无",
+        "decision": "不得声称有用的个性化"
+      }
+    },
+    {
+      "id": "reference_representativeness_equity",
+      "status": "NOT_TESTED",
+      "status_rationale": "The release does not provide demographic or recruitment composition, so subgroup coverage, differential reference error, and transportability cannot be assessed.",
+      "evidence_artifact_ids": [
+        "revision4_summary",
+        "revision6_summary"
+      ],
+      "decision_owner_role": "data-governance lead",
+      "decision_date": "2026-08-09",
+      "review_due_date": null,
+      "review_trigger": "Re-review only after reference-cohort composition, subgroup coverage, and differential-error evidence are documented for the intended population.",
+      "estimand": "reference-group coverage, subgroup error, and transportability",
+      "permits": [],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Reference representation and equity",
+        "evidence": "Reference-size sensitivity; no demographic or recruitment composition",
+        "boundary": "Subgroup coverage, differential reference error, and transportability are not assessable",
+        "permitted_claim": "None about equitable representation or subgroup validity",
+        "decision": "Block retention and transfer until intended-population coverage is documented"
+      },
+      "table_zh": {
+        "node": "参考代表性与公平性",
+        "evidence": "参考人数敏感性；缺少人口统计与招募构成",
+        "boundary": "无法评估子组覆盖、差异性参考误差与可迁移性",
+        "permitted_claim": "不能主张公平代表性或子组效度",
+        "decision": "在目标人群覆盖得到记录前阻止保留与迁移"
+      }
+    },
+    {
+      "id": "retention_and_transfer",
+      "status": "NOT_JUSTIFIED",
+      "status_rationale": "No retest, cross-interface replication, or user-utility evidence offsets the linkage and mental-privacy risks of durable profiles.",
+      "evidence_artifact_ids": [
+        "revision5_summary",
+        "revision6_summary"
+      ],
+      "decision_owner_role": "data-governance lead",
+      "decision_date": "2026-07-29",
+      "review_due_date": null,
+      "review_trigger": "Re-review before any participant-level release, durable retention, cross-interface transfer, or consequential personalization decision.",
+      "estimand": "durable retention, transfer, and consequential use",
+      "permits": [],
+      "include_in_table": true,
+      "table_en": {
+        "node": "Retention and transfer",
+        "evidence": "No retest, cross-interface replication, or utility study",
+        "boundary": "Profiles and physiology may create linkage and privacy risk",
+        "permitted_claim": "None",
+        "decision": "Not justified by present evidence; do not release participant profiles"
+      },
+      "table_zh": {
+        "node": "保留与迁移",
+        "evidence": "没有复测、跨界面复现或效用研究",
+        "boundary": "画像和生理信息可能产生链接与隐私风险",
+        "permitted_claim": "无",
+        "decision": "现有证据不支持；不发布参与者画像"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "measurement_meaning",
+      "target": "trace_derived_estimation",
+      "type": "supports"
+    },
+    {
+      "source": "measurement_meaning",
+      "target": "absolute_q_calibration",
+      "type": "supports"
+    },
+    {
+      "source": "measurement_meaning",
+      "target": "signed_proximal_correction",
+      "type": "supports"
+    },
+    {
+      "source": "estimator_robustness",
+      "target": "empirical_library_resampling_stability",
+      "type": "requires"
+    },
+    {
+      "source": "empirical_library_resampling_stability",
+      "target": "absolute_q_calibration",
+      "type": "supports"
+    },
+    {
+      "source": "empirical_library_resampling_stability",
+      "target": "eeg_fnirs_increment",
+      "type": "supports"
+    },
+    {
+      "source": "trace_derived_estimation",
+      "target": "signed_proximal_correction",
+      "type": "requires"
+    },
+    {
+      "source": "reference_representativeness_equity",
+      "target": "retention_and_transfer",
+      "type": "blocks_deployment"
+    },
+    {
+      "source": "signed_proximal_correction",
+      "target": "downstream_user_utility",
+      "type": "does_not_license"
+    },
+    {
+      "source": "absolute_q_calibration",
+      "target": "downstream_user_utility",
+      "type": "does_not_license"
+    },
+    {
+      "source": "eeg_fnirs_increment",
+      "target": "trace_derived_estimation",
+      "type": "does_not_license"
+    },
+    {
+      "source": "session_persistence",
+      "target": "retention_and_transfer",
+      "type": "blocks_deployment"
+    },
+    {
+      "source": "downstream_user_utility",
+      "target": "retention_and_transfer",
+      "type": "blocks_deployment"
+    },
+    {
+      "source": "signed_proximal_correction",
+      "target": "retention_and_transfer",
+      "type": "does_not_license"
+    }
+  ]
+}

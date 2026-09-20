@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA = ROOT / "paper_support" / "evidence_traceability.json"
+SCHEMA = ROOT / "results" / "evidence_traceability.json"
 
 ADDITIONAL_ARTIFACTS = {
     "revision6_decision_threshold_curves": "artifacts/revision6/decision_threshold_curves.csv",
@@ -60,7 +60,7 @@ def main() -> None:
     )
     print(
         f"Refreshed {len(graph['artifact_registry'])} evidence artifacts in "
-        "paper_support/evidence_traceability.json"
+        "results/evidence_traceability.json"
     )
 
 

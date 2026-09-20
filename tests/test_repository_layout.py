@@ -29,14 +29,14 @@ class RepositorySafetyTests(unittest.TestCase):
     def test_private_directories_and_raw_data_are_rejected(self):
         for relative in (".local/notes.txt", "archive/old.tex", "artifacts/results.json",
                          "checkpoints/model.pt", ".venv/file", "references/article.pdf",
+                         "paper/main.pdf", "paper_zh/main.tex", "dist/source.zip",
                          "data/stimuli/stimulus_audit.json", "data/raw.json"):
             with self.subTest(relative=relative):
                 self.put(relative)
                 self.assertEqual(self.audit(relative)[0].severity, "error")
 
     def test_public_source_data_and_data_documentation_are_allowed(self):
-        for relative in ("paper_support/revision6_source.json", "paper_support/figures/source.csv",
-                         "paper/main.pdf", "paper/figures/protocol_embed.pdf",
+        for relative in ("results/revision6_source.json", "scripts/figures/source.csv",
                          "data/DATASET.md", "data/stimuli/PROVENANCE.md", ".env.example"):
             self.put(relative)
             self.assertEqual(self.audit(relative), [])
@@ -53,8 +53,8 @@ class RepositorySafetyTests(unittest.TestCase):
                 self.assertIn("contents not inspected", issue.message)
 
     def test_private_suffix_checks_are_case_insensitive(self):
-        self.put("paper_support/ACCIDENTAL.NPZ", "synthetic fixture")
-        self.assertEqual(self.audit("paper_support/ACCIDENTAL.NPZ")[0].severity, "error")
+        self.put("results/ACCIDENTAL.NPZ", "synthetic fixture")
+        self.assertEqual(self.audit("results/ACCIDENTAL.NPZ")[0].severity, "error")
 
     def test_credential_names_rejected_without_reading_contents(self):
         for relative in ("github_token.json", "token.json", "credentials.yaml", ".env",
@@ -92,9 +92,16 @@ class RepositorySafetyTests(unittest.TestCase):
         self.put("docs/README.md")
         self.put("README.md", "[docs](docs/README.md#section)\n[web](https://example.org)\n"
                  "```\n[example](missing-in-code.md)\n```\n[missing](missing.md)\n")
-        issues = self.audit("README.md")
+        issues = self.audit("README.md", "docs/README.md")
         self.assertEqual(len(issues), 1)
         self.assertEqual(issues[0].line, 6)
+
+    def test_nested_markdown_links_cannot_rely_on_unpublished_files(self):
+        self.put("paper/main.pdf")
+        self.put("docs/guide.md", "[local manuscript](../paper/main.pdf)\n")
+        issues = self.audit("docs/guide.md")
+        self.assertEqual(len(issues), 1)
+        self.assertIn("excluded from publication", issues[0].message)
 
     def test_git_enumeration_keeps_tracked_ignored_paths(self):
         self.put(".gitignore", "tracked_token.json\nignored_token.json\n")

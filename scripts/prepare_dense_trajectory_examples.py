@@ -13,7 +13,7 @@ import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "paper_support/dense_trajectory_examples.json"
+OUTPUT = ROOT / "scripts/figures/dense_trajectory_examples.json"
 CURVES = ("target", "metadata", "content", "residual", "sam")
 ARCHIVES = {
     "content": "artifacts/av_content_prior_clip_siglip/oof_predictions.npz",
@@ -86,7 +86,7 @@ def validate_release(payload):
 def prepare():
     import numpy as np
 
-    source = json.loads((ROOT / "paper_support/revision6_source.json").read_text())
+    source = json.loads((ROOT / "results/revision6_source.json").read_text())
     registered = source["summaries"]["algorithm_experiments"]["oof_artifact_consistency"][
         "artifact_identities"]
     archive_hashes = {}

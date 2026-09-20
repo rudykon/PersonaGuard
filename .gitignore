@@ -4,6 +4,12 @@
 token.json
 *.pem
 *.key
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
 *.token
 .env
 .env.*
@@ -50,17 +56,19 @@ __pycache__/
 /checkpoints/
 /references/
 /archive/
-/paper/submission/
+/paper/
+/paper_zh/
 *.zip
 *.tar
 *.tar.gz
 *.tgz
 *.7z
 *.orig
+*.bak
 *.rej
 *~
 
-# LaTeX intermediates (generated/*.tex and figure PDFs are real inputs)
+# LaTeX intermediates
 *.aux
 *.bbl
 *.blg
@@ -72,14 +80,6 @@ __pycache__/
 *.synctex.gz
 *.xdv
 *-luamml-mathml.html
-
-# Optional raster exports; version the editable vectors and cited PDFs
-/paper/figures/*.png
-/paper/figures/*.tif
-/paper/figures/*.tiff
-/paper_support/figures/*.png
-/paper_support/figures/*.tif
-/paper_support/figures/*.tiff
 
 # OS/editor noise
 .DS_Store

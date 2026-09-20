@@ -1,0 +1,133 @@
+{
+  "independent_unit_policy": "Participants are the population unit. Videos are fixed released support points or category-stratified empirical support as stated; no unseen-video population claim is made.",
+  "rows": [
+    {
+      "endpoint": "Saved versus separately implemented b and q targets; structural q-at-least-absolute-b invariant",
+      "estimator_or_test": "Exact recomputation and equality/invariant checks",
+      "id": "formula_target_audit",
+      "multiplicity": "Not applicable",
+      "population_unit": "360 participant-video trials (structural identity check)",
+      "resampling_or_folds": "None",
+      "seed": "20260729",
+      "status": "STRUCTURAL CHECK",
+      "uncertainty": "None; this is a deterministic artifact check"
+    },
+    {
+      "endpoint": "Other-axis alignment gain and own-versus-donor warp advantage",
+      "estimator_or_test": "Mean gain, participant x video crossed bootstrap, participant sign-flip diagnostic, donor derangement",
+      "id": "same_trial_cross_axis",
+      "multiplicity": "Axis-specific and combined contrasts are exploratory; no familywise claim",
+      "population_unit": "Participant; videos crossed as released support points",
+      "resampling_or_folds": "5,000 bootstrap draws; outer participant folds retained",
+      "seed": "20260727",
+      "status": "EXPLORATORY INTERFACE-DEPENDENCE DIAGNOSTIC",
+      "uncertainty": "Percentile crossed bootstrap; 10,000 sign-flip/derangement draws"
+    },
+    {
+      "endpoint": "Held-out signed residual or absolute-magnitude prediction gain",
+      "estimator_or_test": "Nested shrinkage calibration over 1/2/4/8-video budgets",
+      "id": "cross_video_transfer",
+      "multiplicity": "Four budgets are reported as an exploratory response curve; no confirmatory threshold claim",
+      "population_unit": "Participant, with held-out videos inside participant-safe folds",
+      "resampling_or_folds": "100 calibration subsets per budget",
+      "seed": "20260729",
+      "status": "EXPLORATORY TRANSFER ANALYSIS",
+      "uncertainty": "Participant percentile bootstrap with 5,000 draws"
+    },
+    {
+      "endpoint": "Sum of squared deviations among five category mean gains",
+      "estimator_or_test": "Within-participant category-label permutation",
+      "id": "category_heterogeneity",
+      "multiplicity": "Budget-specific p values Holm-adjusted across four budgets; combined all-budget diagnostic reported separately",
+      "population_unit": "Participant blocks; released video categories",
+      "resampling_or_folds": "Participant-blocked label permutations",
+      "seed": "20260729",
+      "status": "EXPLORATORY HETEROGENEITY TEST",
+      "uncertainty": "Monte Carlo p value from 10,000 permutations"
+    },
+    {
+      "endpoint": "Profile rank, q shift, path geometry, and shared-reference descriptive variance ratios",
+      "estimator_or_test": "Five estimands, four path objectives, parameter and reference-panel sensitivities",
+      "id": "estimator_reference_sensitivity",
+      "multiplicity": "Sensitivity inventory; no reliability cutoff or confirmatory family",
+      "population_unit": "Participants and released videos under the stated empirical support",
+      "resampling_or_folds": "Participant-cluster resampling with within-category video sampling and rebuilt references",
+      "seed": "20260729",
+      "status": "DESCRIPTIVE SENSITIVITY",
+      "uncertainty": "Original-identity-excluding full-pipeline bootstrap (1,000 draws); geometry bootstrap (1,000)"
+    },
+    {
+      "endpoint": "Participant-macro MAE gain versus video-mean and context-only comparators",
+      "estimator_or_test": "Nested grouped CV with fold-safe targets, features, scaling, selection, and disabled-residual option",
+      "id": "optional_sensing_increment",
+      "multiplicity": "Model inventory is descriptive; the blockwise residual stack is the declared primary sensor route; no equivalence margin",
+      "population_unit": "Outer-held-out participant",
+      "resampling_or_folds": "5 outer x 4 inner folds; 5 complete participant partitions",
+      "seed": "20260729",
+      "status": "PRIMARY ROUTE COMPARISON, NOT PREREGISTERED",
+      "uncertainty": "Participant percentile bootstrap (5,000 draws) plus complete split sensitivity"
+    },
+    {
+      "endpoint": "Reference-trace MAE gain versus video-only correction",
+      "estimator_or_test": "Outer-training shrinkage with 1/2/4/8 calibration-video budgets",
+      "id": "signed_calibration",
+      "multiplicity": "Four budgets form an exploratory burden-response curve; no smallest meaningful gain or utility test",
+      "population_unit": "Participant",
+      "resampling_or_folds": "100 calibration subsets per budget; participant-safe folds",
+      "seed": "20260729",
+      "status": "PROXIMAL, NOT USER-UTILITY EVIDENCE",
+      "uncertainty": "Participant percentile bootstrap (5,000 draws)"
+    },
+    {
+      "endpoint": "Counts of participants exceeding hypothetical benefit or degradation thresholds",
+      "estimator_or_test": "Exact integer count over a fixed 41-point grid",
+      "id": "decision_threshold_curves",
+      "multiplicity": "Post hoc descriptive sensitivity only; thresholds do not define a decision rule",
+      "population_unit": "24 participant-level estimated gains",
+      "resampling_or_folds": "Uses participant estimates from the registered sensing/calibration pipelines",
+      "seed": "20260729",
+      "status": "DESCRIPTIVE DECISION CURVE",
+      "uncertainty": "No interval; conditional Wilson bands deliberately removed"
+    },
+    {
+      "endpoint": "Trial-macro valence/arousal MAE on the 1--255 scale and gain versus the metadata temporal prior",
+      "estimator_or_test": "Frozen visual representation, same-category trajectory retrieval, monotone content alignment, and inner-selected exact fallback",
+      "id": "content_conditioned_trajectory",
+      "multiplicity": "Seven reported backbone/fusion candidates are a development inventory; no confirmatory winner claim",
+      "population_unit": "Participant, with videos treated as fixed released support points and held out jointly in outer cells",
+      "resampling_or_folds": "5 participant x 5 video outer cells; 2 participant x 3 video inner folds; 5 participant-fold allocations",
+      "seed": "20260814",
+      "status": "ITERATIVE DEVELOPMENT-SET NESTED OOF ESTIMATE",
+      "uncertainty": "Five complete grouped-CV participant allocations plus a fixed -3 to +3 s alignment sensitivity range"
+    },
+    {
+      "endpoint": "Trial-macro MAE gain over the frozen CLIP+SigLIP content prediction",
+      "estimator_or_test": "Causal current/past EEG-fNIRS ridge residual with inner gain gate and exact zero-residual fallback",
+      "id": "causal_physiology_residual",
+      "multiplicity": "Full-feature and temporal-token routes are reported as gated development comparisons",
+      "population_unit": "Participant, with released videos held out jointly inside the fixed 15-video support",
+      "resampling_or_folds": "Same 5 participant x 5 video outer cells as the content prior; 2 participant x 2 video inner folds",
+      "seed": "20260814",
+      "status": "PRIMARY GATE FAILED; EXACT CONTENT FALLBACK",
+      "uncertainty": "Frozen five-point inner-gain decision curve; no equivalence interval or user-utility claim"
+    },
+    {
+      "endpoint": "Trial-macro MAE and gain over the canonical known-video population prior after one post-trial SAM pair",
+      "estimator_or_test": "Gaussian-weighted same-video trajectory retrieval plus bounded center/shape correction and functional residual ensemble",
+      "id": "post_trial_sam_sparse_recovery",
+      "multiplicity": "Candidate inventory and ensemble were developed on this dataset; independent confirmation is required",
+      "population_unit": "Participant; videos crossed as the fixed released support in uncertainty propagation",
+      "resampling_or_folds": "5 outer participant folds x 4 inner folds; 5 complete allocations",
+      "seed": "20260812",
+      "status": "POST-TRIAL SPARSE-FEEDBACK ROUTE; NOT ZERO INTERACTION",
+      "uncertainty": "Participant-video crossed percentile bootstrap (5,000 draws) and complete participant-fold allocation sensitivity"
+    }
+  ],
+  "schema_version": "statistical-analysis-registry-v1",
+  "scope": "Complete registry for quantitative claims retained in the main manuscript and Supplementary Information.",
+  "software": {
+    "note": "Revision 2 did not record package versions; later recomputations used the listed environment.",
+    "numpy": "2.5.1",
+    "python": "3.12.3"
+  }
+}

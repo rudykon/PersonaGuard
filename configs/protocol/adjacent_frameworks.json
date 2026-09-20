@@ -1,0 +1,60 @@
+{
+  "schema_version": "adjacent-framework-comparison-v1",
+  "comparison_boundary": "Primary emphasis as described in each cited framework; a blank or non-primary feature is not a claim that the framework can never be extended.",
+  "rows": [
+    {
+      "id": "model_cards",
+      "framework": "Model Cards",
+      "citation_key": "mitchell2019modelcards",
+      "unit": "Released model",
+      "primary_output": "Intended-use and benchmark report",
+      "evidence_to_action": "Documents suitability boundaries; route resolution is not the primary output",
+      "evaluation_basis": "Worked model cards"
+    },
+    {
+      "id": "datasheets",
+      "framework": "Datasheets for Datasets",
+      "citation_key": "gebru2021datasheets",
+      "unit": "Released dataset",
+      "primary_output": "Motivation, composition, collection, and use documentation",
+      "evidence_to_action": "Informs downstream choice; candidate-route actions are not the primary output",
+      "evaluation_basis": "Template rationale and examples"
+    },
+    {
+      "id": "fairness_checklists",
+      "framework": "Co-designed Fairness Checklists",
+      "citation_key": "madaio2020checklists",
+      "unit": "Organizational development practice",
+      "primary_output": "Checklist plus organizational desiderata and misuse risks",
+      "evidence_to_action": "Supports process reflection; no typed route resolver is claimed",
+      "evaluation_basis": "Iterative co-design with 48 practitioners"
+    },
+    {
+      "id": "internal_audit",
+      "framework": "End-to-End Internal Algorithmic Auditing",
+      "citation_key": "raji2020accountability",
+      "unit": "Organizational AI lifecycle",
+      "primary_output": "Lifecycle audit framework and documentation trail",
+      "evidence_to_action": "Connects audit stages and accountability; not specialized to parallel HCI profile routes",
+      "evaluation_basis": "Process synthesis and organizational case grounding"
+    },
+    {
+      "id": "hai_guidelines",
+      "framework": "Human--AI Interaction Guidelines",
+      "citation_key": "amershi2019guidelines",
+      "unit": "Human-facing AI interaction",
+      "primary_output": "Eighteen design guidelines",
+      "evidence_to_action": "Guides design choices; provenance-linked route actions are not the primary output",
+      "evaluation_basis": "Multiple rounds, including 49 practitioners and 20 products"
+    },
+    {
+      "id": "route_audit",
+      "framework": "This route-audit protocol",
+      "citation_key": "self",
+      "unit": "Candidate profile interpretation, acquisition, action, retention, or transfer route",
+      "primary_output": "Typed evidence record plus route-specific action and review trigger",
+      "evidence_to_action": "Declarative constraint/permission resolver with explicit comparator, consequence, burden, scope, and lifecycle fields",
+      "evaluation_basis": "Worked replay, malformed and locality tests, six-source external transfer benchmark, and five rule ablations"
+    }
+  ]
+}

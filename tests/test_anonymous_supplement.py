@@ -83,7 +83,7 @@ class AnonymousSupplementTests(unittest.TestCase):
             self.assertTrue(required.issubset(archive.namelist()))
 
     def test_portable_publication_source_is_packaged(self):
-        member = f"{builder.ARCHIVE_ROOT}/paper_support/revision6_source.json"
+        member = f"{builder.ARCHIVE_ROOT}/results/revision6_source.json"
         with zipfile.ZipFile(io.BytesIO(self.payload)) as archive:
             source = archive.read(member).decode("utf-8")
         self.assertNotIn("/home/", source)

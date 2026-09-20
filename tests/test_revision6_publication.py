@@ -32,7 +32,7 @@ class Revision6PublicationTest(unittest.TestCase):
             "generate_revision6_publication_for_test",
             ROOT / "scripts" / "generate_revision6_publication.py",
         )
-        cls.source_path = ROOT / "paper_support" / "revision6_source.json"
+        cls.source_path = ROOT / "results" / "revision6_source.json"
         cls.source = json.loads(cls.source_path.read_text(encoding="utf-8"))
 
     def test_revision6_is_unique_canonical_source(self) -> None:
@@ -42,7 +42,7 @@ class Revision6PublicationTest(unittest.TestCase):
         self.assertEqual(self.source["revision"], 6)
         self.assertEqual(
             self.source["policy"]["single_numeric_source"],
-            "paper_support/revision6_source.json",
+            "results/revision6_source.json",
         )
         self.assertEqual(self.source, self.builder.build_source())
         self.assertIn("protocol_rules", self.source["summaries"])
@@ -75,10 +75,10 @@ class Revision6PublicationTest(unittest.TestCase):
 
     def test_publication_figure_scripts_do_not_read_revision_directories(self) -> None:
         paths = [
-            ROOT / "paper_support" / "figures" / "make_revision6_protocol_figure.py",
-            ROOT / "paper_support" / "figures" / "make_revision5_figures.py",
-            ROOT / "paper_support" / "figures" / "make_revision6_validity_figure.py",
-            ROOT / "paper_support" / "figures" / "make_revision6_decision_figures.py",
+            ROOT / "scripts" / "figures" / "make_revision6_protocol_figure.py",
+            ROOT / "scripts" / "figures" / "make_revision5_figures.py",
+            ROOT / "scripts" / "figures" / "make_revision6_validity_figure.py",
+            ROOT / "scripts" / "figures" / "make_revision6_decision_figures.py",
         ]
         forbidden = [
             "artifacts/revision2",
@@ -100,13 +100,12 @@ class Revision6PublicationTest(unittest.TestCase):
             "protocol_replay_rows",
             "algorithm_route_rows",
         ]
-        for manuscript, suffix in (("body.tex", ""), ("body_zh.tex", "_zh")):
-            text = (ROOT / "paper" / manuscript).read_text(encoding="utf-8")
-            for stem in main_inputs:
-                self.assertIn(rf"\input{{generated/{stem}{suffix}}}", text)
-            self.assertNotIn("revision6_signal_audit_rows", text)
-            self.assertNotIn("revision6_calibration_rows", text)
-            self.assertNotIn("decision_boundary_sensitivity.png", text)
+        text = (ROOT / "paper" / "body.tex").read_text(encoding="utf-8")
+        for stem in main_inputs:
+            self.assertIn(rf"\input{{generated/{stem}}}", text)
+        self.assertNotIn("revision6_signal_audit_rows", text)
+        self.assertNotIn("revision6_calibration_rows", text)
+        self.assertNotIn("decision_boundary_sensitivity.png", text)
         supplement = (
             ROOT / "paper" / "supplementary_information.tex"
         ).read_text(encoding="utf-8")
@@ -135,25 +134,16 @@ class Revision6PublicationTest(unittest.TestCase):
     def test_generated_table_fragments_close_booktabs_internally(self) -> None:
         stems = [
             "revision6_signal_audit_rows",
-            "revision6_signal_audit_rows_zh",
             "revision6_availability_rows",
-            "revision6_availability_rows_zh",
             "revision6_sensing_rows",
-            "revision6_sensing_rows_zh",
             "revision6_calibration_rows",
-            "revision6_calibration_rows_zh",
             "protocol_replay_rows",
-            "protocol_replay_rows_zh",
             "external_reuse_rows",
-            "external_reuse_rows_zh",
             "protocol_rule_rows",
-            "protocol_rule_rows_zh",
             "protocol_contract_rows",
-            "protocol_contract_rows_zh",
             "adjacent_framework_rows",
             "statistical_analysis_registry_rows",
             "algorithm_route_rows",
-            "algorithm_route_rows_zh",
             "algorithm_content_rows",
             "algorithm_physiology_rows",
             "algorithm_sparse_rows",
@@ -176,9 +166,9 @@ class Revision6PublicationTest(unittest.TestCase):
             "Evidence-to-Action_Audit_Protocol",
             "Protocol_Evaluation_refined_source",
         ]
-        for manuscript in ("body.tex", "body_zh.tex"):
+        for manuscript in ("body.tex",):
             text = (ROOT / "paper" / manuscript).read_text(encoding="utf-8")
-            stems = current_svg_stems + main_stems[2:] if manuscript == "body.tex" else main_stems
+            stems = current_svg_stems + main_stems[2:]
             for stem in stems:
                 self.assertIn(f"{stem}_embed.pdf", text)
                 self.assertNotIn(f"{stem}.png", text)
@@ -195,7 +185,6 @@ class Revision6PublicationTest(unittest.TestCase):
         ]
         for manuscript in (
             "supplementary_information.tex",
-            "supplementary_information_zh.tex",
         ):
             text = (ROOT / "paper" / manuscript).read_text(encoding="utf-8")
             for stem in supplement_stems:
@@ -203,14 +192,14 @@ class Revision6PublicationTest(unittest.TestCase):
                 self.assertNotIn(f"{stem}.png", text)
 
         for stem in [*main_stems, *supplement_stems[2:]]:
-            for suffix in (".pdf", ".svg", "_embed.pdf"):
-                path = ROOT / "paper_support" / "figures" / f"{stem}{suffix}"
+            for suffix in ("_embed.pdf",):
+                path = ROOT / "paper" / "figures" / f"{stem}{suffix}"
                 self.assertTrue(path.is_file(), path)
                 self.assertGreater(path.stat().st_size, 0, path)
 
         for stem in [*current_svg_stems, *supplementary_svg_stems]:
             for suffix in (".svg", "_embed.pdf"):
-                path = ROOT / "paper_support" / "figures" / f"{stem}{suffix}"
+                path = ROOT / "paper" / "figures" / f"{stem}{suffix}"
                 self.assertTrue(path.is_file(), path)
                 self.assertGreater(path.stat().st_size, 0, path)
 
@@ -256,7 +245,7 @@ class Revision6PublicationTest(unittest.TestCase):
             self.assertTrue(required.issubset(row), row["id"])
             self.assertTrue(all(str(row[field]).strip() for field in required), row["id"])
         generated = json.loads(
-            (ROOT / "paper_support" / "statistical_analysis_registry.json").read_text(
+            (ROOT / "results" / "statistical_analysis_registry.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -265,9 +254,8 @@ class Revision6PublicationTest(unittest.TestCase):
     def test_shared_reference_outputs_do_not_use_generalizability_symbols(self) -> None:
         publication_files = [
             ROOT / "paper" / "body.tex",
-            ROOT / "paper" / "body_zh.tex",
             ROOT / "paper" / "supplementary_information.tex",
-            ROOT / "paper_support" / "evidence_traceability.json",
+            ROOT / "results" / "evidence_traceability.json",
         ]
         forbidden = (r"R^{\mathrm{SR}}", "R_G^SR", "R_Phi^SR")
         for path in publication_files:
@@ -301,7 +289,7 @@ class Revision6PublicationTest(unittest.TestCase):
             self.assertNotIn("wilson_ci95_high", row)
 
         figure_source = (
-            ROOT / "paper_support" / "figures" / "make_revision6_decision_figures.py"
+            ROOT / "scripts" / "figures" / "make_revision6_decision_figures.py"
         ).read_text(encoding="utf-8")
         self.assertNotIn("fill_between(", figure_source)
 

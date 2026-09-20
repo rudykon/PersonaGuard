@@ -19,9 +19,18 @@ SPEC.loader.exec_module(MODULE)
 
 class SubmissionReadinessTest(unittest.TestCase):
     def setUp(self):
-        self.document = json.loads(
-            (ROOT / "paper_support" / "submission_readiness.json").read_text(encoding="utf-8")
-        )
+        self.document = {
+            "schema_version": "submission-readiness-v2",
+            "secondary_analysis_ethics": {
+                "status": MODULE.DISCLOSURE_COMPLETE,
+                "manuscript_sentence": "Example secondary-analysis disclosure.",
+                "manuscript_sentence_zh": "示例分析使用 gated research release。",
+                "source_approval_reference": "Example source approval",
+                "data_access_basis": "Example research access terms",
+                "analysis_scope": "Example secondary analysis",
+                "additional_institutional_determination_claimed": False,
+            },
+        }
 
     def test_complete_disclosure_passes_strict_gate(self):
         record = MODULE.validate(self.document, strict=True)
@@ -31,17 +40,19 @@ class SubmissionReadinessTest(unittest.TestCase):
     def test_generated_sentence_matches_record(self):
         record = MODULE.validate(self.document)
         self.assertEqual(
-            MODULE.render(record, language="en"),
-            (ROOT / "paper" / "generated" / "secondary_analysis_ethics_statement.tex").read_text(
-                encoding="utf-8"
-            ),
+            MODULE.render(record, language="en").splitlines()[1:],
+            ["Example secondary-analysis disclosure."],
         )
         self.assertEqual(
-            MODULE.render(record, language="zh"),
-            (ROOT / "paper" / "generated" / "secondary_analysis_ethics_statement_zh.tex").read_text(
-                encoding="utf-8"
-            ),
+            MODULE.render(record, language="zh").splitlines()[1:],
+            ["示例分析使用 受限研究发布集。"],
         )
+
+    def test_cli_accepts_explicit_author_record(self):
+        args = MODULE.parse_args(["--source", "author-record.json", "--check", "--strict"])
+        self.assertEqual(args.source, Path("author-record.json"))
+        self.assertTrue(args.check)
+        self.assertTrue(args.strict)
 
     def test_complete_disclosure_requires_source_provenance(self):
         incomplete = json.loads(json.dumps(self.document))

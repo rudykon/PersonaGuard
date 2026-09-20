@@ -58,21 +58,17 @@ WINDOWS_ABSOLUTE_PATH = re.compile(r"(?i)(?:^|[\s\"'])(?:[a-z]:\\)")
 DIRECT_FILES = (
     "requirements.txt",
     "paper/accessibility_patches.tex",
-    "paper_support/adjacent_frameworks.json",
-    "paper_support/evidence_traceability.json",
-    "paper_support/external_reuse_cases.json",
-    "paper_support/pdfua_validation_report.json",
-    "paper_support/protocol_replay_cases.json",
-    "paper_support/protocol_rules.json",
+    "configs/protocol/adjacent_frameworks.json",
+    "results/evidence_traceability.json",
+    "configs/protocol/external_reuse_cases.json",
+    "configs/protocol/protocol_replay_cases.json",
+    "configs/protocol/protocol_rules.json",
     "paper/references.bib",
-    "paper_support/revision6_source.json",
-    "paper_support/dense_trajectory_examples.json",
-    "paper_support/submission_readiness.json",
+    "results/revision6_source.json",
+    "scripts/figures/dense_trajectory_examples.json",
     "paper/supplementary_information.pdf",
     "paper/supplementary_information.tex",
     "paper/word_count_report.txt",
-    "paper_support/figures/vector_export.py",
-    "paper_support/reference_verification_2026-09-11.json",
 )
 
 GLOBS = (
@@ -83,13 +79,11 @@ GLOBS = (
     ("configs", "*.json"),
     ("configs", "*.yaml"),
     ("configs", "*.yml"),
-    ("paper_support", "*.json"),
+    ("results", "*.json"),
     ("paper/generated", "*.tex"),
-    ("paper_support/figures", "*.py"),
-    ("paper_support/figures", "*.svg"),
-    ("paper_support/figures", "*.pdf"),
+    ("paper/figures", "*.svg"),
     ("paper/figures", "*_embed.pdf"),
-    ("paper_support/figures", "source_data_*.csv"),
+    ("scripts/figures", "source_data_*.csv"),
 )
 
 
@@ -361,8 +355,7 @@ def validate_archive(payload: bytes) -> None:
             f"{ARCHIVE_ROOT}/MANIFEST.json",
             f"{ARCHIVE_ROOT}/MANIFEST.sha256",
             f"{ARCHIVE_ROOT}/supplementary_information.pdf",
-            f"{ARCHIVE_ROOT}/paper_support/revision6_source.json",
-            f"{ARCHIVE_ROOT}/paper_support/reference_verification_2026-09-11.json",
+            f"{ARCHIVE_ROOT}/results/revision6_source.json",
         }
         missing = required.difference(names)
         if missing:

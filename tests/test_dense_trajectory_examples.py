@@ -14,8 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class DenseTrajectoryExamplesTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.release = json.loads((ROOT / "paper_support/dense_trajectory_examples.json").read_text())
-        cls.source = json.loads((ROOT / "paper_support/revision6_source.json").read_text())
+        cls.release = json.loads((ROOT / "scripts/figures/dense_trajectory_examples.json").read_text())
+        cls.source = json.loads((ROOT / "results/revision6_source.json").read_text())
 
     def test_three_examples_have_closed_anonymous_schema(self):
         preparation.validate_release(self.release)
@@ -49,7 +49,7 @@ class DenseTrajectoryExamplesTest(unittest.TestCase):
             self.assertEqual(round(observed[name], 3), rounded)
 
     def test_csv_contains_every_authorized_coordinate(self):
-        path = ROOT / "paper_support/figures/source_data_dense_trajectory_examples.csv"
+        path = ROOT / "scripts/figures/source_data_dense_trajectory_examples.csv"
         with path.open() as handle:
             reader = csv.DictReader(handle)
             self.assertEqual(reader.fieldnames,
@@ -67,8 +67,8 @@ class DenseTrajectoryExamplesTest(unittest.TestCase):
 
     def test_package_excludes_private_mapping_and_complete_archives(self):
         paths = [p.relative_to(ROOT).as_posix() for p in archive_builder.collect_files()]
-        self.assertIn("paper_support/dense_trajectory_examples.json", paths)
-        self.assertIn("paper_support/figures/source_data_dense_trajectory_examples.csv", paths)
+        self.assertIn("scripts/figures/dense_trajectory_examples.json", paths)
+        self.assertIn("scripts/figures/source_data_dense_trajectory_examples.csv", paths)
         self.assertFalse(any("private_selection" in p or p.endswith(".npz") for p in paths))
 
     def test_five_main_figures_and_canonical_renderer(self):
@@ -76,13 +76,11 @@ class DenseTrajectoryExamplesTest(unittest.TestCase):
             body = (ROOT / "paper" / name).read_text()
             self.assertEqual(body.count(r"\begin{figure*}"), 5)
             self.assertIn("dense_trajectory_examples_embed.pdf", body)
-        renderer = (ROOT / "paper_support/figures/make_dense_trajectory_examples.py").read_text()
+        renderer = (ROOT / "scripts/figures/make_dense_trajectory_examples.py").read_text()
         self.assertIn("revision6_source.json", renderer)
         self.assertNotIn("np.load(", renderer)
-        self.assertNotIn("artifacts/", renderer)
-        # Raster review copies may be archived; vector assets must stay.
-        for suffix in (".svg", ".pdf", "_embed.pdf"):
-            self.assertTrue((ROOT / "paper_support/figures" / ("dense_trajectory_examples" + suffix)).is_file())
+        self.assertIn('SOURCE = ROOT / "results/revision6_source.json"', renderer)
+        self.assertTrue((ROOT / "paper/figures/dense_trajectory_examples_embed.pdf").is_file())
 
 
 if __name__ == "__main__":

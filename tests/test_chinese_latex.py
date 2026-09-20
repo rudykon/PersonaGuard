@@ -22,6 +22,10 @@ def citation_keys(text: str) -> Counter[str]:
     )
 
 
+@unittest.skipUnless(
+    (PAPER / "main_zh.tex").is_file(),
+    "Chinese manuscript is not part of the current publication",
+)
 class ChineseLatexTest(unittest.TestCase):
     def test_every_english_tex_has_a_chinese_counterpart(self) -> None:
         english = sorted(

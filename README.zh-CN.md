@@ -1,4 +1,4 @@
-# 🧭 From Evidence to Action
+# PersonaGuard
 
 <p align="center">
   <img src="docs/brand-mark.svg" width="520" alt="PersonaGuard brand mark">
@@ -6,107 +6,64 @@
 
 **面向 HCI 系统的个性化决策证据审查协议**
 
-[English](README.md) · **简体中文**
+[English](README.md) · 简体中文
 
-可执行的证据到行动审查协议与 HCI 研究复现代码。
+本项目以可执行协议判断现有证据能够支持哪些个性化决策。
+以连续效价—唤醒度估计为实例，覆盖内容先验、生理传感、稀疏反馈及画像保留与迁移。
 
-本项目关注：**现有证据能够支持哪些个性化决策，又应在何处止步？**
-我们将证据类型、评估条件和决策规则组织为可执行协议，覆盖离线估计、可选生理传感、
-行为校准，以及画像保留与迁移。协议明确记录何时可在已评估边界内个性化、
-何时应保留比较方案，以及何时需要补充证据或开展用户研究。
+## 快速开始
 
-项目以连续效价—唤醒度数据为工作实例，展示协议如何组织证据与决策。
-现有验证支持结构符合性、跨来源可表示性和确定性重放；独立分析者复用、协议可用性与用户收益仍待评估。
+需要 Python 3.10+ 和 Git，在项目根目录运行：
 
-## 🗺️ 项目导航
+```bash
+# 仓库测试与文件检查，无需研究数据或 GPU
+make check github-check
 
-| 想做什么 | 从这里开始 |
+# 使用 Python 标准库重放内置审查案例
+python3 -B scripts/run_protocol_replay.py --resolve-case-set configs/protocol/protocol_replay_cases.json
+```
+
+未安装 Make 时，检查命令为 `python3 -B -m unittest -v tests.test_repository_layout tests.test_export_github`
+和 `python3 -B scripts/check_repository.py`。
+NumPy 合成测试与完整研究环境见[复现指南](docs/REPRODUCING.md)。
+
+## 项目结构
+
+```text
+src/merps/       可复用算法
+scripts/        分析、检查、导出及绘图源数据
+configs/        协议规则、案例与刺激清单
+results/        汇总结果与证据记录
+tests/          单元测试及研究一致性检查
+docs/           复现与 GitHub 上传说明
+data/           仅发布数据获取和来源说明
+```
+
+| 任务 | 入口 |
 |---|---|
-| 安装环境或复现实验 | [复现指南](docs/REPRODUCING.md) |
-| 查找某项分析的运行命令 | [脚本索引](scripts/README.md) |
-| 查看协议规则与审查案例 | [协议规则](paper_support/protocol_rules.json) · [重放案例](paper_support/protocol_replay_cases.json) |
-| 查找当前流程的使用说明 | [文档导航](docs/README.md) |
-| 准备 GitHub 发布 | [上传前检查](docs/GITHUB.md) |
+| 安装依赖、复现实验 | [复现指南](docs/REPRODUCING.md) |
+| 查找分析与绘图命令 | [脚本索引](scripts/README.md) |
+| 查看协议规则和案例 | [协议说明](configs/protocol/README.md) |
+| 查看结果和来源 | [结果说明](results/README.md) |
+| 导出可上传 GitHub 的源码包 | [上传指南](docs/GITHUB.md) |
 
-## 🚀 快速开始
+## 结果与共享范围
 
-在项目根目录使用 **Python 3.10+** 运行以下命令。
-仓库检查只使用 Python 标准库，无需 GPU、研究数据或网络访问。
+[`results/revision6_source.json`](results/revision6_source.json) 是唯一汇总数值源。
+现有检查支持结构符合性与确定性重放；独立分析者复用、协议可用性与用户收益仍待评估。
 
-```bash
-# 运行独立的仓库检查
-python3 -B -m unittest -v tests.test_repository_layout
-
-# 只读检查 Git 候选文件与本地链接
-python3 -B scripts/check_repository.py
-```
-
-审计读取工作区文件，不修改 Git 索引，也不执行提交或上传。
-已安装 GNU Make 时，`make github-check` 可执行同一审计。
-
-已有包含 NumPy 的研究环境后，可运行合成数据结构测试：
-
-```bash
-make smoke PYTHON=.venv/bin/python
-```
-
-该测试用合成数据检查分组折、阈值汇总与证据图结构，不复现经验结果。
-完整分析需要相应的授权输入和缓存，具体流程见[脚本索引](scripts/README.md)。
-
-## 🗂️ 目录与证据流
-
-```text
-CHI2027/
-├── paper_support/  汇总结果、协议规则与案例、图件源码及源数据 CSV
-├── src/merps/      可复用算法与模型
-├── scripts/        分析、生成、验证与打包入口
-├── tests/          单元测试及研究结果一致性检查
-├── configs/        实验配置与刺激清单
-├── docs/           当前流程、复现指南与发布说明
-├── data/           本地数据与缓存；仅选定说明文件纳入 Git
-├── checkpoints/    本地模型权重
-├── artifacts/      本地实验结果、检查报告与编译输出
-└── .local/         本机凭据与交接记录
-```
-
-汇总结果与审查决策沿同一证据链生成：
-
-```text
-研究输入与正式分析
-        ↓
-paper_support/revision6_source.json
-        ↓
-结果摘要、源数据表与审查输出
-```
-
-当前维护的代码覆盖协议重放、特征准备、内容先验、生理残差、稀疏反馈与测量审查。
-各流程的运行入口和输入要求见[脚本索引](scripts/README.md)。
-
-## 🔧 环境与共享说明
-
-`requirements.txt` 保存完整研究环境的依赖约束，包括固定的 CUDA/PyTorch 版本；
-`pyproject.toml` 提供本地包安装入口。轻量检查无需先安装全部训练依赖。
-数据授权、环境要求和运行成本见[复现指南](docs/REPRODUCING.md)。
-
-- **本地材料**：原始数据、刺激视频、参与者级完整输出、模型权重、凭据和备份不纳入普通仓库发布。
-- **支撑材料**：汇总数据、源图和匿名示例按各自来源与许可核查分享范围。
-- **许可证**：本项目尚未设置整体开源许可证；材料可读取不代表已获再分发授权。
-- **发布准备**：Git 历史、第三方许可与匿名审稿身份需单独检查，详见[上传前检查](docs/GITHUB.md)。
+原始数据、模型权重、实验缓存、中英文论文、凭据和备份留在本地。
+完整分析需要授权数据及相应上游产物。本项目尚未选定整体开源许可证。
 
 <a id="results"></a>
 
-## 📊 当前结果与来源
-
-下方摘要由唯一数值源自动生成，与汇总结果及审查记录保持一致。
-可展开查看，或直接阅读[数值源文件](paper_support/revision6_source.json)。
-
 <details>
-<summary>展开自动生成的详细结果</summary>
+<summary>查看自动生成的详细结果</summary>
 
 <!-- REVISION6_RESULTS:START -->
 ## Revision 6 唯一数值源与正式结论
 
-以下结果由 `paper_support/revision6_source.json` 自动生成；汇总表格、结果摘要与图件不得直接读取早期 revision 目录。
+以下结果由 `results/revision6_source.json` 自动生成；汇总表格、结果摘要与图件不得直接读取早期 revision 目录。
 
 - 锁定协议已在 4 个路线级案例上完成结构重放，产生 4 种不同决策；100 次顺序扰动结果不变，12/12 个非法记录被拒绝，5/5 个路线局部性探针、30/30 个正向授权边界探针及4/4 个声明优先级探针通过。这些检查只证明 schema、哈希、边型与传播规则的结构可复现性，不证明 substantive validity、分析者一致性或跨领域通用性。
 - 同一声明式 resolver 还处理了 6 项独立作者团队的公开 HCI 研究所形成的 7 条路线，无需 schema 扩展且没有 fallback；其中 5 条被许可在已评估边界内个性化，2 条保留比较方案或进入用户研究。五条规则逐条消融均改变至少一个动作。这是跨来源可表示性证据，不是独立分析者一致性或实质正确性证明。

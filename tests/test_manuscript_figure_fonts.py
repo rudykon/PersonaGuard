@@ -13,7 +13,7 @@ from matplotlib.mathtext import MathTextParser
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FIGURES = ROOT / "paper_support" / "figures"
+FIGURES = ROOT / "scripts" / "figures"
 SPEC = importlib.util.spec_from_file_location(
     "manuscript_fonts_under_test", FIGURES / "manuscript_fonts.py"
 )

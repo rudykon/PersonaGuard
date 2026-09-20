@@ -1,0 +1,108 @@
+{
+  "schema_version": "route-audit-cases-v2",
+  "protocol_version": "2.0",
+  "case_set": "worked_empirical_case",
+  "validation_scope": "Four candidate personalization routes from the MER-PS worked case, encoded in the same generic route schema used for the external transfer benchmark.",
+  "cases": [
+    {
+      "id": "trace_interpretation",
+      "source_id": "merps_worked_case",
+      "label_en": "Trace-derived profile interpretation",
+      "label_zh": "轨迹派生画像解释",
+      "proposed_use_en": "Compute and interpret a post-trial temporal-deviation profile.",
+      "proposed_use_zh": "计算并解释试次后的时间偏差画像。",
+      "deployment_stage": "OFFLINE_ESTIMATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {
+        "interpretation_scope": "PARTIAL",
+        "comparator_increment": "NOT_APPLICABLE",
+        "evaluation_mode": "PROXY_ONLY",
+        "user_outcome": "NOT_APPLICABLE",
+        "user_control": "NOT_APPLICABLE",
+        "safety_reversibility": "NOT_APPLICABLE",
+        "persistence": "NOT_TESTED",
+        "transfer": "NOT_TESTED",
+        "reference_equity": "NOT_ASSESSABLE"
+      },
+      "evidence_basis_en": "The trace is computable, but its magnitude changes with interface, estimator, and shared reference; no repeat session exists.",
+      "evidence_basis_zh": "轨迹可以计算，但其幅度随界面、估计器和共享参考而变化，且没有重复 session。",
+      "source_locator": "results/evidence_traceability.json#measurement_meaning",
+      "naive_action": "RETAIN_AS_DURABLE_PERSON_PROFILE"
+    },
+    {
+      "id": "optional_sensing",
+      "source_id": "merps_worked_case",
+      "label_en": "Optional EEG/fNIRS acquisition",
+      "label_zh": "可选 EEG/fNIRS 获取路径",
+      "proposed_use_en": "Add physiology to predict the same profile without a target-video joystick trace.",
+      "proposed_use_zh": "增加生理信号，在没有目标视频 joystick 轨迹时预测同一画像。",
+      "deployment_stage": "OPTIONAL_ACQUISITION",
+      "route_capability": "AVAILABLE",
+      "evidence": {
+        "interpretation_scope": "PARTIAL",
+        "comparator_increment": "NO_DEMONSTRATED_INCREMENT",
+        "evaluation_mode": "PROXY_ONLY",
+        "user_outcome": "PROXIMAL_ONLY",
+        "user_control": "NOT_APPLICABLE",
+        "safety_reversibility": "PARTIAL",
+        "persistence": "NOT_TESTED",
+        "transfer": "NOT_TESTED",
+        "reference_equity": "NOT_ASSESSABLE"
+      },
+      "evidence_basis_en": "Every evaluated sensor-containing point estimate was worse than video mean under participant-grouped nested evaluation.",
+      "evidence_basis_zh": "在 participant-grouped 嵌套评估中，所有含传感器方案的点估计均差于 video mean。",
+      "source_locator": "results/evidence_traceability.json#eeg_fnirs_increment",
+      "naive_action": "ADD_SENSORS_FOR_PERSONALIZATION"
+    },
+    {
+      "id": "signed_calibration",
+      "source_id": "merps_worked_case",
+      "label_en": "Signed behavioral calibration",
+      "label_zh": "有符号行为校准",
+      "proposed_use_en": "Deploy a constant signed correction inferred from separate calibration videos.",
+      "proposed_use_zh": "部署由独立校准视频推断的常量有符号校正。",
+      "deployment_stage": "CONSEQUENTIAL_PERSONALIZATION",
+      "route_capability": "AVAILABLE",
+      "evidence": {
+        "interpretation_scope": "PARTIAL",
+        "comparator_increment": "SUPPORTED",
+        "evaluation_mode": "PROXY_ONLY",
+        "user_outcome": "PROXIMAL_ONLY",
+        "user_control": "NOT_TESTED",
+        "safety_reversibility": "REVERSIBLE",
+        "persistence": "NOT_TESTED",
+        "transfer": "NOT_REQUIRED",
+        "reference_equity": "NOT_ASSESSABLE"
+      },
+      "evidence_basis_en": "The reference-proximal correction improves a trace endpoint, but no user benefit, meaningful-gain threshold, or acceptable harm rate was tested.",
+      "evidence_basis_zh": "参考近端校正改善了轨迹终点，但尚未检验用户收益、最小有意义改善或可接受伤害比例。",
+      "source_locator": "results/evidence_traceability.json#signed_proximal_correction",
+      "naive_action": "DEPLOY_CALIBRATION"
+    },
+    {
+      "id": "retention_transfer",
+      "source_id": "merps_worked_case",
+      "label_en": "Durable retention and transfer",
+      "label_zh": "持久保留与迁移",
+      "proposed_use_en": "Store the participant-indexed profile and reuse it in later sessions or interfaces.",
+      "proposed_use_zh": "保存参与者画像并在后续 session 或界面中复用。",
+      "deployment_stage": "RETENTION_TRANSFER",
+      "route_capability": "AVAILABLE",
+      "evidence": {
+        "interpretation_scope": "PARTIAL",
+        "comparator_increment": "NOT_APPLICABLE",
+        "evaluation_mode": "NOT_TESTED",
+        "user_outcome": "NOT_TESTED",
+        "user_control": "NOT_TESTED",
+        "safety_reversibility": "PARTIAL",
+        "persistence": "NOT_TESTED",
+        "transfer": "NOT_TESTED",
+        "reference_equity": "NOT_ASSESSABLE"
+      },
+      "evidence_basis_en": "No repeat session, cross-interface test, downstream utility study, or assessable reference-coverage analysis exists.",
+      "evidence_basis_zh": "不存在重复 session、跨界面检验、下游效用研究或可评估的参考覆盖分析。",
+      "source_locator": "results/evidence_traceability.json#retention_and_transfer",
+      "naive_action": "RETAIN_AND_TRANSFER_PROFILE"
+    }
+  ]
+}

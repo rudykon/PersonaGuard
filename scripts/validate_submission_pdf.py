@@ -13,7 +13,7 @@ from typing import Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_REPORT = ROOT / "paper_support" / "pdfua_validation_report.json"
+DEFAULT_REPORT = ROOT / "artifacts" / "paper_reports" / "pdfua_validation_report.json"
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -183,6 +183,7 @@ def main() -> None:
         ),
     }
     output = args.output if args.output.is_absolute() else ROOT / args.output
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

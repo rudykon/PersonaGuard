@@ -1,0 +1,20 @@
+panel,kind,id,priority,label,value
+A,record_field,Proposed use,,Proposed use,route declaration
+A,record_field,Decision-time information,,Decision-time information,route declaration
+A,record_field,Comparator,,Comparator,route declaration
+A,record_field,Evidence boundary,,Evidence boundary,route declaration
+A,record_field,Consequence / endpoint,,Consequence / endpoint,route declaration
+A,record_field,Lifecycle horizon,,Lifecycle horizon,route declaration
+A,record_field,Source locator,,Source locator,route declaration
+A,record_field,Decision owner,,Decision owner,route declaration
+A,record_field,Review trigger,,Review trigger,route declaration
+B,rule,R4_RETENTION_TRANSFER,10,"Persistence, transfer, and reference coverage must match durable reuse",WITHHOLD_RETENTION_AND_TRANSFER
+B,rule,R2_COMPARATOR_INCREMENT,20,Added acquisition or adaptation must beat its route-matched comparator,RETAIN_EVALUATED_COMPARATOR
+B,rule,R3_CONSEQUENCE_MATCH,30,Evidence must match the consequence and be observed in use,RUN_PREREGISTERED_USER_STUDY
+B,rule,R1_SCOPE_MATCH,40,Interpretation and use cannot exceed the evaluated evidence scope,BOUND_TO_EVIDENCE_SCOPE
+B,rule,R5_BOUNDED_PASS,90,Matched direct evidence and reversible use can license bounded personalization,PROCEED_WITHIN_EVALUATED_BOUNDARY
+C,action,PROCEED_WITHIN_EVALUATED_BOUNDARY,,Bounded permission,human-reviewed route-specific next step
+C,action,BOUND_TO_EVIDENCE_SCOPE,,Scope restriction,human-reviewed route-specific next step
+C,action,RETAIN_EVALUATED_COMPARATOR,,Retain comparator,human-reviewed route-specific next step
+C,action,RUN_PREREGISTERED_USER_STUDY,,In-context study,human-reviewed route-specific next step
+C,action,WITHHOLD_RETENTION_AND_TRANSFER,,Withhold retention / transfer,human-reviewed route-specific next step

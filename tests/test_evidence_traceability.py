@@ -20,7 +20,7 @@ SPEC.loader.exec_module(MODULE)
 class EvidenceTraceabilityTest(unittest.TestCase):
     def setUp(self):
         self.graph = json.loads(
-            (PROJECT_ROOT / "paper_support" / "evidence_traceability.json").read_text(
+            (PROJECT_ROOT / "results" / "evidence_traceability.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -89,12 +89,6 @@ class EvidenceTraceabilityTest(unittest.TestCase):
         self.assertEqual(
             MODULE.table_rows(self.graph, "en"),
             (PROJECT_ROOT / "paper" / "generated" / "evidence_traceability_rows.tex").read_text(
-                encoding="utf-8"
-            ),
-        )
-        self.assertEqual(
-            MODULE.table_rows(self.graph, "zh"),
-            (PROJECT_ROOT / "paper" / "generated" / "evidence_traceability_rows_zh.tex").read_text(
                 encoding="utf-8"
             ),
         )
