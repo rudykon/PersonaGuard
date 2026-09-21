@@ -109,6 +109,7 @@ td { font-family: var(--mono); font-size: 13px; }
 .rule-item > summary:hover .rule-question { color: var(--green); }
 .rule-explanation { margin-left: 53px; padding: 0 0 25px; }
 .rule-explanation > p { font-size: 17px; }
+.rule-explanation .rule-prompt { color: var(--ink); font-weight: 500; margin-bottom: 10px; }
 .rule-explanation .text-link { display: inline-block; margin-top: 15px; }
 .decision-logic { margin-top: 33px; padding: 27px 30px; border: 1px solid var(--line); border-radius: 4px; background: #f4f6f0; }
 .decision-logic > p { font-size: 17px; line-height: 1.8; }
@@ -249,24 +250,21 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
 /* Paper narrative: figures, evidence, and discussion. */
 .overview-section { padding-bottom: 70px; }
 .paper-hero { max-width: 1000px; padding-block: 68px 62px; }
-.eyebrow { color: var(--green); font-size: 14px; letter-spacing: .1em; font-weight: 500; margin-bottom: 18px; }
 .paper-hero h1 { font-size: clamp(42px, 4.5vw, 59px); line-height: 1.16; letter-spacing: -1.9px; font-weight: 500; }
-.paper-subtitle { display: block; max-width: 950px; font-size: clamp(25px, 2.8vw, 37px); line-height: 1.35; letter-spacing: -.6px; margin-top: 15px; color: var(--green); }
+.paper-subtitle { max-width: 950px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.4; letter-spacing: -.6px; margin-top: 15px; color: var(--green); }
+.paper-title { margin-top: 26px; max-width: 900px; font-size: 17px; line-height: 1.8; color: var(--muted); }
+.paper-title > span { color: var(--ink); }
 .paper-lead { margin-top: 32px; max-width: 900px; font-size: 22px; line-height: 1.65; color: var(--ink); }
 .paper-abstract { margin-top: 17px; max-width: 900px; font-size: 18px; line-height: 1.8; }
 .hero-actions { align-items: center; flex-wrap: wrap; }
 .hero-actions > .text-link { margin-left: 7px; }
 .overview-body { padding-top: 45px; border-top: 1px solid var(--line); }
 .overview-body > p { margin-top: 19px; max-width: 940px; font-size: 18px; }
-.overview-body h3 { font-size: 25px; margin-top: 36px; }
 .research-questions { margin-top: 29px; border-top: 1px solid var(--line); }
 .research-questions > div { display: grid; grid-template-columns: 64px 1fr; gap: 23px; padding-block: 21px; border-bottom: 1px solid var(--line); }
 .research-questions dt { font-family: var(--mono); color: var(--green); font-size: 16px; padding-top: 3px; }
 .research-questions dd { font-size: 18px; color: var(--text); }
-.contributions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; padding-left: 21px; margin-top: 20px; }
-.contributions li { font-size: 17px; padding-left: 4px; color: var(--text); }
 .section-tint { background: var(--paper); border-block: 1px solid var(--line); }
-.section-heading .eyebrow { margin-top: 0; font-size: 14px; }
 .paper-figure { margin: 30px 0; }
 .figure-open { display: block; border: 1px solid var(--line); background: white; padding: 12px; border-radius: 3px; }
 .figure-open:hover { border-color: var(--green); }
@@ -274,19 +272,15 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
 .paper-figure figcaption { margin-top: 14px; max-width: 1080px; font-size: 15px; line-height: 1.8; color: var(--muted); }
 .paper-figure figcaption strong { font-weight: 600; color: var(--ink); }
 .paper-figure figcaption .text-link { white-space: nowrap; }
-.method-record { display: grid; grid-template-columns: 1fr 1fr; gap: 27px 45px; margin-block: 36px; }
-.method-record dt { font-size: 21px; margin-bottom: 10px; }
-.method-record dd { color: var(--text); font-size: 17px; }
 .boundary { border-left: 3px solid #9caf8a; padding-left: 17px; margin-block: 22px; font-size: 17px; line-height: 1.8; }
 #method > .wrap > h3 { margin: 42px 0 20px; font-size: 26px; }
-.walkthrough { margin-top: 37px; padding: 28px 30px; background: var(--paper); border: 1px solid var(--line); border-radius: 4px; }
-.walkthrough h3 { font-size: 24px; line-height: 1.4; margin-bottom: 17px; }
+.walkthrough { margin-top: 27px; }
 .walkthrough p, .walkthrough li { font-size: 17px; }
 .walkthrough ol { padding-left: 23px; margin-block: 20px; }
 .walkthrough li { padding-left: 5px; margin-block: 13px; color: var(--text); }
 .execution-details ul { margin-bottom: 20px; }
 .evaluation-layers { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 35px; }
-.evaluation-layers h3 { font-size: 25px; margin-bottom: 15px; }
+.evaluation-layers h3 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; font-size: 25px; margin-bottom: 15px; }
 .evaluation-layers p { font-size: 17px; margin-top: 14px; }
 .research-details { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 27px; }
 .research-details > summary { padding-block: 20px; font-size: 16px; }
@@ -294,8 +288,8 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
 .research-details .text-link { display: inline-block; margin-top: 10px; }
 .result-block { margin-top: 52px; padding-top: 48px; border-top: 1px solid #c5d2bb; }
 .result-block:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
-.result-label { color: var(--green); font-size: 14px; font-family: var(--mono); margin-bottom: 13px; }
-.result-block > h3 { font-size: clamp(27px, 2.9vw, 34px); letter-spacing: -.7px; line-height: 1.4; }
+.result-label { color: var(--green); font-size: 14px; font-family: var(--mono); white-space: nowrap; letter-spacing: 0; }
+.result-block > h3 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; font-size: clamp(25px, 2.6vw, 31px); letter-spacing: -.7px; line-height: 1.4; }
 .result-block > p { max-width: 1040px; margin-top: 19px; font-size: 18px; }
 .result-block > .finding { color: var(--ink); font-size: 20px; line-height: 1.75; margin-top: 18px; }
 .result-block > .boundary { font-size: 17px; }
@@ -324,14 +318,12 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
 .case-followup h4 { font-size: 16px; margin: 0 0 11px; color: var(--green); }
 .case-followup p { font-size: 16px; }
 .discussion-prose { max-width: 1040px; }
-.discussion-prose article { margin-top: 30px; }
-.discussion-prose h3 { font-size: 25px; margin-bottom: 14px; }
 .discussion-prose p { font-size: 18px; }
-.discussion-limits { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-top: 32px; margin-top: 38px; border-top: 1px solid var(--line); }
-.discussion-limits h3 { font-size: 25px; }
-.discussion-limits ul, .discussion-limits ol { padding-left: 21px; }
-.discussion-limits li { padding-left: 4px; color: var(--text); font-size: 17px; margin-block: 16px; }
-.conclusion { font-size: 23px; line-height: 1.75; color: var(--ink); max-width: 1050px; margin-top: 38px; padding-block: 27px; border-block: 1px solid #bdceb0; }
+.discussion-prose > p + p { margin-top: 22px; }
+#discussion .details-body article + article { margin-top: 24px; }
+#discussion .details-body h3 { font-size: 22px; }
+#discussion .details-body ul, #discussion .details-body ol { padding-left: 21px; }
+#discussion .details-body li { color: var(--text); font-size: 17px; margin-block: 14px; }
 .legacy-anchor { display: block; position: relative; top: -110px; visibility: hidden; }
 @media (min-width: 1051px) {
   .nav-wrap { gap: 22px; }
@@ -359,22 +351,17 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
   .overview-body > p, .research-questions dd { font-size: 17px; }
   .research-questions > div { grid-template-columns: 39px 1fr; gap: 16px; }
   .research-questions dt { font-size: 14px; }
-  .contributions { grid-template-columns: 1fr; gap: 17px; }
-  .method-record, .evaluation-layers, .evidence-pair, .discussion-limits { grid-template-columns: 1fr; gap: 26px; }
-  .method-record { margin-block: 28px; }
+  .evaluation-layers, .evidence-pair { grid-template-columns: 1fr; gap: 26px; }
   .paper-figure { margin-block: 25px; }
   .figure-open { padding: 5px; }
   .paper-figure figcaption { font-size: 15px; }
-  .walkthrough { padding: 24px 22px; }
   .result-block { margin-top: 42px; padding-top: 37px; }
-  .result-block > h3 { font-size: 28px; }
+  .result-block > h3 { font-size: 26px; }
   .result-block > p, .discussion-prose p { font-size: 17px; }
   .result-block > .finding { font-size: 19px; }
   .case-tabs button { min-height: 53px; }
   .case-followup { grid-template-columns: 1fr; gap: 19px; }
   .case-followup h4 { margin-top: 0; }
-  .discussion-limits { margin-top: 29px; }
-  .conclusion { font-size: 21px; }
 }
 @media (max-width: 600px) {
   html { scroll-padding-top: 170px; }
