@@ -1,28 +1,44 @@
-# PersonaGuard
-
-<p>
-  <a href="https://rudykon.github.io/PersonaGuard/"><img src="https://img.shields.io/badge/Project%20Page-28654a?style=flat-square" alt="Project Page"></a>
-  <a href="https://rudykon.github.io/PersonaGuard/#method"><img src="https://img.shields.io/badge/Method-28654a?style=flat-square" alt="Method"></a>
-  <a href="https://rudykon.github.io/PersonaGuard/#results"><img src="https://img.shields.io/badge/Results-28654a?style=flat-square" alt="Results"></a>
-  <a href="docs/REPRODUCING.md"><img src="https://img.shields.io/badge/Reproduce-28654a?style=flat-square" alt="Reproduce"></a>
-</p>
-
 <p align="center">
   <img src="docs/brand-mark.svg" width="520" alt="PersonaGuard brand mark">
 </p>
 
-**A Companion for Deciding When AI Should Personalize**
+<h1 align="center">PersonaGuard</h1>
 
-Auditing Personalization Decisions in HCI Systems
+<p align="center">
+  <strong>A Companion for Deciding When AI Should Personalize</strong><br>
+  Auditing Personalization Decisions in HCI Systems
+</p>
 
-English · [简体中文](README.zh-CN.md)
+<p align="center">
+  <a href="https://rudykon.github.io/PersonaGuard/"><img src="https://img.shields.io/badge/Project%20Website-Explore%20Research-28654a?style=for-the-badge&amp;logo=googlechrome&amp;logoColor=white" alt="Open the PersonaGuard project website"></a>
+  <a href="docs/REPRODUCING.md"><img src="https://img.shields.io/badge/Reproduction-Read%20Guide-3776AB?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Read the reproduction guide"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.10 or newer"></a>
+  <a href="configs/protocol/README.md"><img src="https://img.shields.io/badge/Protocol-5%20Rules-28654a?style=flat-square" alt="View protocol rules and cases"></a>
+  <a href="#quick-start"><img src="https://img.shields.io/badge/Validation-Structural%20Checks-2CA02C?style=flat-square" alt="Run repository structural checks"></a>
+</p>
+
+<p align="center">
+  <a href="https://rudykon.github.io/PersonaGuard/">Website</a> ·
+  <a href="https://rudykon.github.io/PersonaGuard/#method">Method</a> ·
+  <a href="https://rudykon.github.io/PersonaGuard/#results">Results</a> ·
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="docs/REPRODUCING.md">Reproduction</a> ·
+  <a href="#repository">Repository</a>
+</p>
+
+<p align="center">
+  <strong>English</strong> · <a href="README.zh-CN.md">简体中文</a>
+</p>
 
 An executable protocol for deciding which personalization actions the available
 evidence supports. Continuous valence–arousal estimation provides the worked
 example, covering content priors, physiological sensing, sparse feedback, and
 profile retention or transfer.
 
-[Project page](https://rudykon.github.io/PersonaGuard/)
+<a id="quick-start"></a>
 
 ## Quick start
 
@@ -40,6 +56,8 @@ Without Make, use `python3 -B -m unittest -v tests.test_repository_layout tests.
 and `python3 -B scripts/check_repository.py` for the checks.
 For the NumPy-based synthetic smoke test and full research environment, see the
 [reproduction guide](docs/REPRODUCING.md).
+
+<a id="repository"></a>
 
 ## Repository
 

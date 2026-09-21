@@ -1,24 +1,41 @@
-# PersonaGuard
-
-<p>
-  <a href="https://rudykon.github.io/PersonaGuard/"><img src="https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-28654a?style=flat-square" alt="项目主页"></a>
-  <a href="https://rudykon.github.io/PersonaGuard/#method"><img src="https://img.shields.io/badge/%E6%96%B9%E6%B3%95-28654a?style=flat-square" alt="方法"></a>
-  <a href="https://rudykon.github.io/PersonaGuard/#results"><img src="https://img.shields.io/badge/%E7%A0%94%E7%A9%B6%E7%BB%93%E6%9E%9C-28654a?style=flat-square" alt="研究结果"></a>
-  <a href="docs/REPRODUCING.md"><img src="https://img.shields.io/badge/%E5%A4%8D%E7%8E%B0%E6%8C%87%E5%8D%97-28654a?style=flat-square" alt="复现指南"></a>
-</p>
-
 <p align="center">
   <img src="docs/brand-mark.svg" width="520" alt="PersonaGuard brand mark">
 </p>
 
-**面向 HCI 系统的个性化决策证据审查协议**
+<h1 align="center">PersonaGuard</h1>
 
-[English](README.md) · 简体中文
+<p align="center">
+  <strong>面向 HCI 系统的个性化决策证据审查协议</strong>
+</p>
+
+<p align="center">
+  <a href="https://rudykon.github.io/PersonaGuard/"><img src="https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-%E6%B5%8F%E8%A7%88%E7%A0%94%E7%A9%B6-28654a?style=for-the-badge&amp;logo=googlechrome&amp;logoColor=white" alt="打开 PersonaGuard 项目主页"></a>
+  <a href="docs/REPRODUCING.md"><img src="https://img.shields.io/badge/%E5%A4%8D%E7%8E%B0%E6%8C%87%E5%8D%97-%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%8D%97-3776AB?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="查看复现指南"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.10 or newer"></a>
+  <a href="configs/protocol/README.md"><img src="https://img.shields.io/badge/%E5%8D%8F%E8%AE%AE-5%20%E6%9D%A1%E8%A7%84%E5%88%99-28654a?style=flat-square" alt="查看协议规则与案例"></a>
+  <a href="#quick-start"><img src="https://img.shields.io/badge/%E9%AA%8C%E8%AF%81-%E7%BB%93%E6%9E%84%E6%A3%80%E6%9F%A5-2CA02C?style=flat-square" alt="运行仓库结构检查"></a>
+</p>
+
+<p align="center">
+  <a href="https://rudykon.github.io/PersonaGuard/">项目主页</a> ·
+  <a href="https://rudykon.github.io/PersonaGuard/#method">方法</a> ·
+  <a href="https://rudykon.github.io/PersonaGuard/#results">研究结果</a> ·
+  <a href="#quick-start">快速开始</a> ·
+  <a href="docs/REPRODUCING.md">复现指南</a> ·
+  <a href="#repository">项目结构</a>
+</p>
+
+<p align="center">
+  <a href="README.md">English</a> · <strong>简体中文</strong>
+</p>
 
 本项目以可执行协议判断现有证据能够支持哪些个性化决策。
 以连续效价—唤醒度估计为实例，覆盖内容先验、生理传感、稀疏反馈及画像保留与迁移。
 
-[论文海报项目页](https://rudykon.github.io/PersonaGuard/)
+<a id="quick-start"></a>
 
 ## 快速开始
 
@@ -35,6 +52,8 @@ python3 -B scripts/run_protocol_replay.py --resolve-case-set configs/protocol/pr
 未安装 Make 时，检查命令为 `python3 -B -m unittest -v tests.test_repository_layout tests.test_export_github`
 和 `python3 -B scripts/check_repository.py`。
 NumPy 合成测试与完整研究环境见[复现指南](docs/REPRODUCING.md)。
+
+<a id="repository"></a>
 
 ## 项目结构
 
