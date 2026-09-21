@@ -1,5 +1,12 @@
 # PersonaGuard
 
+<p>
+  <a href="https://rudykon.github.io/PersonaGuard/"><img src="https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E4%B8%BB%E9%A1%B5-28654a?style=flat-square" alt="项目主页"></a>
+  <a href="https://rudykon.github.io/PersonaGuard/#method"><img src="https://img.shields.io/badge/%E6%96%B9%E6%B3%95-28654a?style=flat-square" alt="方法"></a>
+  <a href="https://rudykon.github.io/PersonaGuard/#results"><img src="https://img.shields.io/badge/%E7%A0%94%E7%A9%B6%E7%BB%93%E6%9E%9C-28654a?style=flat-square" alt="研究结果"></a>
+  <a href="docs/REPRODUCING.md"><img src="https://img.shields.io/badge/%E5%A4%8D%E7%8E%B0%E6%8C%87%E5%8D%97-28654a?style=flat-square" alt="复现指南"></a>
+</p>
+
 <p align="center">
   <img src="docs/brand-mark.svg" width="520" alt="PersonaGuard brand mark">
 </p>
