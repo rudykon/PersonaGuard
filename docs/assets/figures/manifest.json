@@ -1,0 +1,57 @@
+[
+  {
+    "file": "fig1-protocol.webp",
+    "width": 2400,
+    "height": 1600,
+    "paper_figure": 1,
+    "source_sha256": "71f6023ca04a61ddbcfcedad7b2147fde7f3737f92193033ad0caec199d0600a",
+    "bytes": 280084,
+    "web_sha256": "200d963a416cac46815a9dafdfbaede9dac129acd706318577b38d20c79ea2d6",
+    "format": "lossless WebP; complete figure, no crop or relabeling",
+    "release_basis": "Explicit standalone web-image approval, 2026-09-21"
+  },
+  {
+    "file": "fig2-evaluation.webp",
+    "width": 2400,
+    "height": 1600,
+    "paper_figure": 2,
+    "source_sha256": "ffc6a696ed0c2262f4539ebe2751cb02d424ddf1f5c90eb3f826283960eb57fa",
+    "bytes": 435934,
+    "web_sha256": "3256cb491ae3955ea3d00ddb7e79ec1e1921dc0a1e26d0dbe0f429e0d1fb773e",
+    "format": "lossless WebP; complete figure, no crop or relabeling",
+    "release_basis": "Explicit standalone web-image approval, 2026-09-21"
+  },
+  {
+    "file": "fig3-protocol-results.webp",
+    "width": 2400,
+    "height": 1607,
+    "paper_figure": 3,
+    "source_sha256": "11cd8c31b62dc8f3aabf1187c61f8ea499e36db5b50bad23b8409a2e05da5822",
+    "bytes": 89418,
+    "web_sha256": "69542eb39b5cff34ec4057149648dade81e5801e101edd02df0678aabeaba92d",
+    "format": "lossless WebP; complete figure, no crop or relabeling",
+    "release_basis": "Published aggregate sources and figure generators; Fig. 5 uses only the three previously authorized anonymous illustrations"
+  },
+  {
+    "file": "fig4-measurement.webp",
+    "width": 2400,
+    "height": 1892,
+    "paper_figure": 4,
+    "source_sha256": "90f3a373be999f588d7e814499e46f713f188acff08a0c42d97cc97003081340",
+    "bytes": 100970,
+    "web_sha256": "1cd78ee8d217cc6cf889c9b7ad3a66b6e6754a1816605b44730971019973d3b5",
+    "format": "lossless WebP; complete figure, no crop or relabeling",
+    "release_basis": "Published aggregate sources and figure generators; Fig. 5 uses only the three previously authorized anonymous illustrations"
+  },
+  {
+    "file": "fig5-trajectories.webp",
+    "width": 2400,
+    "height": 1557,
+    "paper_figure": 5,
+    "source_sha256": "11b1ca2b736eae5381ed18ab5df0090fc54d8067496900b53af175deaf2f482e",
+    "bytes": 137022,
+    "web_sha256": "d80ab43625e33bbd971442678de6fb1d727af20eb1715eda3f04e4a8e5c87f51",
+    "format": "lossless WebP; complete figure, no crop or relabeling",
+    "release_basis": "Published aggregate sources and figure generators; Fig. 5 uses only the three previously authorized anonymous illustrations"
+  }
+]

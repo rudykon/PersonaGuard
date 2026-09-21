@@ -16,27 +16,31 @@
 
 协议配置见 [configs/protocol](../configs/protocol/README.md)，汇总数值和证据记录见 [results](../results/README.md)。
 
-## 论文海报项目页
+## 学术项目主页
 
 线上页面：https://rudykon.github.io/PersonaGuard/
 
 页面源文件为 [index.html](index.html)，样式和交互位于 `assets/`。
-阅读顺序为项目定义、审查示例、五个问题、方法检查与局限、项目资源；默认展示画像复用案例。
-使用原生 HTML/CSS/JavaScript，无需前端依赖或构建。GitHub Pages 从 `main` 分支的 `/docs` 发布。
+按论文顺序组织为 Overview、Method、Evaluation、Results、Discussion、Resources。
+四层结果、论文主图、主要发现及必要数值默认可见；四案例交互位于结果综合部分，默认选中画像解释。
+使用原生 HTML/CSS/JavaScript，无需前端框架。GitHub Pages 从 `main` 分支的 `/docs` 发布。
 
 ```bash
 python3 -m http.server 8000 --directory docs
 python3 -B scripts/build_project_page_data.py --check
 ```
 
-浏览 `http://localhost:8000`。页面内容分为两层：
+浏览 `http://localhost:8000`。页面内容分为以下几层：
 
-- [case-copy.js](assets/case-copy.js)：按案例 ID 编写的双语通俗说明。`expected_action` 用于核对其对应的正式判定；修改时同时核对页面中的无 JavaScript 默认示例。
-- [cases.js](assets/cases.js)：生成文件，保存解析器输出、正式规则条件与优先级，不手动编辑。
+- [case-copy.js](assets/case-copy.js)：按案例 ID 编写的双语解释、综合表摘要与复审要求。`expected_action` 必须与正式判定一致。
+- [cases.js](assets/cases.js)：生成文件，不手工编辑。保存解析器输出、正式规则、来源记录中的责任角色与复审触发条件，以及由论文数值生成函数读取公开结果后生成的指标。
+- [figures](assets/figures/README.md)：五张完整主图的网页导出、授权范围和文件摘要。
 
-修改公开协议或案例后，运行 `python3 -B scripts/build_project_page_data.py` 更新数据；
-`--check` 同时检查生成文件、案例 ID、双语说明是否完整，以及说明对应的正式判定是否改变。
-首屏仅预告案例，手机端显示简短入口；完整说明只在案例区展示。
-规则首次展开仅解释理由及对下一步的影响，正式条件通过源码链接查看。
-执行顺序、检查设计与数量、实验数值和命令默认折叠。页面展示已记录案例，支持键盘选择；不在浏览器中审查任意新输入。
-页面不包含论文附件、`references/` 或私有数据。
+修改公开协议、案例或数值来源后，运行 `python3 -B scripts/build_project_page_data.py` 更新数据与页面中的 `data-number` 数值。
+`--check` 核对案例 ID、双语文案、预期行动、生成文件及页面数值。来源字段由 `results/evidence_traceability.json` 连接到案例，不新增规则条件。
+修改案例解释时，同时维护无 JavaScript 默认记录及综合表；新复审文案是对现有要求的摘要，不是新实验结果或许可。
+
+执行细节、原始字段、额外敏感性说明与命令默认折叠。案例支持键盘切换，移动端保留六栏导航和滚动高亮。
+页面不在浏览器中审查任意新输入，也不提供未公开的论文下载入口。
+
+栏目与论文章节的对应关系、模块迁移和检查结果见 [本轮改版说明](PROJECT_PAGE.md)。

@@ -24,6 +24,22 @@ window.PERSONAGUARD_CASE_COPY = {
     "context": {
       "en": "This case concerns durable retention and transfer. It does not grant permission for a different use of the same profile.",
       "zh": "这个案例审查的是长期保留与跨场景复用，不会自动批准同一画像的其他用途。"
+    },
+    "summary_use": {
+      "en": "Retain or transfer",
+      "zh": "长期保留或迁移"
+    },
+    "summary_boundary": {
+      "en": "Evidence for stability, transfer, and reference coverage is missing.",
+      "zh": "稳定性、迁移与参考数据覆盖证据不足。"
+    },
+    "summary_action": {
+      "en": "Withhold long-term retention and transfer.",
+      "zh": "暂不长期保留或跨场景迁移。"
+    },
+    "review": {
+      "en": "Evidence of persistence, transfer to the intended setting, and reference-data coverage for the intended population.",
+      "zh": "补充长期稳定性、目标场景适用性，以及参考数据对目标人群覆盖的证据。"
     }
   },
   "optional_sensing": {
@@ -49,8 +65,24 @@ window.PERSONAGUARD_CASE_COPY = {
       "zh": "这项分析没有证明额外采集生理信号能带来增益。结论只针对这项任务和对照，不能解释为生理信号没有有用信息。"
     },
     "context": {
-      "en": "Here, the comparator is video mean in the temporal-deviation measurement analysis. The content-prediction experiment below uses a different comparator and outcome.",
-      "zh": "这里比较的是时间偏差测量分析中的视频均值方案（video mean）。下方内容预测实验使用的比较对象和测量结果不同。"
+      "en": "This case compares scalar timing-deviation prediction against video mean. The additional trajectory analysis above uses video-content prediction as a different comparator for a different target.",
+      "zh": "本案例针对时间偏差量的预测，对照为视频均值。上方额外轨迹分析针对不同的目标，以视频内容预测作为另一种对照。"
+    },
+    "summary_use": {
+      "en": "Add sensing",
+      "zh": "增加传感"
+    },
+    "summary_boundary": {
+      "en": "No demonstrated gain over the matched comparator for this target.",
+      "zh": "在该任务中未证明优于匹配的对照方案。"
+    },
+    "summary_action": {
+      "en": "Keep the evaluated comparator.",
+      "zh": "保留已评估的对照方案。"
+    },
+    "review": {
+      "en": "Demonstrated improvement over the timing-deviation comparator, using declared acquisition and burden criteria.",
+      "zh": "在事先声明的采集与负担标准下，证明优于时间偏差量预测的对照方案。"
     }
   },
   "signed_calibration": {
@@ -78,6 +110,22 @@ window.PERSONAGUARD_CASE_COPY = {
     "context": {
       "en": "The recorded proposal is a constant signed correction inferred from separate calibration videos. The audit distinguishes the trace endpoint from downstream user benefit.",
       "zh": "正式记录中的方案是从独立校准视频推断的常量有符号校正。审查区分了轨迹测量指标的改善和下游用户收益。"
+    },
+    "summary_use": {
+      "en": "Deploy calibration",
+      "zh": "部署校准"
+    },
+    "summary_boundary": {
+      "en": "Reference error improved; direct user benefit was not tested.",
+      "zh": "参考误差改善，尚未证明用户收益。"
+    },
+    "summary_action": {
+      "en": "First run an in-context user study.",
+      "zh": "先开展情境内用户研究。"
+    },
+    "review": {
+      "en": "Direct evidence of benefit and degradation in actual use, with meaningful-gain and harm criteria specified in advance.",
+      "zh": "事先确定有意义改善及伤害标准，再收集真实使用中收益与退化的直接证据。"
     }
   },
   "trace_interpretation": {
@@ -105,6 +153,22 @@ window.PERSONAGUARD_CASE_COPY = {
     "context": {
       "en": "The original measure is a post-trial temporal-deviation profile relative to a reference. R1 limits its scope; permission to personalize is a separate decision.",
       "zh": "原始测量是试次结束后相对参考曲线的时间偏差画像。R1 限定其范围，是否许可个性化需要另行判断。"
+    },
+    "summary_use": {
+      "en": "Interpret the profile",
+      "zh": "解释画像"
+    },
+    "summary_boundary": {
+      "en": "Depends on the measurement and reference conditions.",
+      "zh": "结果受测量与参考条件影响。"
+    },
+    "summary_action": {
+      "en": "Limit interpretation and use.",
+      "zh": "限定解释与使用范围。"
+    },
+    "review": {
+      "en": "Evidence matching the proposed interpretation, interface, estimator, reference group, and intended reuse period.",
+      "zh": "补充与解释目标、界面、估计方法、参考群体及复用期限匹配的验证。"
     }
   }
 };
