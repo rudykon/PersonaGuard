@@ -22,6 +22,7 @@
 
 页面源文件为 [index.html](index.html)，样式和交互位于 `assets/`。
 按论文顺序组织为 Overview、Method、Evaluation、Results、Discussion、Resources。
+首屏从“让常用功能更容易找到”的界面需求开场，桌面显示三种菜单选择的静态示意；手机保留场景文字。菜单依据外部文献案例，仅作说明情境。连续自评工作案例在评估区另行介绍。
 四层结果、论文主图、主要发现及必要数值默认可见；四案例交互位于结果综合部分，默认选中画像解释。
 使用原生 HTML/CSS/JavaScript，无需前端框架。GitHub Pages 从 `main` 分支的 `/docs` 发布。
 

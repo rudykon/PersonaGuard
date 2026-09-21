@@ -249,7 +249,21 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
 
 /* Paper narrative: figures, evidence, and discussion. */
 .overview-section { padding-bottom: 70px; }
-.paper-hero { max-width: 1000px; padding-block: 68px 62px; }
+.paper-hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .9fr); column-gap: 48px; padding-block: 68px 62px; }
+.hero-intro { min-width: 0; }
+.hero-meta { grid-column: 1 / -1; margin-top: 26px; }
+.hero-meta .paper-title { margin-top: 12px; }
+.scenario-note { font-size: 14px; line-height: 1.8; color: var(--muted); }
+.scenario-note a { text-decoration: underline; text-underline-offset: 3px; }
+.menu-scenario { align-self: center; margin: 0; min-width: 0; }
+.menu-scenario figcaption { margin-bottom: 18px; font-size: 17px; color: var(--text); }
+.menu-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.menu-option { min-width: 0; }
+.menu-option h3 { min-height: 48px; font-size: 16px; line-height: 1.45; font-weight: 500; }
+.menu-items { list-style: none; padding: 8px 0; margin: 0; border: 1px solid var(--line); border-radius: 5px; background: white; }
+.menu-items li { padding: 9px 12px; color: var(--text); font-size: 15px; line-height: 1.45; }
+.menu-items li + li { border-top: 1px solid #edf0ea; }
+.menu-control { margin-top: 11px; font-size: 13px; line-height: 1.6; color: var(--muted); }
 .paper-hero h1 { font-size: clamp(42px, 4.5vw, 59px); line-height: 1.16; letter-spacing: -1.9px; font-weight: 500; }
 .paper-subtitle { max-width: 950px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.4; letter-spacing: -.6px; margin-top: 15px; color: var(--green); }
 .paper-title { margin-top: 26px; max-width: 900px; font-size: 17px; line-height: 1.8; color: var(--muted); }
@@ -337,7 +351,8 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
   .nav-actions { grid-column: 2; grid-row: 1; }
   .main-nav { grid-column: 1/-1; grid-row: 2; display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; gap: 16px; }
   .main-nav a { min-height: 44px; }
-  .paper-hero { padding-block: 52px; }
+  .paper-hero { display: block; max-width: 1000px; padding-block: 52px; }
+  .menu-scenario { display: none; }
   .evidence-pair { gap: 27px; }
 }
 @media (max-width: 720px) {
@@ -377,7 +392,8 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
   .research-table th, .research-table td { padding-inline: 13px; }
 }
 @media print {
-  .paper-hero { padding-top: 0; }
+  .paper-hero { display: block; padding-top: 0; }
+  .menu-scenario { display: none; }
   .paper-hero h1 { font-size: 29pt; }
   .paper-subtitle { font-size: 19pt; }
   .paper-figure { break-inside: avoid; }
