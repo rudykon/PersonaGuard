@@ -2,8 +2,8 @@ window.PERSONAGUARD_CASE_COPY = {
   "retention_transfer": {
     "expected_action": "WITHHOLD_RETENTION_AND_TRANSFER",
     "question": {
-      "en": "Can we use this profile again later?",
-      "zh": "用户画像能留到下次吗？"
+      "en": "Can we use this experiment’s profile again later?",
+      "zh": "这次得到的用户画像，下次还能用吗？"
     },
     "use": {
       "en": "Save the profile from this experiment and use it in later sessions or other interfaces.",
@@ -18,8 +18,8 @@ window.PERSONAGUARD_CASE_COPY = {
       "zh": "暂不长期保留，也不跨场景复用。"
     },
     "why": {
-      "en": "Computing a profile now does not establish that it will remain valid later or elsewhere. Durable reuse needs evidence of stability, transfer, and reference coverage.",
-      "zh": "这次能计算出画像，并不能说明它在下次或其他场景仍然成立。长期复用前，还需要验证稳定性、跨场景适用性及参考数据覆盖。"
+      "en": "Being able to compute a profile does not establish that it will still apply in a later session or another setting.",
+      "zh": "能计算出画像，并不代表它在下次实验或其他场景仍然适用。"
     },
     "context": {
       "en": "This case concerns durable retention and transfer. It does not grant permission for a different use of the same profile.",
@@ -38,7 +38,7 @@ window.PERSONAGUARD_CASE_COPY = {
     },
     "evidence": {
       "en": "In this measurement analysis, all evaluated sensor-based estimates had higher prediction error than the tested video-mean comparator.",
-      "zh": "在这项测量分析中，受评估的传感方案预测误差估计值，都高于已经测试过的按视频取平均值的方案。"
+      "zh": "在这项测量分析中，所有已测试的传感方案，预测误差估计值都高于按视频取平均值的对照方案。"
     },
     "next": {
       "en": "Keep the tested video-mean comparator.",
@@ -64,8 +64,8 @@ window.PERSONAGUARD_CASE_COPY = {
       "zh": "把其他校准视频中得到的校正方法，部署到个性化系统中。"
     },
     "evidence": {
-      "en": "The correction improved an experimental measurement. User benefit, a meaningful improvement threshold, and acceptable harm have not been tested.",
-      "zh": "这项校正改善了实验中的测量指标。但尚未检验这种改善能否使用户受益，也未检验有意义改善的标准及可接受的伤害程度。"
+      "en": "The correction improved a measurement in the experiment, but user benefit has not been tested. How much improvement matters and what risks are acceptable remain to be established.",
+      "zh": "这项校正改善了实验中的测量指标，但尚未检验用户能否受益。还没有确定：改善需要达到多大程度，以及哪些风险可以接受。"
     },
     "next": {
       "en": "Run a preregistered study in actual use before deployment.",

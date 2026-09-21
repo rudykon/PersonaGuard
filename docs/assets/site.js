@@ -39,6 +39,7 @@
       }
       conditions.append(row);
     }
+    document.getElementById('profile-definition').hidden = selectedCase !== 'retention_transfer';
     document.getElementById('case-panel').setAttribute('aria-labelledby', `tab-${selectedCase}`);
     caseButtons.forEach(button => {
       const active = button.dataset.case === selectedCase;
@@ -47,14 +48,8 @@
     });
   }
 
-  function renderRules() {
+  function renderRuleOrder() {
     if (!research) return;
-    research.rules.forEach(rule => {
-      const id = rule.id.split('_')[0];
-      document.querySelector(`[data-formal-rule="${id}"]`).textContent = `${rule.id} — ${rule[`title_${language}`]}`;
-      document.querySelector(`[data-priority="${id}"]`).textContent = rule.priority;
-      document.querySelector(`[data-predicate="${id}"]`).textContent = JSON.stringify(rule.predicate, null, 2);
-    });
     document.getElementById('rule-order').textContent = [...research.rules]
       .sort((a, b) => a.priority - b.priority)
       .map(rule => rule.id.split('_')[0]).join(' → ');
@@ -65,13 +60,13 @@
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-en][data-zh]').forEach(node => { node.textContent = node.dataset[language]; });
     document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === language)));
-    document.title = language === 'zh' ? 'PersonaGuard — AI 应该何时进行个性化？' : 'PersonaGuard — When should AI personalize?';
+    document.title = language === 'zh' ? 'PersonaGuard — AI 何时应该进行个性化？' : 'PersonaGuard — When should AI personalize?';
     document.querySelector('nav').setAttribute('aria-label', language === 'zh' ? '主导航' : 'Main navigation');
     document.querySelector('[role=tablist]').setAttribute('aria-label', language === 'zh' ? '已有审查示例' : 'Recorded review examples');
     clearTimeout(copyTimer);
     document.getElementById('copy-status').textContent = '';
     renderCase();
-    renderRules();
+    renderRuleOrder();
     try { localStorage.setItem('personaguard-language', language); } catch (_) { /* The page remains usable without storage. */ }
   }
 

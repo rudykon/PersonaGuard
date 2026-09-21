@@ -66,18 +66,11 @@ p { color: var(--text); }
 .primary:hover { background: var(--green); }
 .secondary:hover { background: var(--tint); }
 .role-note { margin-top: 27px; border-left: 2px solid #91ad85; padding-left: 15px; font-size: 15px; line-height: 1.7; }
-.role-note strong { font-weight: 500; display: block; color: var(--ink); }
-.role-note > span { display: block; color: var(--muted); margin-top: 3px; }
 .hero-example { padding: 30px; border: 1px solid var(--line); border-radius: 6px; background: white; }
 .card-label { font-size: 14px; color: var(--muted); margin-bottom: 13px; }
 .hero-example h2 { font-size: 27px; letter-spacing: -.6px; line-height: 1.35; }
-.hero-example dl { margin-top: 23px; }
-.hero-example dl > div { padding: 15px 0; border-top: 1px solid var(--line); }
-.hero-example dt { font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 5px; }
-.hero-example dd { font-size: 16px; line-height: 1.7; }
-.hero-example dl > .hero-decision { background: #f3efe2; border: 1px solid #dfd8c2; padding: 16px 18px; margin-top: 8px; border-radius: 3px; }
-.hero-decision dt { color: #726143; }
-.hero-decision dd { color: #4b4735; }
+.preview-result { margin-block: 19px 22px; font-size: 17px; line-height: 1.8; }
+.hero-mobile { display: none; }
 .case-section { background: var(--tint); border-block: 1px solid var(--line); }
 .case-tabs { display: none; gap: 12px; margin-bottom: 20px; }
 html.js-ready .case-tabs { display: grid; grid-template-columns: repeat(4, 1fr); }
@@ -86,6 +79,7 @@ html.js-ready .case-tabs { display: grid; grid-template-columns: repeat(4, 1fr);
 .case-tabs button[aria-selected=true] { color: white; background: var(--ink); border-color: var(--ink); }
 .case-panel { background: white; border: 1px solid #cdd8c4; border-radius: 5px; padding: 31px 32px 0; }
 .case-question { font-size: 26px; letter-spacing: -.5px; line-height: 1.4; margin-bottom: 25px; }
+.profile-definition { max-width: 920px; font-size: 16px; line-height: 1.8; margin: -7px 0 25px; }
 .case-story { display: grid; grid-template-columns: .85fr 1fr 1.15fr; gap: 28px; align-items: stretch; }
 .case-story article { min-width: 0; padding-top: 17px; border-top: 2px solid #d1dcc8; }
 .case-story h4 { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 15px; line-height: 1.55; font-weight: 500; margin-bottom: 13px; color: #566c4e; }
@@ -128,11 +122,9 @@ td { font-family: var(--mono); font-size: 13px; }
 .rule-item > summary:hover .rule-question { color: var(--green); }
 .rule-explanation { margin-left: 53px; padding: 0 0 25px; }
 .rule-explanation > p { font-size: 17px; }
-.rule-explanation .technical-label { font-size: 14px; margin-top: 22px; color: var(--muted); overflow-wrap: anywhere; }
-.technical-label strong { font-weight: 400; }
-.predicate { max-width: 100%; overflow: auto; font-family: var(--mono); font-size: 14px; line-height: 1.7; background: var(--tint); border: 1px solid var(--line); padding: 19px; border-radius: 3px; margin: 14px 0 20px; }
+.rule-explanation .text-link { display: inline-block; margin-top: 15px; }
 .decision-logic { margin-top: 33px; padding: 27px 30px; border: 1px solid var(--line); border-radius: 4px; background: #f4f6f0; }
-.decision-logic h3 { font-size: 22px; line-height: 1.4; }
+.decision-logic > p { font-size: 17px; line-height: 1.8; }
 .decision-logic ul { margin: 15px 0 0; padding-left: 21px; }
 .decision-logic li { font-size: 17px; padding-left: 5px; margin-block: 7px; }
 .execution-details { margin-top: 22px; border-top: 1px solid var(--line); }
@@ -147,7 +139,13 @@ td { font-family: var(--mono); font-size: 13px; }
 .validation-columns ul { margin: 20px 0 0; padding-left: 20px; }
 .validation-columns li { padding-left: 4px; margin-block: 13px; font-size: 17px; line-height: 1.8; }
 .validation-boundary { margin-top: 23px; padding: 5px 0; max-width: 1000px; }
-.validation-boundary p { font-size: 16px; line-height: 1.8; margin-bottom: 10px; }
+.validation-boundary p { font-size: 17px; line-height: 1.8; }
+.validation-boundary strong { font-weight: 500; }
+.validation-details { margin-top: 18px; border-top: 1px solid #c9d5bf; border-bottom: 1px solid #c9d5bf; }
+.validation-details > summary { padding-block: 19px; font-size: 16px; }
+.validation-details p, .validation-details li { font-size: 16px; line-height: 1.8; }
+.validation-details ul { padding-left: 22px; margin-block: 18px; }
+.validation-details li { margin-block: 13px; }
 .experiments { margin-top: 48px; padding-top: 35px; border-top: 1px solid #c4d1b9; }
 .experiments > h3 { font-size: 26px; line-height: 1.4; }
 .experiment-intro { font-size: 17px; margin: 12px 0 25px; max-width: 940px; }
@@ -233,10 +231,10 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
   .hero-actions { margin-top: 23px; gap: 12px; }
   .button { min-height: 49px; font-size: 16px; padding: 11px 16px; gap: 19px; }
   .role-note { margin-top: 22px; font-size: 15px; }
-  .hero-example { padding: 25px; }
-  .hero-example h2 { font-size: 26px; }
-  .hero-example dl { margin-top: 20px; }
-  .hero-example dd { font-size: 17px; }
+  .hero-example { padding: 0; border: 0; border-radius: 0; background: transparent; }
+  .hero-preview { display: none; }
+  .hero-mobile { display: flex; align-items: center; gap: 18px; justify-content: space-between; padding-block: 17px; border-block: 1px solid var(--line); font-size: 16px; line-height: 1.7; }
+  .preview-cta { flex-shrink: 0; color: var(--green); }
   .section { padding-block: 46px; }
   h2 { font-size: 31px; letter-spacing: -.8px; }
   .section-heading { margin-bottom: 27px; }
@@ -265,9 +263,7 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
   .rule-question { font-size: 18px; }
   .rule-explanation { margin-left: 0; padding-inline: 5px; }
   .rule-explanation > p { font-size: 16px; }
-  .predicate { font-size: 13px; padding: 15px; }
   .decision-logic { padding: 23px; margin-top: 27px; }
-  .decision-logic h3 { font-size: 22px; }
   .decision-logic li { font-size: 16px; margin-block: 12px; }
   .execution-details > summary { font-size: 15px; }
   .validation-columns { grid-template-columns: 1fr; }
@@ -298,7 +294,7 @@ html:lang(zh-CN) .case-story p { line-height: 1.9; }
   .brand { width: 150px; }
   .hero h1 { font-size: 43px; }
   .button { font-size: 15px; gap: 14px; padding-inline: 13px; }
-  .hero-example, .case-panel, .validation-columns article { padding-inline: 19px; }
+  .case-panel, .validation-columns article { padding-inline: 19px; }
   .case-tabs button { font-size: 14px; padding: 12px; }
   .case-story .next-step { padding-inline: 15px; }
   .condition-table { margin-inline: -3px; }
