@@ -68,6 +68,7 @@
     document.querySelectorAll('[data-en][data-zh]').forEach(node => { node.textContent = node.dataset[language]; });
     document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === language)));
     document.title = 'PersonaGuard — From Evidence to Action';
+    document.querySelectorAll('meta[data-content-en][data-content-zh]').forEach(node => { node.content = node.getAttribute(`data-content-${language}`); });
     document.querySelectorAll('[data-alt-en][data-alt-zh]').forEach(node => { node.alt = node.getAttribute(`data-alt-${language}`); });
     document.querySelectorAll('[data-label-en][data-label-zh]').forEach(node => { node.setAttribute('aria-label', node.getAttribute(`data-label-${language}`)); });
     document.querySelectorAll('[data-summary-case]').forEach(node => {
@@ -132,7 +133,8 @@
   let scrollFrame;
   function markCurrentSection() {
     scrollFrame = undefined;
-    const threshold = document.querySelector('.header').getBoundingClientRect().bottom + 30;
+    const anchorOffset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const threshold = Math.max(document.querySelector('.header').getBoundingClientRect().bottom + 30, anchorOffset + 2);
     let current = sections[0];
     for (const section of sections) {
       if (section.getBoundingClientRect().top <= threshold) current = section;
