@@ -18,6 +18,7 @@ id_ed25519
 
 # Python environments and caches
 .venv/
+.venv-site/
 __pycache__/
 *.py[cod]
 .pytest_cache/

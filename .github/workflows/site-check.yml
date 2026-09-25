@@ -1,0 +1,22 @@
+name: Website checks
+on:
+  pull_request:
+    paths: ['website/**', 'docs/**', 'mkdocs.yml', 'requirements-site.txt', 'scripts/build_project_site.py', 'scripts/check_project_site.py', 'scripts/build_project_page_data.py', 'scripts/build_browser_demo_data.py', 'configs/protocol/**', 'results/**', '.github/workflows/site-check.yml']
+  push:
+    branches: [main]
+    paths: ['website/**', 'docs/**', 'mkdocs.yml', 'requirements-site.txt', 'scripts/build_project_site.py', 'scripts/check_project_site.py', 'scripts/build_project_page_data.py', 'scripts/build_browser_demo_data.py', 'configs/protocol/**', 'results/**', '.github/workflows/site-check.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install -r requirements-site.txt
+      - run: make site-check browser-check

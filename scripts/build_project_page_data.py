@@ -84,15 +84,20 @@ def main() -> int:
         print(f'Project-page data check failed: {error}', file=sys.stderr)
         return 1
     metrics = json.loads(expected.split(' = ', 1)[1].strip().removesuffix(';'))['metrics']
-    page = (ROOT / 'docs/index.html').read_text(encoding='utf-8')
+    # Reviewed bilingual fragments are the source; docs/ contains built pages.
+    pages = sorted((ROOT / 'website/overrides/content').glob('*.html'))
+    if not pages:
+        pages = [ROOT / 'docs/index.html']
     number_pattern = r'<span data-number="(\w+)">([^<]*)</span>'
-    stale = [key for key, value in re.findall(number_pattern, page) if metrics.get(key) != value]
-    if args.check and stale:
-        print(f'Project-page numbers are stale: {sorted(set(stale))}', file=sys.stderr)
-        return 1
-    if not args.check:
-        page = re.sub(number_pattern, lambda match: f'<span data-number="{match[1]}">{metrics[match[1]]}</span>', page)
-        (ROOT / 'docs/index.html').write_text(page, encoding='utf-8')
+    for path in pages:
+        page = path.read_text(encoding='utf-8')
+        stale = [key for key, value in re.findall(number_pattern, page) if metrics.get(key) != value]
+        if args.check and stale:
+            print(f'Project-page numbers are stale in {path.name}: {sorted(set(stale))}', file=sys.stderr)
+            return 1
+        if not args.check:
+            page = re.sub(number_pattern, lambda match: f'<span data-number="{match[1]}">{metrics[match[1]]}</span>', page)
+            path.write_text(page, encoding='utf-8')
     if args.check:
         if not OUTPUT.exists() or OUTPUT.read_text(encoding='utf-8') != expected:
             print('Project-page case data is stale; run scripts/build_project_page_data.py.', file=sys.stderr)

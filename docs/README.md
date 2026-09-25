@@ -20,30 +20,44 @@
 
 线上页面：https://rudykon.github.io/PersonaGuard/
 
-页面源文件为 [index.html](index.html)，样式和交互位于 `assets/`。
-按论文顺序组织为 Overview、Method、Evaluation、Results、Discussion、Resources。
-首屏从 MER-PS 数据中的视频观看与摇杆报告任务开场，以“记录对齐了，就更懂你了吗？”贯穿方法、结果和结尾。桌面与手机均显示任务示意及数据来源，明确参考报告不是情绪真值。评估区说明二次分析与已有界面研究记录的分工；场景不新增实验或正式判定。
-四层结果、论文主图、主要发现及必要数值默认可见；四案例交互位于结果综合部分，默认选中画像解释。
-使用原生 HTML/CSS/JavaScript，无需前端框架。GitHub Pages 从 `main` 分支的 `/docs` 发布。
+网站采用 **MkDocs Material**，参考 Wearable IMU 项目站点的页面结构和视觉风格。
+导航分为概览、方法、研究证据（评估、结果、讨论）、浏览器演示、复现与资源。
+提供独立中英文地址、站内搜索、深浅色主题和手机导航。
+
+源文件位于 [website](../website/)，配置见 [mkdocs.yml](../mkdocs.yml)。
+`docs/index.html` 及各分区 HTML 是生成产物，**请编辑源文件后重新构建**。
+GitHub Pages 保持从 `main` 分支的 `/docs` 发布，不需要更改仓库设置。
 
 ```bash
-python3 -m http.server 8000 --directory docs
-python3 -B scripts/build_project_page_data.py --check
+python3 -m venv .venv-site
+.venv-site/bin/pip install -r requirements-site.txt
+make site PYTHON=.venv-site/bin/python
+make site-serve PYTHON=.venv-site/bin/python
 ```
 
-浏览 `http://localhost:8000`。页面内容分为以下几层：
+预览地址以 MkDocs 输出为准。只构建检查、不更新 `docs/`：
 
-- [case-copy.js](assets/case-copy.js)：按案例 ID 编写的双语解释、综合表摘要与复审要求。`expected_action` 必须与正式判定一致。
-- [cases.js](assets/cases.js)：生成文件，不手工编辑。保存解析器输出、正式规则、来源记录中的责任角色与复审触发条件，以及由论文数值生成函数读取公开结果后生成的指标。
-- [figures](assets/figures/README.md)：五张完整主图的网页导出、授权范围和文件摘要。
+```bash
+make site-check PYTHON=.venv-site/bin/python
+make browser-check
+```
 
-修改公开协议、案例或数值来源后，运行 `python3 -B scripts/build_project_page_data.py` 更新数据与页面中的 `data-number` 数值。
-`--check` 核对案例 ID、双语文案、预期行动、生成文件及页面数值。来源字段由 `results/evidence_traceability.json` 连接到案例，不新增规则条件。
-修改案例解释时，同时维护无 JavaScript 默认记录及综合表；新复审文案是对现有要求的摘要，不是新实验结果或许可。
+内容维护：
 
-完整论文题目以普通字号保留在首屏，章节采用短标题。校准示例、执行细节、原始字段、额外敏感性说明、后续计划与命令默认折叠。案例支持键盘切换，移动端保留六栏导航和滚动高亮。
-主页展示正式记录；新增 [本地运行页面](playground.html) 可以修改已有案例的证据条件并在浏览器执行规则。修改结果标为假设，不改正式记录。页面不提供未公开的论文下载入口。
+- [双语内容](../website/overrides/content/)：首页和全部研究章节，使用 `data-en` / `data-zh` 保持逐段对应，构建时生成可独立阅读和搜索的两种语言。
+- [共享样式](../website/stylesheets/personaguard.css)：导航、首屏、研究图表、演示页面、移动端和深色主题。
+- [case-copy.js](assets/case-copy.js)：四案例的双语解释；`expected_action` 必须与正式判定一致。
+- [cases.js](assets/cases.js)、[audit-data.js](assets/audit-data.js)：生成数据，不手工编辑。
+- [图表说明](assets/figures/README.md)：五张完整主图及其授权边界。
 
-本地运行的生成方式、执行边界和浏览器/Python 一致性检查见 [运行案例说明](PLAYGROUND.md)。
+修改正式规则、案例或数值来源后，依次运行数据生成和网站构建：
 
-栏目与论文章节的对应关系、模块迁移和检查结果见 [本轮改版说明](PROJECT_PAGE.md)。
+```bash
+python3 -B scripts/build_project_page_data.py
+python3 -B scripts/build_browser_demo_data.py
+make site PYTHON=.venv-site/bin/python
+```
+
+构建检查全部源章节中的 `data-number`、案例判定、中英文页面、站内链接、锚点与资源。
+`playground.html?case=...` 和原首页的详细研究锚点兼容跳转到新页面。
+浏览器演示的执行边界见 [PLAYGROUND.md](PLAYGROUND.md)，页面迁移说明见 [PROJECT_PAGE.md](PROJECT_PAGE.md)。

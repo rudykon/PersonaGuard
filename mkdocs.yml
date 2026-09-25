@@ -1,0 +1,109 @@
+site_name: PersonaGuard
+site_url: https://rudykon.github.io/PersonaGuard/
+site_description: From evidence to action. Auditing personalization decisions in HCI systems.
+repo_name: rudykon/PersonaGuard
+repo_url: https://github.com/rudykon/PersonaGuard
+edit_uri: ''
+docs_dir: website
+site_dir: dist/project-site
+
+theme:
+  name: material
+  custom_dir: website/overrides
+  language: en
+  logo: assets/mark.svg
+  favicon: assets/mark.svg
+  font: false
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: zh
+          name: 简体中文
+          build: true
+          site_description: 从证据到行动：审查人机交互系统中的个性化决策。
+          nav_translations:
+            Overview: 概览
+            Method: 方法
+            Research: 研究证据
+            Evaluation: 评估设计
+            Results: 研究结果
+            Discussion: 讨论与边界
+            Browser demo: 浏览器演示
+            Reproduce: 复现与资源
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+extra_css:
+  - stylesheets/personaguard.css
+extra_javascript:
+  - assets/cases.js
+  - assets/case-copy.js
+  - assets/audit-data.js
+  - assets/audit-engine.js
+  - javascripts/research.js
+  - javascripts/playground.js
+hooks:
+  - website/hooks.py
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rudykon/PersonaGuard
+      name: PersonaGuard on GitHub
+copyright: PersonaGuard · From Evidence to Action
+
+nav:
+  - Overview: index.md
+  - Method: method.md
+  - Research:
+      - Evaluation: evaluation.md
+      - Results: results.md
+      - Discussion: discussion.md
+  - Browser demo: demo.md
+  - Reproduce: reproduce.md
+  - GitHub: https://github.com/rudykon/PersonaGuard

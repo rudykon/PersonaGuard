@@ -2,9 +2,12 @@ PYTHON ?= python3
 export PYTHONDONTWRITEBYTECODE := 1
 export PYTHONPATH := src
 
-.PHONY: help check browser-check github-check github-export smoke publication-check paper
+.PHONY: help check browser-check github-check github-export smoke publication-check paper site site-check site-serve
 
 help:
+	@echo "make site               Build bilingual MkDocs pages into docs/"
+	@echo "make site-check         Strict site build and local-link checks"
+	@echo "make site-serve         Preview the MkDocs source locally"
 	@echo "make check              Offline repository and export tests (standard library)"
 	@echo "make browser-check      Browser/Python rule parity (requires Node.js)"
 	@echo "make github-check       Read-only Git candidate audit"
@@ -40,3 +43,12 @@ paper:
 	cd paper && latexmk -lualatex -interaction=nonstopmode -halt-on-error -outdir=../artifacts/paper_build/si supplementary_information.tex
 	cd paper_zh && latexmk -xelatex -interaction=nonstopmode -halt-on-error -outdir=../artifacts/paper_build/main_zh main.tex
 	cd paper_zh && latexmk -xelatex -interaction=nonstopmode -halt-on-error -outdir=../artifacts/paper_build/si_zh supplementary_information.tex
+
+site:
+	$(PYTHON) -B scripts/build_project_site.py
+
+site-check:
+	$(PYTHON) -B scripts/build_project_site.py --check
+
+site-serve:
+	$(PYTHON) -m mkdocs serve

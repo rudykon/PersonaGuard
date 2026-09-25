@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block extrahead %}
+{% if page %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PersonaGuard">
+  <meta property="og:title" content="{{ page.meta.title | default(page.title, true) }} · PersonaGuard">
+  <meta property="og:description" content="{{ config.site_description }}">
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  <meta property="og:image" content="https://rudykon.github.io/PersonaGuard/assets/figures/fig1-protocol.webp">
+  <meta name="twitter:card" content="summary_large_image">
+{% endif %}
+{% endblock %}
