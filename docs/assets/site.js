@@ -12,6 +12,7 @@
     if (!research || !copy) return;
     const record = research.cases.find(item => item.id === selectedCase);
     const explanation = copy[selectedCase];
+    document.getElementById('case-run-link').href = `playground.html?case=${encodeURIComponent(selectedCase)}`;
     const rule = research.rules.find(item => item.id === record.matched_rule_id);
     if (!explanation || explanation.expected_action !== record.audited_action) {
       throw new Error(`Presentation copy must be reviewed for ${selectedCase}`);

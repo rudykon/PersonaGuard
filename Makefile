@@ -2,10 +2,11 @@ PYTHON ?= python3
 export PYTHONDONTWRITEBYTECODE := 1
 export PYTHONPATH := src
 
-.PHONY: help check github-check github-export smoke publication-check paper
+.PHONY: help check browser-check github-check github-export smoke publication-check paper
 
 help:
 	@echo "make check              Offline repository and export tests (standard library)"
+	@echo "make browser-check      Browser/Python rule parity (requires Node.js)"
 	@echo "make github-check       Read-only Git candidate audit"
 	@echo "make github-export      Export dist/CHI2027-github.zip without local files or Git history"
 	@echo "make smoke              Synthetic structural smoke (requires NumPy)"
@@ -15,6 +16,11 @@ help:
 
 check:
 	$(PYTHON) -B -m unittest -v tests.test_repository_layout tests.test_export_github
+
+browser-check:
+	$(PYTHON) -B scripts/build_project_page_data.py --check
+	$(PYTHON) -B scripts/build_browser_demo_data.py --check
+	$(PYTHON) -B -m unittest -v tests.test_browser_audit
 
 github-check:
 	$(PYTHON) -B scripts/check_repository.py
